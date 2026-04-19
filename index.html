@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --bg: #0D0D0F;
     --surface: #16161A;
@@ -30,222 +29,78 @@
     --radius: 10px;
     --radius-lg: 16px;
   }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
-  }
-
-  /* NAV */
   nav {
     border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    background: rgba(13,13,15,0.92);
+    padding: 0 2rem; height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0;
+    background: rgba(13,13,15,0.95);
     backdrop-filter: blur(12px);
     z-index: 100;
   }
-  .logo {
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--accent);
-    letter-spacing: 0.05em;
-  }
+  .logo { font-family: var(--mono); font-weight: 700; font-size: 15px; color: var(--accent); letter-spacing: 0.05em; }
   .logo span { color: var(--muted); }
-  .nav-tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    border: 1px solid var(--border2);
-    border-radius: 20px;
-    padding: 4px 12px;
-  }
+  .nav-tag { font-family: var(--mono); font-size: 11px; color: var(--muted); border: 1px solid var(--border2); border-radius: 20px; padding: 4px 12px; }
 
-  /* HERO */
-  .hero {
-    padding: 5rem 2rem 3rem;
-    max-width: 860px;
-    margin: 0 auto;
-    text-align: center;
+  .tabs-bar {
+    display: flex; border-bottom: 1px solid var(--border);
+    background: var(--surface); padding: 0 2rem;
+    overflow-x: auto; scrollbar-width: none;
   }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--accent-dim);
-    border: 1px solid rgba(0,255,148,0.2);
-    border-radius: 20px;
-    padding: 5px 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    margin-bottom: 2rem;
+  .tabs-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 20px; height: 48px;
+    font-family: var(--sans); font-size: 14px; font-weight: 500;
+    color: var(--muted); background: none; border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer; white-space: nowrap;
+    transition: all 0.15s; margin-bottom: -1px;
   }
-  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-  }
-  .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero p { font-size: 16px; color: var(--muted); max-width: 500px; margin: 0 auto; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
-  /* TOOL CARDS NAV */
-  .tool-nav {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 2rem;
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .tool-nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    background: var(--surface);
-    color: var(--muted);
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
-  .tool-nav-btn:hover, .tool-nav-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-dim2);
-  }
-  .tool-nav-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .tab-panel { display: none; max-width: 760px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+  .tab-panel.active { display: block; }
 
-  /* TOOLS */
-  .tools-wrapper {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 2rem 6rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+  .panel-header { margin-bottom: 2rem; }
+  .panel-header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .panel-header h1 em { font-style: normal; color: var(--accent); }
+  .panel-header p { font-size: 14px; color: var(--muted); }
 
-  .tool-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-  }
-  .tool-card-header {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .tool-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .tool-icon svg { width: 18px; height: 18px; }
-  .tool-icon.green { background: var(--accent-dim); color: var(--accent); }
-  .tool-icon.blue { background: var(--info-dim); color: var(--info); }
-  .tool-icon.pink { background: var(--danger-dim); color: var(--danger); }
-  .tool-card-header h2 { font-size: 16px; font-weight: 700; }
-  .tool-card-header p { font-size: 13px; color: var(--muted); margin-top: 2px; }
-  .tool-card-body { padding: 1.5rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.25rem; }
 
-  /* INPUTS */
-  label {
-    display: block;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
+  label { display: block; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--border2);
+    border-radius: var(--radius); padding: 12px 14px;
+    font-family: var(--mono); font-size: 13px; color: var(--text);
+    resize: vertical; line-height: 1.7; transition: border-color 0.2s; outline: none;
   }
-  textarea, input[type="text"] {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text);
-    resize: vertical;
-    line-height: 1.7;
-    transition: border-color 0.2s;
-    outline: none;
-  }
-  textarea:focus, input[type="text"]:focus { border-color: var(--accent); }
-  textarea::placeholder, input::placeholder { color: var(--muted); }
+  textarea:focus { border-color: var(--accent); }
+  textarea::placeholder { color: var(--muted); }
 
-  /* RESULT BOX */
   .result-box {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text);
-    min-height: 52px;
-    word-break: break-all;
-    white-space: pre-wrap;
-    line-height: 1.7;
-    cursor: text;
-    user-select: all;
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 12px 14px; font-family: var(--mono); font-size: 13px;
+    min-height: 52px; word-break: break-all; white-space: pre-wrap;
+    line-height: 1.7; user-select: all; color: var(--accent);
   }
-  .result-box.accent { color: var(--accent); }
 
-  /* BUTTONS */
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 9px 18px;
-    border-radius: var(--radius);
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-    border: 1px solid var(--border2);
-    background: var(--surface2);
-    color: var(--text);
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 18px; border-radius: var(--radius);
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+    border: 1px solid var(--border2); background: var(--surface2); color: var(--text);
   }
-  .btn:hover { border-color: var(--border2); background: #26262E; }
+  .btn:hover { background: #26262E; }
   .btn:active { transform: scale(0.97); }
-  .btn-accent {
-    background: var(--accent);
-    color: #0D0D0F;
-    border-color: var(--accent);
-  }
-  .btn-accent:hover { background: #00e085; border-color: #00e085; }
+  .btn-accent { background: var(--accent); color: #0D0D0F; border-color: var(--accent); }
+  .btn-accent:hover { background: #00e085; }
   .btn-ghost { background: transparent; border-color: var(--border); color: var(--muted); }
   .btn-ghost:hover { color: var(--text); border-color: var(--border2); }
   .btn svg { width: 14px; height: 14px; }
@@ -254,135 +109,60 @@
   .section { margin-bottom: 1.25rem; }
   .section:last-child { margin-bottom: 0; }
 
-  /* CHIPS */
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-  }
+  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 20px; font-family: var(--mono); font-size: 11px; font-weight: 500; }
   .chip.green { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(0,255,148,0.2); }
   .chip.blue { background: var(--info-dim); color: var(--info); border: 1px solid rgba(61,155,255,0.2); }
   .chip.red { background: var(--danger-dim); color: var(--danger); border: 1px solid rgba(255,77,109,0.2); }
   .chip.yellow { background: var(--warning-dim); color: var(--warning); border: 1px solid rgba(255,184,0,0.2); }
 
-  /* TOAST */
-  .toast {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    opacity: 0;
-    transition: opacity 0.3s;
-    margin-left: 4px;
-  }
+  .toast { font-family: var(--mono); font-size: 11px; color: var(--accent); opacity: 0; transition: opacity 0.3s; margin-left: 4px; }
   .toast.show { opacity: 1; }
+  .meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; min-height: 24px; }
 
-  /* PASSWORD */
   .pw-display {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    font-family: var(--mono);
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    word-break: break-all;
-    min-height: 60px;
-    line-height: 1.6;
-    color: var(--accent);
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; font-family: var(--mono); font-size: 15px; font-weight: 500;
+    letter-spacing: 0.04em; word-break: break-all; min-height: 60px; line-height: 1.6; color: var(--accent);
   }
-  .slider-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1rem;
-  }
+  .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
   .slider-row label { margin: 0; white-space: nowrap; }
   input[type="range"] {
-    flex: 1;
-    -webkit-appearance: none;
-    height: 4px;
-    background: var(--border2);
-    border-radius: 2px;
-    outline: none;
-    border: none;
-    padding: 0;
+    flex: 1; -webkit-appearance: none; height: 4px;
+    background: var(--border2); border-radius: 2px; outline: none; border: none; padding: 0;
   }
   input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-    border: 3px solid var(--bg);
-    box-shadow: 0 0 0 1px var(--accent);
+    -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--accent); cursor: pointer; border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--accent);
   }
   .slider-val { font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--accent); min-width: 32px; text-align: right; }
   .opts { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
   .opt-chip {
-    border: 1px solid var(--border2);
-    border-radius: 20px;
-    padding: 5px 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    cursor: pointer;
-    background: transparent;
-    color: var(--muted);
-    transition: all 0.15s;
-    letter-spacing: 0.04em;
+    border: 1px solid var(--border2); border-radius: 20px; padding: 5px 14px;
+    font-family: var(--mono); font-size: 11px; font-weight: 500; cursor: pointer;
+    background: transparent; color: var(--muted); transition: all 0.15s; letter-spacing: 0.04em;
   }
   .opt-chip.on { background: var(--accent-dim); color: var(--accent); border-color: rgba(0,255,148,0.3); }
   .strength-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin: 10px 0 6px; }
   .strength-fill { height: 100%; border-radius: 2px; transition: width 0.4s, background 0.4s; }
 
-  /* DIFF */
   .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
   .diff-output {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px;
-    font-family: var(--mono);
-    font-size: 12px;
-    line-height: 1.9;
-    min-height: 100px;
-    white-space: pre-wrap;
-    word-break: break-all;
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 14px; font-family: var(--mono); font-size: 12px; line-height: 1.9;
+    min-height: 100px; white-space: pre-wrap; word-break: break-all;
   }
   .diff-add { background: rgba(0,255,148,0.15); color: #00FF94; border-radius: 2px; padding: 0 2px; }
   .diff-del { background: rgba(255,77,109,0.15); color: #FF4D6D; border-radius: 2px; padding: 0 2px; text-decoration: line-through; }
   .diff-eq { color: var(--muted); }
 
-  /* DIVIDER */
-  .divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
-
-  /* META ROW */
-  .meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; min-height: 24px; }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
-  }
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted); }
   footer span { color: var(--accent); }
 
   @media (max-width: 600px) {
     .diff-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 2rem; }
     nav { padding: 0 1rem; }
-    .tools-wrapper, .tool-nav { padding-left: 1rem; padding-right: 1rem; }
-    .hero { padding: 3rem 1rem 2rem; }
+    .tab-panel { padding: 1.5rem 1rem 4rem; }
+    .tab-btn { padding: 0 14px; font-size: 13px; }
   }
 </style>
 </head>
@@ -390,158 +170,133 @@
 
 <nav>
   <div class="logo">sec<span>/</span>toolkit</div>
-  <div class="nav-tag">v1.0 · client-side only</div>
+  <div class="nav-tag">client-side only</div>
 </nav>
 
-<section class="hero">
-  <div class="hero-badge">Ferramentas de segurança</div>
-  <h1>Tudo o que precisas,<br><em>sem sair do browser.</em></h1>
-  <p>Defang de URLs e IPs, geração de passwords seguras e comparação de texto — tudo processado localmente.</p>
-</section>
-
-<div class="tool-nav">
-  <a href="#defang" class="tool-nav-btn active">
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('defang',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Defang URL / IP
-  </a>
-  <a href="#password" class="tool-nav-btn">
+  </button>
+  <button class="tab-btn" onclick="switchTab('password',this)">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
     Gerador de password
-  </a>
-  <a href="#diff" class="tool-nav-btn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+  </button>
+  <button class="tab-btn" onclick="switchTab('diff',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
     Diff de texto
-  </a>
+  </button>
 </div>
 
-<div class="tools-wrapper">
+<!-- DEFANG -->
+<div class="tab-panel active" id="panel-defang">
+  <div class="panel-header">
+    <h1>Defang <em>URL / IP</em></h1>
+    <p>Transforma URLs e IPs em formato seguro para partilhar em relatórios e emails sem risco de cliques acidentais.</p>
+  </div>
+  <div class="card">
+    <div class="section">
+      <label>Input — URLs ou IPs (um por linha)</label>
+      <textarea id="defangInput" rows="6" placeholder="https://malicious.example.com/path&#10;192.168.1.100&#10;http://phishing.ru/login&#10;10.0.0.1"></textarea>
+    </div>
+    <div class="row section">
+      <button class="btn btn-accent" onclick="doDefang()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Fazer defang
+      </button>
+      <button class="btn" onclick="doRefang()">Reverter (refang)</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('defangInput').value='';document.getElementById('defangOutput').textContent='—';document.getElementById('defangMeta').innerHTML=''">Limpar</button>
+    </div>
+    <div class="section">
+      <label>Resultado</label>
+      <div class="result-box" id="defangOutput">—</div>
+      <div class="meta-row" id="defangMeta"></div>
+    </div>
+    <div class="row">
+      <button class="btn" onclick="copyEl('defangOutput','defangToast')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copiar
+      </button>
+      <span class="toast" id="defangToast">✓ Copiado!</span>
+    </div>
+  </div>
+</div>
 
-  <!-- DEFANG -->
-  <div class="tool-card" id="defang">
-    <div class="tool-card-header">
-      <div class="tool-icon green">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+<!-- PASSWORD -->
+<div class="tab-panel" id="panel-password">
+  <div class="panel-header">
+    <h1>Gerador de <em>password</em></h1>
+    <p>Passwords criptograficamente seguras geradas localmente no teu browser — nenhum dado sai do teu computador.</p>
+  </div>
+  <div class="card">
+    <div class="section">
+      <div class="slider-row">
+        <label>Comprimento</label>
+        <input type="range" min="8" max="128" value="24" step="1" id="pwLen" oninput="document.getElementById('pwLenVal').textContent=this.value;genPw()">
+        <span class="slider-val" id="pwLenVal">24</span>
       </div>
-      <div>
-        <h2>Defang URL / IP</h2>
-        <p>Transforma URLs e IPs em formato seguro para partilhar em relatórios e emails</p>
+      <div class="opts">
+        <button class="opt-chip on" data-key="upper" onclick="toggleOpt(this)">A–Z maiúsculas</button>
+        <button class="opt-chip on" data-key="lower" onclick="toggleOpt(this)">a–z minúsculas</button>
+        <button class="opt-chip on" data-key="digits" onclick="toggleOpt(this)">0–9 números</button>
+        <button class="opt-chip on" data-key="symbols" onclick="toggleOpt(this)">!@#$ símbolos</button>
+        <button class="opt-chip" data-key="ambig" onclick="toggleOpt(this)">Excluir ambíguos (0O1lI)</button>
       </div>
     </div>
-    <div class="tool-card-body">
-      <div class="section">
-        <label>Input — URLs ou IPs (um por linha)</label>
-        <textarea id="defangInput" rows="5" placeholder="https://malicious.example.com/path&#10;192.168.1.100&#10;http://phishing.ru/login&#10;10.0.0.1"></textarea>
-      </div>
-      <div class="row section">
-        <button class="btn btn-accent" onclick="doDefang()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Fazer defang
-        </button>
-        <button class="btn" onclick="doRefang()">Reverter (refang)</button>
-        <button class="btn btn-ghost" onclick="document.getElementById('defangInput').value='';document.getElementById('defangOutput').textContent='—';document.getElementById('defangMeta').innerHTML=''">Limpar</button>
-      </div>
-      <div class="section">
-        <label>Resultado defangado</label>
-        <div class="result-box accent" id="defangOutput">—</div>
-        <div class="meta-row" id="defangMeta"></div>
-      </div>
+    <div class="section">
+      <label>Password gerada</label>
+      <div class="pw-display" id="pwOutput">—</div>
+      <div class="strength-bar"><div class="strength-fill" id="strengthFill" style="width:0%"></div></div>
       <div class="row">
-        <button class="btn" onclick="copyEl('defangOutput','defangToast')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copiar
-        </button>
-        <span class="toast" id="defangToast">✓ Copiado!</span>
+        <span id="strengthLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted)">—</span>
+        <span id="entropyLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto"></span>
       </div>
     </div>
+    <div class="row">
+      <button class="btn btn-accent" onclick="genPw()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+        Gerar nova
+      </button>
+      <button class="btn" onclick="copyPw()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copiar
+      </button>
+      <span class="toast" id="pwToast">✓ Copiado!</span>
+    </div>
   </div>
+</div>
 
-  <!-- PASSWORD -->
-  <div class="tool-card" id="password">
-    <div class="tool-card-header">
-      <div class="tool-icon blue">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+<!-- DIFF -->
+<div class="tab-panel" id="panel-diff">
+  <div class="panel-header">
+    <h1>Diff de <em>texto</em></h1>
+    <p>Compara dois blocos de texto e destaca as diferenças palavra a palavra em tempo real.</p>
+  </div>
+  <div class="card">
+    <div class="diff-grid">
+      <div>
+        <label>Texto original</label>
+        <textarea id="diffA" rows="10" placeholder="Cola aqui o texto original..." oninput="doDiff()"></textarea>
       </div>
       <div>
-        <h2>Gerador de password</h2>
-        <p>Passwords criptograficamente seguras geradas localmente no teu browser</p>
+        <label>Texto novo</label>
+        <textarea id="diffB" rows="10" placeholder="Cola aqui o texto novo..." oninput="doDiff()"></textarea>
       </div>
     </div>
-    <div class="tool-card-body">
-      <div class="section">
-        <div class="slider-row">
-          <label>Comprimento</label>
-          <input type="range" min="8" max="128" value="24" step="1" id="pwLen" oninput="document.getElementById('pwLenVal').textContent=this.value;genPw()">
-          <span class="slider-val" id="pwLenVal">24</span>
-        </div>
-        <div class="opts" id="pwOpts">
-          <button class="opt-chip on" data-key="upper" onclick="toggleOpt(this)">A–Z maiúsculas</button>
-          <button class="opt-chip on" data-key="lower" onclick="toggleOpt(this)">a–z minúsculas</button>
-          <button class="opt-chip on" data-key="digits" onclick="toggleOpt(this)">0–9 números</button>
-          <button class="opt-chip on" data-key="symbols" onclick="toggleOpt(this)">!@#$ símbolos</button>
-          <button class="opt-chip" data-key="ambig" onclick="toggleOpt(this)">Excluir ambíguos (0O1lI)</button>
-        </div>
-      </div>
-      <div class="section">
-        <label>Password gerada</label>
-        <div class="pw-display" id="pwOutput">—</div>
-        <div class="strength-bar"><div class="strength-fill" id="strengthFill" style="width:0%"></div></div>
-        <div class="row">
-          <span id="strengthLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted)">—</span>
-          <span id="entropyLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto"></span>
-        </div>
-      </div>
-      <div class="row">
-        <button class="btn btn-accent" onclick="genPw()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
-          Gerar nova
-        </button>
-        <button class="btn" onclick="copyPw()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copiar
-        </button>
-        <span class="toast" id="pwToast">✓ Copiado!</span>
-      </div>
+    <div class="row section">
+      <div id="diffStats"></div>
+      <button class="btn btn-ghost" style="margin-left:auto" onclick="document.getElementById('diffA').value='';document.getElementById('diffB').value='';doDiff()">Limpar</button>
+      <button class="btn" onclick="copyDiff()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copiar diff
+      </button>
+      <span class="toast" id="diffToast">✓ Copiado!</span>
+    </div>
+    <div>
+      <label>Resultado</label>
+      <div class="diff-output" id="diffOutput"><span class="diff-eq">Cola texto nos campos acima para ver as diferenças...</span></div>
     </div>
   </div>
-
-  <!-- DIFF -->
-  <div class="tool-card" id="diff">
-    <div class="tool-card-header">
-      <div class="tool-icon pink">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      </div>
-      <div>
-        <h2>Diff de texto</h2>
-        <p>Compara dois blocos de texto e destaca as diferenças palavra a palavra</p>
-      </div>
-    </div>
-    <div class="tool-card-body">
-      <div class="diff-grid">
-        <div>
-          <label>Texto original</label>
-          <textarea id="diffA" rows="8" placeholder="Cole aqui o texto original..." oninput="doDiff()"></textarea>
-        </div>
-        <div>
-          <label>Texto novo</label>
-          <textarea id="diffB" rows="8" placeholder="Cole aqui o texto novo..." oninput="doDiff()"></textarea>
-        </div>
-      </div>
-      <div class="row section">
-        <div id="diffStats" style="display:none"></div>
-        <button class="btn btn-ghost" style="margin-left:auto" onclick="document.getElementById('diffA').value='';document.getElementById('diffB').value='';doDiff()">Limpar</button>
-        <button class="btn" onclick="copyDiff()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copiar diff
-        </button>
-        <span class="toast" id="diffToast">✓ Copiado!</span>
-      </div>
-      <div class="section">
-        <label>Resultado</label>
-        <div class="diff-output" id="diffOutput"><span class="diff-eq">Escreve ou cola texto nos campos acima para ver as diferenças...</span></div>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <footer>
@@ -549,7 +304,13 @@
 </footer>
 
 <script>
-/* ── DEFANG ── */
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
 function doDefang() {
   const raw = document.getElementById('defangInput').value.trim();
   if (!raw) return;
@@ -560,7 +321,11 @@ function doDefang() {
     return s;
   });
   document.getElementById('defangOutput').textContent = lines.join('\n');
-  renderDefangMeta(raw, lines.length);
+  const chips = [];
+  if (/https?:\/\//i.test(raw)) chips.push('<span class="chip green">URL detectada</span>');
+  if (/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/.test(raw)) chips.push('<span class="chip blue">IP detectado</span>');
+  if (lines.length > 1) chips.push(`<span class="chip blue">${lines.length} linhas processadas</span>`);
+  document.getElementById('defangMeta').innerHTML = chips.join('');
 }
 
 function doRefang() {
@@ -577,22 +342,12 @@ function doRefang() {
   document.getElementById('defangMeta').innerHTML = '<span class="chip yellow">Refang aplicado — usar com cuidado</span>';
 }
 
-function renderDefangMeta(input, count) {
-  const chips = [];
-  if (/https?:\/\//i.test(input)) chips.push('<span class="chip green">URL detectada</span>');
-  if (/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/.test(input)) chips.push('<span class="chip blue">IP detectado</span>');
-  if (count > 1) chips.push(`<span class="chip blue">${count} linhas processadas</span>`);
-  document.getElementById('defangMeta').innerHTML = chips.join('');
-}
-
-/* ── PASSWORD ── */
 const pwCharsets = {
   upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   lower: 'abcdefghijklmnopqrstuvwxyz',
   digits: '0123456789',
   symbols: '!@#$%^&*()-_=+[]{}|;:,.<>?'
 };
-const ambigChars = /[0O1lI]/g;
 let pwState = { upper: true, lower: true, digits: true, symbols: true, ambig: false };
 
 function toggleOpt(btn) {
@@ -608,20 +363,14 @@ function genPw() {
   if (pwState.lower) charset += pwCharsets.lower;
   if (pwState.digits) charset += pwCharsets.digits;
   if (pwState.symbols) charset += pwCharsets.symbols;
-  if (pwState.ambig) charset = charset.replace(ambigChars, '');
+  if (pwState.ambig) charset = charset.replace(/[0O1lI]/g, '');
   if (!charset) { document.getElementById('pwOutput').textContent = 'Seleciona pelo menos uma opção.'; return; }
   const len = parseInt(document.getElementById('pwLen').value);
   const arr = new Uint32Array(len);
   crypto.getRandomValues(arr);
   const pw = Array.from(arr).map(v => charset[v % charset.length]).join('');
   document.getElementById('pwOutput').textContent = pw;
-  updateStrength(pw, charset.length);
-}
-
-function updateStrength(pw, csLen) {
-  const entropy = Math.floor(pw.length * Math.log2(csLen));
-  const fill = document.getElementById('strengthFill');
-  const label = document.getElementById('strengthLabel');
+  const entropy = Math.floor(len * Math.log2(charset.length));
   document.getElementById('entropyLabel').textContent = `~${entropy} bits de entropia`;
   let pct, color, txt;
   if (entropy < 40) { pct = 20; color = '#FF4D6D'; txt = 'Fraca'; }
@@ -629,32 +378,28 @@ function updateStrength(pw, csLen) {
   else if (entropy < 80) { pct = 65; color = '#80C44A'; txt = 'Boa'; }
   else if (entropy < 100) { pct = 82; color = '#00CC77'; txt = 'Forte'; }
   else { pct = 100; color = '#00FF94'; txt = 'Muito forte'; }
-  fill.style.width = pct + '%';
-  fill.style.background = color;
-  label.textContent = txt;
-  label.style.color = color;
+  document.getElementById('strengthFill').style.width = pct + '%';
+  document.getElementById('strengthFill').style.background = color;
+  const sl = document.getElementById('strengthLabel');
+  sl.textContent = txt; sl.style.color = color;
 }
 
 function copyPw() {
-  const t = document.getElementById('pwOutput').textContent;
-  navigator.clipboard.writeText(t).then(() => flash('pwToast'));
+  navigator.clipboard.writeText(document.getElementById('pwOutput').textContent).then(() => flash('pwToast'));
 }
 
-/* ── DIFF ── */
 function doDiff() {
   const a = document.getElementById('diffA').value;
   const b = document.getElementById('diffB').value;
   if (!a && !b) {
-    document.getElementById('diffOutput').innerHTML = '<span class="diff-eq">Escreve ou cola texto nos campos acima para ver as diferenças...</span>';
-    document.getElementById('diffStats').style.display = 'none';
+    document.getElementById('diffOutput').innerHTML = '<span class="diff-eq">Cola texto nos campos acima para ver as diferenças...</span>';
+    document.getElementById('diffStats').innerHTML = '';
     return;
   }
-  const wordsA = tokenize(a);
-  const wordsB = tokenize(b);
-  const lcs = computeLCS(wordsA, wordsB);
-  const ops = buildOps(wordsA, wordsB, lcs);
-  let html = '';
-  let adds = 0, dels = 0;
+  const wa = tokenize(a), wb = tokenize(b);
+  const lcs = computeLCS(wa, wb);
+  const ops = buildOps(wa, wb, lcs);
+  let html = '', adds = 0, dels = 0;
   ops.forEach(op => {
     if (op.type === 'eq') html += `<span class="diff-eq">${esc(op.val)}</span>`;
     else if (op.type === 'add') { html += `<span class="diff-add">${esc(op.val)}</span>`; adds++; }
@@ -662,16 +407,11 @@ function doDiff() {
   });
   document.getElementById('diffOutput').innerHTML = html || '<span class="diff-eq">(sem diferenças)</span>';
   const stats = document.getElementById('diffStats');
-  stats.style.display = 'block';
-  if (adds === 0 && dels === 0) {
-    stats.innerHTML = '<span class="chip green">Textos idênticos</span>';
-  } else {
-    stats.innerHTML = `<span class="chip green">+${adds} adições</span> <span class="chip red">−${dels} remoções</span>`;
-  }
+  if (adds === 0 && dels === 0) stats.innerHTML = '<span class="chip green">Textos idênticos</span>';
+  else stats.innerHTML = `<span class="chip green">+${adds} adições</span> <span class="chip red">−${dels} remoções</span>`;
 }
 
 function tokenize(s) { return s.match(/(\s+|\S+)/g) || []; }
-
 function computeLCS(a, b) {
   const m = a.length, n = b.length;
   const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
@@ -680,15 +420,13 @@ function computeLCS(a, b) {
       dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
   let i = m, j = n, res = [];
   while (i > 0 && j > 0) {
-    if (a[i-1] === b[j-1]) { res.unshift({ type: 'eq', i: i-1, j: j-1 }); i--; j--; }
-    else if (dp[i-1][j] >= dp[i][j-1]) { i--; } else { j--; }
+    if (a[i-1] === b[j-1]) { res.unshift({ i: i-1, j: j-1 }); i--; j--; }
+    else if (dp[i-1][j] >= dp[i][j-1]) i--; else j--;
   }
   return res;
 }
-
 function buildOps(a, b, lcs) {
-  const ops = [];
-  let ai = 0, bi = 0, li = 0;
+  const ops = []; let ai = 0, bi = 0, li = 0;
   while (li < lcs.length) {
     const { i, j } = lcs[li];
     while (ai < i) { ops.push({ type: 'del', val: a[ai] }); ai++; }
@@ -699,32 +437,18 @@ function buildOps(a, b, lcs) {
   while (bi < b.length) { ops.push({ type: 'add', val: b[bi] }); bi++; }
   return ops;
 }
-
-function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function copyDiff() {
-  const t = document.getElementById('diffOutput').innerText;
-  navigator.clipboard.writeText(t).then(() => flash('diffToast'));
+  navigator.clipboard.writeText(document.getElementById('diffOutput').innerText).then(() => flash('diffToast'));
 }
-
-/* ── UTILS ── */
 function copyEl(id, toastId) {
-  const t = document.getElementById(id).textContent;
-  navigator.clipboard.writeText(t).then(() => flash(toastId));
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(() => flash(toastId));
 }
-
 function flash(id) {
   const el = document.getElementById(id);
   el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), 2200);
 }
-
-document.querySelectorAll('.tool-nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tool-nav-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
 
 genPw();
 </script>
