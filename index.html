@@ -35,10 +35,12 @@ nav{border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:fle
 .nav-item svg{width:14px;height:14px;flex-shrink:0}
 
 .main{flex:1;overflow-x:hidden}
-/* HOME usa largura total, outras páginas limitam a 860px */
-.page{display:none;padding:2.5rem 2.5rem 5rem}
+.page{display:none;width:100%}
 .page.active{display:block}
-.page:not(#page-home){max-width:860px}
+#page-home{padding:2rem 2rem 5rem}
+.page:not(#page-home){padding:2.5rem 3rem 5rem;display:none}
+.page:not(#page-home).active{display:flex;justify-content:center}
+.page-inner{width:100%;max-width:860px}
 
 .page-title{font-size:26px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px}
 .page-title em{font-style:normal;color:var(--accent)}
@@ -388,7 +390,7 @@ footer span{color:var(--accent)}
       <div class="stats-card">
         <div class="stats-card-title">Línguas</div>
         <div class="stat-item"><span class="stat-label">Português</span><span class="stat-val" style="color:var(--accent)">Nativo</span></div>
-        <div class="stat-item"><span class="stat-label">Inglês</span><span class="stat-val" style="color:var(--info)">C1</span></div>
+        <div class="stat-item"><span class="stat-label">Inglês</span><span class="stat-val" style="color:var(--info)">B2</span></div>
         <div class="stat-item"><span class="stat-label">Espanhol</span><span class="stat-val" style="color:var(--muted)">B1</span></div>
       </div>
       <div class="stats-card">
@@ -418,20 +420,20 @@ footer span{color:var(--accent)}
 </div>
 
 <!-- DEFANG -->
-<div class="page" id="page-defang">
+<div class="page" id="page-defang"><div class="page-inner">
   <div class="page-title">Defang <em>URL / IP</em></div>
   <div class="page-desc">Converte URLs e IPs em formato seguro. Cola manualmente, importa da clipboard ou arrasta texto.</div>
   <div class="card">
     <div class="section">
       <label>Input (um por linha)</label>
       <div class="row" style="margin-bottom:8px">
-        <button class="btn btn-accent" onclick="pasteFromClipboard()">
+        <button class="btn btn-accent" onclick="pasteAndDefang()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Colar do clipboard
+          Clipboard → Defang automático
         </button>
-        <span class="toast" id="pasteToast" style="margin-left:4px">✓ Colado!</span>
+        <span class="toast" id="pasteToast" style="margin-left:4px">✓ Feito e copiado!</span>
       </div>
-      <textarea id="defangInput" rows="6" placeholder="https://malicious.example.com&#10;192.168.1.100&#10;http://phishing.ru/login&#10;&#10;Ou clica em 'Colar da clipboard' para importar automaticamente."></textarea>
+      <textarea id="defangInput" rows="5" placeholder="https://malicious.example.com&#10;192.168.1.100&#10;&#10;Ou usa o botão acima para importar e fazer defang da clipboard de uma vez."></textarea>
     </div>
     <div class="row section">
       <button class="btn btn-accent" onclick="doDefang()">Fazer defang</button>
@@ -445,10 +447,11 @@ footer span{color:var(--accent)}
     </div>
     <div class="row"><button class="btn" onclick="copyEl('defangOut','dft')">Copiar novamente</button><span class="toast" id="dft">✓ Copiado!</span></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- IOC -->
-<div class="page" id="page-ioc">
+<div class="page" id="page-ioc"><div class="page-inner">
   <div class="page-title">Extrator de <em>IOCs</em></div>
   <div class="page-desc">Cola qualquer texto (log, email, relatório) e extrai automaticamente IPs, URLs, hashes e emails.</div>
   <div class="card">
@@ -462,10 +465,11 @@ footer span{color:var(--accent)}
     </div>
     <div id="iocResults"></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- REPUTATION -->
-<div class="page" id="page-reputation">
+<div class="page" id="page-reputation"><div class="page-inner">
   <div class="page-title">Reputação <em>IP / URL</em></div>
   <div class="page-desc">Consulta automática via API + links diretos para as principais plataformas de threat intelligence.</div>
   <div class="card" id="apiKeysCard">
@@ -484,9 +488,9 @@ footer span{color:var(--accent)}
           <div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://www.virustotal.com/gui/join-us" target="_blank" style="color:var(--info)">virustotal.com/gui/join-us</a></div>
         </div>
         <div>
-          <label>AbuseIPDB API Key <span style="color:var(--accent);font-size:10px">GRATUITA</span></label>
+          <label>AbuseIPDB API Key <span style="color:var(--accent);font-size:10px">GRATUITA</span> <span style="color:var(--warning);font-size:10px">⚠ CORS</span></label>
           <input type="password" id="key-abuse" placeholder="Cole a tua AbuseIPDB key...">
-          <div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://www.abuseipdb.com/register" target="_blank" style="color:var(--info)">abuseipdb.com/register</a></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://www.abuseipdb.com/register" target="_blank" style="color:var(--info)">abuseipdb.com/register</a><br><span style="color:var(--warning)">Nota: o AbuseIPDB bloqueia pedidos diretos do browser (CORS). Usa o botão manual para consulta direta.</span></div>
         </div>
         <div>
           <label>OTX AlienVault Key <span style="color:var(--accent);font-size:10px">GRATUITA</span></label>
@@ -537,20 +541,22 @@ footer span{color:var(--accent)}
       <div id="repVerdict" style="margin-top:1rem;padding:1rem 1.25rem;border-radius:var(--radius-lg);border:1px solid;display:none"></div>
     </div>
   </div>
-</div>
+
+</div></div>
 
 <!-- CIDR -->
-<div class="page" id="page-cidr">
+<div class="page" id="page-cidr"><div class="page-inner">
   <div class="page-title">Calculadora <em>CIDR</em></div>
   <div class="page-desc">Calcula informação detalhada sobre sub-redes a partir de notação CIDR.</div>
   <div class="card">
     <div class="section"><label>Notação CIDR</label><input type="text" id="cidrInput" placeholder="Ex: 192.168.1.0/24" oninput="calcCIDR()"></div>
     <div id="cidrResult"></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- ENCODING -->
-<div class="page" id="page-encoding">
+<div class="page" id="page-encoding"><div class="page-inner">
   <div class="page-title">Encoding / <em>Decoding</em></div>
   <div class="page-desc">Codifica e descodifica texto em vários formatos.</div>
   <div class="card">
@@ -562,20 +568,22 @@ footer span{color:var(--accent)}
       <div><label>ROT13</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="rot13()">Aplicar ROT13</button></div><div class="result-box" id="rot13out">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('rot13out','rot13t')">Copiar</button><span class="toast" id="rot13t">✓</span></div></div>
     </div>
   </div>
-</div>
+
+</div></div>
 
 <!-- HASH -->
-<div class="page" id="page-hash">
+<div class="page" id="page-hash"><div class="page-inner">
   <div class="page-title">Hash <em>Generator</em></div>
   <div class="page-desc">Gera hashes criptográficos de texto. Processado localmente no browser.</div>
   <div class="card">
     <div class="section"><label>Texto</label><textarea id="hashInput" rows="4" placeholder="Texto para gerar hash..." oninput="genHashes()"></textarea></div>
     <div id="hashResults"></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- PASSWORD -->
-<div class="page" id="page-password">
+<div class="page" id="page-password"><div class="page-inner">
   <div class="page-title">Gerador de <em>password</em></div>
   <div class="page-desc">Passwords criptograficamente seguras geradas localmente no teu browser.</div>
   <div class="card">
@@ -597,10 +605,11 @@ footer span{color:var(--accent)}
     </div>
     <div class="row"><button class="btn btn-accent" onclick="genPw()">Gerar nova</button><button class="btn" onclick="copyPw()">Copiar</button><span class="toast" id="pwToast">✓ Copiado!</span></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- UUID -->
-<div class="page" id="page-uuid">
+<div class="page" id="page-uuid"><div class="page-inner">
   <div class="page-title">UUID / MAC / <em>Dados de teste</em></div>
   <div class="page-desc">Gera identificadores e dados aleatórios para testes e desenvolvimento.</div>
   <div class="card">
@@ -614,10 +623,11 @@ footer span{color:var(--accent)}
       <div class="result-box" id="bulkOut">—</div>
     </div>
   </div>
-</div>
+
+</div></div>
 
 <!-- DIFF -->
-<div class="page" id="page-diff">
+<div class="page" id="page-diff"><div class="page-inner">
   <div class="page-title">Diff de <em>texto</em></div>
   <div class="page-desc">Compara dois blocos de texto e destaca as diferenças palavra a palavra.</div>
   <div class="card">
@@ -633,10 +643,11 @@ footer span{color:var(--accent)}
     </div>
     <div><label>Resultado</label><div class="diff-output" id="diffOutput"><span class="diff-eq">Cola texto acima...</span></div></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- REGEX -->
-<div class="page" id="page-regex">
+<div class="page" id="page-regex"><div class="page-inner">
   <div class="page-title">Regex <em>Tester</em></div>
   <div class="page-desc">Testa expressões regulares em tempo real com highlight de matches.</div>
   <div class="card">
@@ -655,10 +666,11 @@ footer span{color:var(--accent)}
     <div id="regexMeta" class="meta-row section"></div>
     <div><label>Resultado (matches destacados)</label><div class="diff-output" id="regexOutput"><span class="diff-eq">Escreve uma regex e texto acima...</span></div></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- JSON -->
-<div class="page" id="page-json">
+<div class="page" id="page-json"><div class="page-inner">
   <div class="page-title">JSON <em>Formatter</em></div>
   <div class="page-desc">Formata, valida e faz syntax highlight de JSON.</div>
   <div class="card">
@@ -672,17 +684,19 @@ footer span{color:var(--accent)}
     <div><label>Resultado</label><div class="json-output" id="jsonOutput"></div></div>
     <div class="row" style="margin-top:8px"><button class="btn" onclick="copyJSON()">Copiar</button><span class="toast" id="jsont">✓ Copiado!</span></div>
   </div>
-</div>
+
+</div></div>
 
 <!-- COUNTER -->
-<div class="page" id="page-counter">
+<div class="page" id="page-counter"><div class="page-inner">
   <div class="page-title">Contador de <em>texto</em></div>
   <div class="page-desc">Análise detalhada de qualquer bloco de texto.</div>
   <div class="card">
     <div class="section"><label>Texto</label><textarea id="counterInput" rows="8" placeholder="Cola aqui o texto para analisar..." oninput="countText()"></textarea></div>
     <div id="counterStats" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:1rem"></div>
   </div>
-</div>
+
+</div></div>
 
 <footer>Tudo processado <span>localmente</span> — nenhum dado é enviado para servidores.</footer>
 </main>
@@ -708,15 +722,14 @@ function updateApiStatusHome(){
 }
 
 /* DEFANG */
-async function pasteFromClipboard(){
+async function pasteAndDefang(){
   try{
     const text=await navigator.clipboard.readText();
-    if(text.trim()){
-      document.getElementById('defangInput').value=text.trim();
-      flash('pasteToast');
-    }
+    if(!text.trim()){alert('A clipboard está vazia.');return;}
+    document.getElementById('defangInput').value=text.trim();
+    doDefang();
   }catch(e){
-    alert('Não foi possível aceder à clipboard. Usa Ctrl+V para colar manualmente.');
+    alert('Sem permissão para ler a clipboard. Usa Ctrl+V para colar e depois clica em Fazer defang.');
   }
 }
 function doDefang(){
@@ -836,7 +849,7 @@ async function runRepLookup(){
     } else {
       vtEndpoint='urls';
       /* base64url sem padding */
-      vtId=btoa(val).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+      vtId=btoa(encodeURIComponent(val).replace(/%([0-9A-F]{2})/g,(_,p)=>String.fromCharCode('0x'+p))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
     }
     promises.push(
       fetch('https://www.virustotal.com/api/v3/'+vtEndpoint+'/'+vtId,{headers:{'x-apikey':vtKey}})
@@ -857,10 +870,10 @@ async function runRepLookup(){
   if(abuseKey&&isIP){
     /* Tentativa direta — pode falhar por CORS em alguns browsers */
     promises.push(
-      fetch('https://api.abuseipdb.com/api/v2/check?ipAddress='+encodeURIComponent(target)+'&maxAgeInDays=90',{
+      fetch('https://api.abuseipdb.com/api/v2/check?ipAddress='+encodeURIComponent(target)+'&maxAgeInDays=90&verbose',{
         headers:{'Key':abuseKey,'Accept':'application/json'}
       })
-        .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status+' (CORS?)');return r.json();})
+        .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
         .then(data=>{
           const score=data?.data?.abuseConfidenceScore;
           if(score!==undefined){
@@ -869,7 +882,7 @@ async function runRepLookup(){
             const isp=data?.data?.isp||'';
             results.push({source:'AbuseIPDB',flagged:score>0,detail:'Score: '+score+'/100 · '+reports+' reports · '+country+(isp?' · '+isp:''),score:score>25?'danger':score>0?'warning':'clean'});
           }
-        }).catch(e=>results.push({source:'AbuseIPDB',flagged:null,detail:'Erro CORS — usa o botão manual acima para verificar no site',score:'error'}))
+        }).catch(e=>results.push({source:'AbuseIPDB',flagged:null,detail:'CORS bloqueado pelo browser — abre a extensão CORS Unblock ou usa o botão manual',score:'error'}))
     );
   }
 
