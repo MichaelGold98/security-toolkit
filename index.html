@@ -215,7 +215,7 @@ footer span{color:var(--accent)}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       Extrator de IOCs
     </div>
-    <div class="nav-item" onclick="showPage('email')" data-page="email">
+    <div class="nav-item" onclick="showPage('emailheader')" data-page="emailheader">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Análise de Email
     </div>
@@ -406,7 +406,7 @@ footer span{color:var(--accent)}
   <div class="tools-grid">
     <div class="tool-card-home" onclick="showPage('defang')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="tc-name">Defang URL / IP</div><div class="tc-desc">Formato seguro para partilha</div></div>
     <div class="tool-card-home" onclick="showPage('ioc')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="tc-name">Extrator de IOCs</div><div class="tc-desc">IPs, URLs, hashes e emails</div></div>
-    <div class="tool-card-home" onclick="showPage('email')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="tc-name">Análise de Email</div><div class="tc-desc">Headers, SPF, DKIM, DMARC, origem</div></div>
+    <div class="tool-card-home" onclick="showPage('emailheader')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="tc-name">Análise de Email</div><div class="tc-desc">Headers, SPF, DKIM, DMARC, origem</div></div>
     <div class="tool-card-home" onclick="showPage('reputation')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div class="tc-name">Reputação IP / URL</div><div class="tc-desc">VirusTotal, AbuseIPDB e mais</div></div>
     <div class="tool-card-home" onclick="showPage('cidr')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="tc-name">Calculadora CIDR</div><div class="tc-desc">Sub-redes e ranges de IPs</div></div>
     <div class="tool-card-home" onclick="showPage('emailheader')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="tc-name">Análise de Email</div><div class="tc-desc">Headers, SPF, DKIM, DMARC, spoofing</div></div>
@@ -420,40 +420,6 @@ footer span{color:var(--accent)}
     <div class="tool-card-home" onclick="showPage('counter')"><div class="tc-cat">Texto</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg></div><div class="tc-name">Contador de texto</div><div class="tc-desc">Palavras, caracteres, linhas</div></div>
   </div>
 </div>
-
-<!-- EMAIL -->
-<div class="page" id="page-email"><div class="page-inner">
-  <div class="page-title">Análise de <em>Email</em></div>
-  <div class="page-desc">Cola os headers completos de um email para analisar a origem, autenticação e detetar possível spoofing.</div>
-
-  <div class="card">
-    <div class="section">
-      <label>Headers do email</label>
-      <div class="row" style="margin-bottom:8px">
-        <button class="btn btn-accent" onclick="pasteAndAnalyzeEmail()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Clipboard → Analisar
-        </button>
-        <button class="btn" onclick="analyzeEmail()">Analisar</button>
-        <button class="btn btn-ghost" onclick="document.getElementById('emailInput').value='';document.getElementById('emailResults').innerHTML='';document.getElementById('emailScore').style.display='none'">Limpar</button>
-      </div>
-      <textarea id="emailInput" rows="10" placeholder="Cola aqui os headers completos do email...&#10;&#10;Exemplo de como obter os headers:&#10;• Gmail: Abrir email → ⋮ → Mostrar original&#10;• Outlook: Ficheiro → Propriedades → Cabeçalhos&#10;• Thunderbird: Ver → Código fonte da mensagem"></textarea>
-    </div>
-  </div>
-
-  <!-- SCORE VERDICT -->
-  <div id="emailScore" style="display:none;margin-bottom:1.25rem;padding:1.25rem 1.5rem;border-radius:var(--radius-lg);border:1px solid">
-    <div style="display:flex;align-items:center;gap:12px">
-      <span id="emailScoreIcon" style="font-size:28px"></span>
-      <div>
-        <div id="emailScoreTitle" style="font-size:16px;font-weight:700;margin-bottom:3px"></div>
-        <div id="emailScoreDesc" style="font-family:var(--mono);font-size:12px;color:var(--muted)"></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="emailResults"></div>
-</div></div>
 
 
 <!-- DEFANG -->
@@ -584,22 +550,24 @@ footer span{color:var(--accent)}
 <!-- EMAILHEADER -->
 <div class="page" id="page-emailheader"><div class="page-inner">
   <div class="page-title">Análise de <em>Email Headers</em></div>
-  <div class="page-desc">Cola os headers completos de um email para identificar origem, detetar spoofing e verificar SPF/DKIM/DMARC.</div>
+  <div class="page-desc">Cola os headers completos de um email para identificar a origem real, detetar spoofing e verificar SPF/DKIM/DMARC.</div>
   <div class="card">
     <div class="section">
-      <label>Headers do email (copia tudo do "View Source" ou "Show Original")</label>
-      <textarea id="emailInput" rows="12" placeholder="Received: from mail.example.com (mail.example.com [1.2.3.4])&#10;        by mx.google.com with ESMTP&#10;From: sender@example.com&#10;To: recipient@example.com&#10;Subject: Test Email&#10;Date: Mon, 1 Jan 2024 12:00:00 +0000&#10;Message-ID: &lt;abc123@example.com&gt;&#10;Authentication-Results: spf=pass dkim=pass dmarc=pass&#10;&#10;Cola aqui os headers completos do email..."></textarea>
-    </div>
-    <div class="row section">
-      <button class="btn btn-accent" onclick="analyzeEmail()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        Analisar headers
-      </button>
-      <button class="btn btn-ghost" onclick="document.getElementById('emailInput').value='';document.getElementById('emailResults').innerHTML='';document.getElementById('emailVerdict').style.display='none'">Limpar</button>
+      <label>Headers do email</label>
+      <div class="row" style="margin-bottom:8px">
+        <button class="btn btn-accent" onclick="pasteAndAnalyzeEmail()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Clipboard → Analisar
+        </button>
+        <button class="btn" onclick="analyzeEmail()">Analisar</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('emailInput').value='';document.getElementById('emailResults').innerHTML='';document.getElementById('emailVerdict').style.display='none'">Limpar</button>
+        <span class="toast" id="emailPasteToast">✓ Analisado!</span>
+      </div>
+      <textarea id="emailInput" rows="10" placeholder="Cola aqui os headers completos do email...&#10;&#10;Como obter os headers:&#10;• Gmail: Abrir email → ⋮ → Mostrar original&#10;• Outlook: Ficheiro → Propriedades → Cabeçalhos&#10;• Thunderbird: Ver → Código fonte da mensagem"></textarea>
     </div>
   </div>
+  <div id="emailVerdict" style="display:none"></div>
   <div id="emailResults"></div>
-  <div id="emailVerdict" style="display:none;margin-top:0"></div>
 </div></div>
 
 
@@ -792,8 +760,14 @@ async function pasteAndDefang(){
   }
 }
 function doDefang(){
-  const raw=document.getElementById('defangInput').value.trim();if(!raw)return;
-  const lines=raw.split('\n').map(l=>{let s=l.trim();s=s.replace(/https?:\/\//gi,m=>m.replace('://','[://]'));s=s.replace(/\./g,'[.]');return s;});
+  const raw=document.getElementById('defangInput').value.trim();
+  if(!raw)return;
+  const lines=raw.split('\n').map(l=>{
+    let s=l.trim();
+    s=s.replace(/https?:\/\//gi,m=>m.replace('://','[://]'));
+    s=s.replace(/\./g,'[.]');
+    return s;
+  });
   const result=lines.join('\n');
   document.getElementById('defangOut').textContent=result;
   const chips=[];
@@ -803,12 +777,20 @@ function doDefang(){
   document.getElementById('defangMeta').innerHTML=chips.join('');
   navigator.clipboard.writeText(result).then(()=>{
     const tag=document.getElementById('defangAutoCopy');
-    tag.style.opacity='1';setTimeout(()=>tag.style.opacity='0',2500);
+    tag.style.opacity='1';
+    setTimeout(()=>tag.style.opacity='0',2500);
   }).catch(()=>{});
 }
 function doRefang(){
-  const raw=document.getElementById('defangInput').value.trim();if(!raw)return;
-  const lines=raw.split('\n').map(l=>{let s=l.trim();s=s.replace(/\[\.\]/g,'.');s=s.replace(/\[:\/\/\]/g,'://');s=s.replace(/\[:\]/g,':');return s;});
+  const raw=document.getElementById('defangInput').value.trim();
+  if(!raw)return;
+  const lines=raw.split('\n').map(l=>{
+    let s=l.trim();
+    s=s.replace(/\[\.\]/g,'.');
+    s=s.replace(/\[:\/\/\]/g,'://');
+    s=s.replace(/\[:\]/g,':');
+    return s;
+  });
   document.getElementById('defangOut').textContent=lines.join('\n');
   document.getElementById('defangMeta').innerHTML='<span class="chip yellow">Refang aplicado</span>';
 }
@@ -828,12 +810,26 @@ function extractIOCs(){
   const sha256=[...new Set(text.match(sha256Re)||[])];
   const sha1=[...new Set((text.replace(sha256Re,'')).match(sha1Re)||[])];
   const md5=[...new Set((text.replace(sha256Re,'').replace(sha1Re,'')).match(md5Re)||[])];
-  const groups=[{label:'IPs',items:ips,cls:'blue'},{label:'URLs',items:urls,cls:'green'},{label:'Emails',items:emails,cls:'yellow'},{label:'SHA256',items:sha256,cls:'red'},{label:'SHA1',items:sha1,cls:'red'},{label:'MD5',items:md5,cls:'red'}];
+  const groups=[
+    {label:'IPs',items:ips,cls:'blue'},
+    {label:'URLs',items:urls,cls:'green'},
+    {label:'Emails',items:emails,cls:'yellow'},
+    {label:'SHA256',items:sha256,cls:'red'},
+    {label:'SHA1',items:sha1,cls:'red'},
+    {label:'MD5',items:md5,cls:'red'}
+  ];
   const total=groups.reduce((s,g)=>s+g.items.length,0);
-  if(total===0){document.getElementById('iocResults').innerHTML='<div style="color:var(--muted);font-family:var(--mono);font-size:13px;padding:1rem 0">Nenhum IOC encontrado no texto.</div>';return;}
+  if(total===0){
+    document.getElementById('iocResults').innerHTML='<div style="color:var(--muted);font-family:var(--mono);font-size:13px;padding:1rem 0">Nenhum IOC encontrado no texto.</div>';
+    return;
+  }
   let html='<div class="meta-row" style="margin-bottom:1rem">'+groups.filter(g=>g.items.length).map(g=>'<span class="chip '+g.cls+'">'+g.items.length+' '+g.label+'</span>').join('')+'</div>';
   groups.filter(g=>g.items.length).forEach(g=>{
-    html+='<div style="margin-bottom:1rem"><label>'+g.label+' ('+g.items.length+')</label><table class="ioc-table"><thead><tr><th>#</th><th>Valor</th><th></th></tr></thead><tbody>'+g.items.map((v,i)=>'<tr><td style="color:var(--muted)">'+(i+1)+'</td><td>'+v+'</td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="navigator.clipboard.writeText(\''+v.replace(/'/g,"\\'")+'\')" >Copiar</button></td></tr>').join('')+'</tbody></table></div>';
+    html+='<div style="margin-bottom:1rem"><label>'+g.label+' ('+g.items.length+')</label><table class="ioc-table"><thead><tr><th>#</th><th>Valor</th><th></th></tr></thead><tbody>';
+    g.items.forEach((v,i)=>{
+      html+='<tr><td style="color:var(--muted)">'+(i+1)+'</td><td>'+v+'</td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="navigator.clipboard.writeText(this.dataset.v)" data-v="'+v.replace(/"/g,'&quot;')+'">Copiar</button></td></tr>';
+    });
+    html+='</tbody></table></div>';
   });
   document.getElementById('iocResults').innerHTML=html;
 }
@@ -858,11 +854,17 @@ function saveApiKeys(){
     const el=document.getElementById('key-'+k);
     if(el)localStorage.setItem('repkey_'+k,el.value.trim());
   });
-  flash('keyToast');updateApiStatusHome();
+  flash('keyToast');
+  updateApiStatusHome();
 }
 function clearApiKeys(){
-  ['vt','abuse','otx','ipinfo'].forEach(k=>{localStorage.removeItem('repkey_'+k);const el=document.getElementById('key-'+k);if(el)el.value='';});
-  flash('keyToast');updateApiStatusHome();
+  ['vt','abuse','otx','ipinfo'].forEach(k=>{
+    localStorage.removeItem('repkey_'+k);
+    const el=document.getElementById('key-'+k);
+    if(el)el.value='';
+  });
+  flash('keyToast');
+  updateApiStatusHome();
 }
 function getKey(k){return localStorage.getItem('repkey_'+k)||'';}
 
@@ -895,20 +897,22 @@ async function runRepLookup(){
 
   document.getElementById('repResults').style.display='block';
   document.getElementById('repVerdict').style.display='none';
-  document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:13px;color:var(--muted);padding:1rem 0;display:flex;align-items:center;gap:10px"><span style="display:inline-block;width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></span>A consultar fontes disponíveis...</div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
+  document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:13px;color:var(--muted);padding:1rem 0;display:flex;align-items:center;gap:10px"><span style="display:inline-block;width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></span>A consultar fontes...</div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
 
-  const results=[];const promises=[];
+  const results=[];
+  const promises=[];
 
-  /* VirusTotal — URL precisa de base64 sem padding */
   const vtKey=getKey('vt');
   if(vtKey){
     let vtEndpoint,vtId;
-    if(isIP){
-      vtEndpoint='ip_addresses';vtId=target;
-    } else {
+    if(isIP){vtEndpoint='ip_addresses';vtId=target;}
+    else{
       vtEndpoint='urls';
-      /* base64url sem padding */
-      vtId=btoa(encodeURIComponent(val).replace(/%([0-9A-F]{2})/g,(_,p)=>String.fromCharCode('0x'+p))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+      try{
+        const encoded=encodeURIComponent(val);
+        const b64=btoa(encoded.replace(/%([0-9A-F]{2})/g,(_,p)=>String.fromCharCode(parseInt(p,16))));
+        vtId=b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+      }catch(e){vtId=btoa(val).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
     }
     promises.push(
       fetch('https://www.virustotal.com/api/v3/'+vtEndpoint+'/'+vtId,{headers:{'x-apikey':vtKey}})
@@ -919,17 +923,17 @@ async function runRepLookup(){
             const mal=stats.malicious||0;
             const tot=Object.values(stats).reduce((a,b)=>a+b,0);
             results.push({source:'VirusTotal',flagged:mal>0,detail:mal+'/'+tot+' engines detetaram',score:mal>0?'danger':'clean'});
+          }else{
+            results.push({source:'VirusTotal',flagged:false,detail:'Sem dados de análise',score:'clean'});
           }
         }).catch(e=>results.push({source:'VirusTotal',flagged:null,detail:'Erro: '+e.message,score:'error'}))
     );
   }
 
-  /* AbuseIPDB — precisa de proxy CORS para funcionar em browser */
   const abuseKey=getKey('abuse');
   if(abuseKey&&isIP){
-    /* Tentativa direta — pode falhar por CORS em alguns browsers */
     promises.push(
-      fetch('https://api.abuseipdb.com/api/v2/check?ipAddress='+encodeURIComponent(target)+'&maxAgeInDays=90&verbose',{
+      fetch('https://api.abuseipdb.com/api/v2/check?ipAddress='+encodeURIComponent(target)+'&maxAgeInDays=90',{
         headers:{'Key':abuseKey,'Accept':'application/json'}
       })
         .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
@@ -941,11 +945,10 @@ async function runRepLookup(){
             const isp=data?.data?.isp||'';
             results.push({source:'AbuseIPDB',flagged:score>0,detail:'Score: '+score+'/100 · '+reports+' reports · '+country+(isp?' · '+isp:''),score:score>25?'danger':score>0?'warning':'clean'});
           }
-        }).catch(e=>results.push({source:'AbuseIPDB',flagged:null,detail:'CORS bloqueado pelo browser — abre a extensão CORS Unblock ou usa o botão manual',score:'error'}))
+        }).catch(e=>results.push({source:'AbuseIPDB',flagged:null,detail:'Erro CORS — usa o botão manual acima',score:'error'}))
     );
   }
 
-  /* OTX AlienVault */
   const otxKey=getKey('otx');
   if(otxKey){
     const otxType=isIP?'IPv4':'domain';
@@ -959,21 +962,23 @@ async function runRepLookup(){
     );
   }
 
-  /* IPInfo */
   const ipinfoKey=getKey('ipinfo');
   if(ipinfoKey&&isIP){
     promises.push(
       fetch('https://ipinfo.io/'+target+'?token='+ipinfoKey)
         .then(r=>r.json())
         .then(data=>{
-          const org=data?.org||'';const city=data?.city||'';const country=data?.country||'';const hostname=data?.hostname||'';
+          const org=data?.org||'';
+          const city=data?.city||'';
+          const country=data?.country||'';
+          const hostname=data?.hostname||'';
           results.push({source:'IPInfo',flagged:false,detail:org+(city?' · '+city:'')+(country?', '+country:'')+(hostname?' · '+hostname:''),score:'info'});
         }).catch(()=>{})
     );
   }
 
   if(promises.length===0){
-    document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:12px;color:var(--muted);padding:0.5rem 0">Nenhuma API key configurada. Clica em "Configurar API Keys" acima.<br>Usa os botões para pesquisa manual enquanto isso.</div>';
+    document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:12px;color:var(--muted);padding:0.5rem 0">Nenhuma API key configurada. Usa os botões manuais acima ou configura as keys.</div>';
     return;
   }
 
@@ -991,14 +996,17 @@ async function runRepLookup(){
   const verdict=document.getElementById('repVerdict');
   verdict.style.display='block';
   if(flagged.length>0){
-    verdict.style.background='var(--danger-dim)';verdict.style.borderColor='var(--danger)';
+    verdict.style.background='var(--danger-dim)';
+    verdict.style.borderColor='var(--danger)';
     verdict.innerHTML='<div style="font-size:14px;font-weight:700;color:var(--danger);margin-bottom:4px">✗ '+val+' encontra-se referenciado como malicioso</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono)">Referenciado em '+flagged.length+' de '+checked.length+' fonte'+(checked.length!==1?'s':'')+' consultada'+(checked.length!==1?'s':'')+'. Recomenda-se investigação adicional.</div>';
-  } else if(checked.length>0){
-    verdict.style.background='var(--accent-dim)';verdict.style.borderColor='var(--accent)';
+  }else if(checked.length>0){
+    verdict.style.background='var(--accent-dim)';
+    verdict.style.borderColor='var(--accent)';
     verdict.innerHTML='<div style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px">✓ '+val+' não se encontra referenciado</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono)">Sem ocorrências em '+checked.length+' fonte'+(checked.length!==1?'s':'')+' consultada'+(checked.length!==1?'s':'')+' com key configurada.</div>';
-  } else {
-    verdict.style.background='var(--surface2)';verdict.style.borderColor='var(--border2)';
-    verdict.innerHTML='<div style="font-size:13px;color:var(--muted);font-family:var(--mono)">Nenhuma fonte com key retornou resultado válido. Verifica as keys ou usa os botões manuais.</div>';
+  }else{
+    verdict.style.background='var(--surface2)';
+    verdict.style.borderColor='var(--border2)';
+    verdict.innerHTML='<div style="font-size:13px;color:var(--muted);font-family:var(--mono)">Nenhuma fonte retornou resultado válido. Verifica as keys ou usa os botões manuais.</div>';
   }
 }
 
@@ -1009,7 +1017,7 @@ function calcCIDR(){
   if(!val){res.innerHTML='';return;}
   const match=val.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\/(\d{1,2})$/);
   if(!match){res.innerHTML='<div style="color:var(--danger);font-family:var(--mono);font-size:12px;margin-top:8px">Formato inválido. Ex: 192.168.1.0/24</div>';return;}
-  const[,a,b,c,d,bits]=match.map(Number);
+  const [,a,b,c,d,bits]=match.map(Number);
   if([a,b,c,d].some(x=>x>255)||bits>32){res.innerHTML='<div style="color:var(--danger);font-family:var(--mono);font-size:12px;margin-top:8px">IP ou prefixo inválido.</div>';return;}
   const mask=bits===0?0:(~0<<(32-bits))>>>0;
   const ip32=((a<<24)|(b<<16)|(c<<8)|d)>>>0;
@@ -1017,18 +1025,22 @@ function calcCIDR(){
   const bcast=(net|(~mask>>>0))>>>0;
   const hosts=bits>=31?Math.pow(2,32-bits):Math.pow(2,32-bits)-2;
   const toIP=n=>[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');
-  const stats=[{l:'Rede',v:toIP(net)},{l:'Máscara',v:toIP(mask)},{l:'Wildcard',v:toIP(~mask>>>0)},{l:'Primeiro host',v:bits>=31?toIP(net):toIP(net+1)},{l:'Último host',v:bits>=31?toIP(bcast):toIP(bcast-1)},{l:'Broadcast',v:toIP(bcast)},{l:'Hosts utilizáveis',v:Math.max(0,hosts).toLocaleString()},{l:'Prefixo',v:'/'+bits}];
+  const stats=[
+    {l:'Rede',v:toIP(net)},{l:'Máscara',v:toIP(mask)},{l:'Wildcard',v:toIP(~mask>>>0)},
+    {l:'Primeiro host',v:bits>=31?toIP(net):toIP(net+1)},{l:'Último host',v:bits>=31?toIP(bcast):toIP(bcast-1)},
+    {l:'Broadcast',v:toIP(bcast)},{l:'Hosts utilizáveis',v:Math.max(0,hosts).toLocaleString()},{l:'Prefixo',v:'/'+bits}
+  ];
   res.innerHTML='<div class="cidr-result">'+stats.map(s=>'<div class="cidr-stat"><div class="cidr-stat-label">'+s.l+'</div><div class="cidr-stat-val">'+s.v+'</div></div>').join('')+'</div>';
 }
 
 /* ENCODING */
-function b64enc(){try{document.getElementById('b64out').textContent=btoa(unescape(encodeURIComponent(document.getElementById('encInput').value)))}catch(e){document.getElementById('b64out').textContent='Erro: '+e.message}}
-function b64dec(){try{document.getElementById('b64out').textContent=decodeURIComponent(escape(atob(document.getElementById('encInput').value)))}catch(e){document.getElementById('b64out').textContent='Erro: input inválido'}}
-function urlenc(){document.getElementById('urlout').textContent=encodeURIComponent(document.getElementById('encInput').value)}
-function urldec(){try{document.getElementById('urlout').textContent=decodeURIComponent(document.getElementById('encInput').value)}catch(e){document.getElementById('urlout').textContent='Erro: input inválido'}}
-function hexenc(){document.getElementById('hexout').textContent=Array.from(document.getElementById('encInput').value).map(c=>c.charCodeAt(0).toString(16).padStart(2,'0')).join(' ')}
-function hexdec(){try{document.getElementById('hexout').textContent=document.getElementById('encInput').value.trim().split(/\s+/).map(h=>String.fromCharCode(parseInt(h,16))).join('')}catch(e){document.getElementById('hexout').textContent='Erro'}}
-function rot13(){document.getElementById('rot13out').textContent=document.getElementById('encInput').value.replace(/[a-zA-Z]/g,c=>{const b=c<='Z'?65:97;return String.fromCharCode(((c.charCodeAt(0)-b+13)%26)+b)})}
+function b64enc(){try{document.getElementById('b64out').textContent=btoa(unescape(encodeURIComponent(document.getElementById('encInput').value)));}catch(e){document.getElementById('b64out').textContent='Erro: '+e.message;}}
+function b64dec(){try{document.getElementById('b64out').textContent=decodeURIComponent(escape(atob(document.getElementById('encInput').value)));}catch(e){document.getElementById('b64out').textContent='Erro: input inválido';}}
+function urlenc(){document.getElementById('urlout').textContent=encodeURIComponent(document.getElementById('encInput').value);}
+function urldec(){try{document.getElementById('urlout').textContent=decodeURIComponent(document.getElementById('encInput').value);}catch(e){document.getElementById('urlout').textContent='Erro: input inválido';}}
+function hexenc(){document.getElementById('hexout').textContent=Array.from(document.getElementById('encInput').value).map(c=>c.charCodeAt(0).toString(16).padStart(2,'0')).join(' ');}
+function hexdec(){try{document.getElementById('hexout').textContent=document.getElementById('encInput').value.trim().split(/\s+/).map(h=>String.fromCharCode(parseInt(h,16))).join('');}catch(e){document.getElementById('hexout').textContent='Erro';}}
+function rot13(){document.getElementById('rot13out').textContent=document.getElementById('encInput').value.replace(/[a-zA-Z]/g,c=>{const b=c<='Z'?65:97;return String.fromCharCode(((c.charCodeAt(0)-b+13)%26)+b);});}
 
 /* HASH */
 async function genHashes(){
@@ -1037,7 +1049,8 @@ async function genHashes(){
   if(!text){res.innerHTML='';return;}
   const enc=new TextEncoder().encode(text);
   res.innerHTML='<div style="color:var(--muted);font-family:var(--mono);font-size:12px;margin-top:8px">A gerar...</div>';
-  const algos=['SHA-1','SHA-256','SHA-512'];const labels=['SHA1','SHA256','SHA512'];
+  const algos=['SHA-1','SHA-256','SHA-512'];
+  const labels=['SHA1','SHA256','SHA512'];
   const hashes=await Promise.all(algos.map(a=>crypto.subtle.digest(a,enc)));
   const hexHashes=hashes.map(buf=>Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join(''));
   res.innerHTML=labels.map((l,i)=>'<div class="hash-row"><span class="hash-label">'+l+'</span><div class="hash-val">'+hexHashes[i]+'</div><button class="btn btn-ghost" style="padding:5px 12px;font-size:11px;flex-shrink:0" onclick="navigator.clipboard.writeText(\''+hexHashes[i]+'\')">Copiar</button></div>').join('');
@@ -1046,15 +1059,18 @@ async function genHashes(){
 /* PASSWORD */
 const pwCharsets={upper:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',lower:'abcdefghijklmnopqrstuvwxyz',digits:'0123456789',symbols:'!@#$%^&*()-_=+[]{}|;:,.<>?'};
 let pwState={upper:true,lower:true,digits:true,symbols:true,ambig:false};
-function toggleOpt(btn){const k=btn.dataset.key;pwState[k]=!pwState[k];btn.classList.toggle('on',pwState[k]);genPw()}
+function toggleOpt(btn){const k=btn.dataset.key;pwState[k]=!pwState[k];btn.classList.toggle('on',pwState[k]);genPw();}
 function genPw(){
   let cs='';
-  if(pwState.upper)cs+=pwCharsets.upper;if(pwState.lower)cs+=pwCharsets.lower;
-  if(pwState.digits)cs+=pwCharsets.digits;if(pwState.symbols)cs+=pwCharsets.symbols;
+  if(pwState.upper)cs+=pwCharsets.upper;
+  if(pwState.lower)cs+=pwCharsets.lower;
+  if(pwState.digits)cs+=pwCharsets.digits;
+  if(pwState.symbols)cs+=pwCharsets.symbols;
   if(pwState.ambig)cs=cs.replace(/[0O1lI]/g,'');
   if(!cs){document.getElementById('pwOutput').textContent='Seleciona pelo menos uma opção.';return;}
   const len=parseInt(document.getElementById('pwLen').value);
-  const arr=new Uint32Array(len);crypto.getRandomValues(arr);
+  const arr=new Uint32Array(len);
+  crypto.getRandomValues(arr);
   const pw=Array.from(arr).map(v=>cs[v%cs.length]).join('');
   document.getElementById('pwOutput').textContent=pw;
   const entropy=Math.floor(len*Math.log2(cs.length));
@@ -1067,7 +1083,9 @@ function genPw(){
   else{pct=100;color='#00FF94';txt='Muito forte';}
   document.getElementById('strengthFill').style.width=pct+'%';
   document.getElementById('strengthFill').style.background=color;
-  const sl=document.getElementById('strengthLabel');sl.textContent=txt;sl.style.color=color;
+  const sl=document.getElementById('strengthLabel');
+  sl.textContent=txt;
+  sl.style.color=color;
 }
 function copyPw(){navigator.clipboard.writeText(document.getElementById('pwOutput').textContent).then(()=>flash('pwToast'));}
 
@@ -1089,24 +1107,60 @@ function genIP(){
   document.getElementById('ipOut').textContent=ip.join('.');
 }
 function genBulk(){
-  const n=parseInt(document.getElementById('bulkCount').value);const uuids=[];
-  for(let i=0;i<n;i++){const b=new Uint8Array(16);crypto.getRandomValues(b);b[6]=(b[6]&0x0f)|0x40;b[8]=(b[8]&0x3f)|0x80;const h=Array.from(b).map(x=>x.toString(16).padStart(2,'0'));uuids.push([h.slice(0,4),h.slice(4,6),h.slice(6,8),h.slice(8,10),h.slice(10)].map(g=>g.join('')).join('-'));}
+  const n=parseInt(document.getElementById('bulkCount').value);
+  const uuids=[];
+  for(let i=0;i<n;i++){
+    const b=new Uint8Array(16);crypto.getRandomValues(b);
+    b[6]=(b[6]&0x0f)|0x40;b[8]=(b[8]&0x3f)|0x80;
+    const h=Array.from(b).map(x=>x.toString(16).padStart(2,'0'));
+    uuids.push([h.slice(0,4),h.slice(4,6),h.slice(6,8),h.slice(8,10),h.slice(10)].map(g=>g.join('')).join('-'));
+  }
   document.getElementById('bulkOut').textContent=uuids.join('\n');
 }
 
 /* DIFF */
 function doDiff(){
-  const a=document.getElementById('diffA').value,b=document.getElementById('diffB').value;
-  if(!a&&!b){document.getElementById('diffOutput').innerHTML='<span class="diff-eq">Cola texto acima...</span>';document.getElementById('diffStats').innerHTML='';return;}
+  const a=document.getElementById('diffA').value;
+  const b=document.getElementById('diffB').value;
+  if(!a&&!b){
+    document.getElementById('diffOutput').innerHTML='<span class="diff-eq">Cola texto acima...</span>';
+    document.getElementById('diffStats').innerHTML='';
+    return;
+  }
   const wa=tok(a),wb=tok(b),lcs=computeLCS(wa,wb),ops=buildOps(wa,wb,lcs);
   let html='',adds=0,dels=0;
-  ops.forEach(op=>{if(op.t==='eq')html+='<span class="diff-eq">'+esc(op.v)+'</span>';else if(op.t==='add'){html+='<span class="diff-add">'+esc(op.v)+'</span>';adds++;}else{html+='<span class="diff-del">'+esc(op.v)+'</span>';dels++;}});
+  ops.forEach(op=>{
+    if(op.t==='eq')html+='<span class="diff-eq">'+esc(op.v)+'</span>';
+    else if(op.t==='add'){html+='<span class="diff-add">'+esc(op.v)+'</span>';adds++;}
+    else{html+='<span class="diff-del">'+esc(op.v)+'</span>';dels++;}
+  });
   document.getElementById('diffOutput').innerHTML=html||'<span class="diff-eq">(sem diferenças)</span>';
   document.getElementById('diffStats').innerHTML=adds===0&&dels===0?'<span class="chip green">Idênticos</span>':'<span class="chip green">+'+adds+'</span> <span class="chip red">−'+dels+'</span>';
 }
 function tok(s){return s.match(/(\s+|\S+)/g)||[];}
-function computeLCS(a,b){const m=a.length,n=b.length,dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);let i=m,j=n,r=[];while(i>0&&j>0){if(a[i-1]===b[j-1]){r.unshift({i:i-1,j:j-1});i--;j--;}else if(dp[i-1][j]>=dp[i][j-1])i--;else j--;}return r;}
-function buildOps(a,b,lcs){const ops=[];let ai=0,bi=0,li=0;while(li<lcs.length){const{i,j}=lcs[li];while(ai<i){ops.push({t:'del',v:a[ai]});ai++;}while(bi<j){ops.push({t:'add',v:b[bi]});bi++;}ops.push({t:'eq',v:a[ai]});ai++;bi++;li++;}while(ai<a.length){ops.push({t:'del',v:a[ai]});ai++;}while(bi<b.length){ops.push({t:'add',v:b[bi]});bi++;}return ops;}
+function computeLCS(a,b){
+  const m=a.length,n=b.length;
+  const dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
+  let i=m,j=n;const r=[];
+  while(i>0&&j>0){
+    if(a[i-1]===b[j-1]){r.unshift({i:i-1,j:j-1});i--;j--;}
+    else if(dp[i-1][j]>=dp[i][j-1])i--;else j--;
+  }
+  return r;
+}
+function buildOps(a,b,lcs){
+  const ops=[];let ai=0,bi=0,li=0;
+  while(li<lcs.length){
+    const{i,j}=lcs[li];
+    while(ai<i){ops.push({t:'del',v:a[ai]});ai++;}
+    while(bi<j){ops.push({t:'add',v:b[bi]});bi++;}
+    ops.push({t:'eq',v:a[ai]});ai++;bi++;li++;
+  }
+  while(ai<a.length){ops.push({t:'del',v:a[ai]});ai++;}
+  while(bi<b.length){ops.push({t:'add',v:b[bi]});bi++;}
+  return ops;
+}
 function copyDiff(){navigator.clipboard.writeText(document.getElementById('diffOutput').innerText).then(()=>flash('diffToast'));}
 
 /* REGEX */
@@ -1115,7 +1169,8 @@ function toggleFlag(btn,f){regexFlags[f]=!regexFlags[f];btn.classList.toggle('on
 function testRegex(){
   const pat=document.getElementById('regexPattern').value;
   const text=document.getElementById('regexText').value;
-  const meta=document.getElementById('regexMeta');const out=document.getElementById('regexOutput');
+  const meta=document.getElementById('regexMeta');
+  const out=document.getElementById('regexOutput');
   if(!pat||!text){out.innerHTML='<span class="diff-eq">Escreve uma regex e texto acima...</span>';meta.innerHTML='';return;}
   try{
     const flags=Object.entries(regexFlags).filter(([,v])=>v).map(([k])=>k).join('');
@@ -1125,7 +1180,10 @@ function testRegex(){
     for(const m of matches){result+=esc(text.slice(last,m.index));result+='<span class="regex-match">'+esc(m[0])+'</span>';last=m.index+m[0].length;}
     result+=esc(text.slice(last));
     out.innerHTML=result||'<span class="diff-eq">(vazio)</span>';
-  }catch(e){meta.innerHTML='<span class="chip red">Erro: '+e.message+'</span>';out.innerHTML='<span class="diff-eq">Regex inválida...</span>';}
+  }catch(e){
+    meta.innerHTML='<span class="chip red">Erro: '+e.message+'</span>';
+    out.innerHTML='<span class="diff-eq">Regex inválida...</span>';
+  }
 }
 
 /* JSON */
@@ -1134,260 +1192,62 @@ function formatJSON(){
     const parsed=JSON.parse(document.getElementById('jsonInput').value);
     document.getElementById('jsonOutput').innerHTML=syntaxHL(JSON.stringify(parsed,null,2));
     document.getElementById('jsonMeta').innerHTML='<span class="chip green">JSON válido</span>';
-  }catch(e){document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';document.getElementById('jsonOutput').textContent='';}
+  }catch(e){
+    document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';
+    document.getElementById('jsonOutput').textContent='';
+  }
 }
 function minifyJSON(){
   try{
     const parsed=JSON.parse(document.getElementById('jsonInput').value);
     document.getElementById('jsonOutput').textContent=JSON.stringify(parsed);
     document.getElementById('jsonMeta').innerHTML='<span class="chip green">Minificado</span>';
-  }catch(e){document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';}
+  }catch(e){
+    document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';
+  }
 }
-function syntaxHL(s){return s.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,m=>{let cls='json-num';if(/^"/.test(m)){cls=/:$/.test(m)?'json-key':'json-str';}else if(/true|false/.test(m)){cls='json-bool';}else if(/null/.test(m)){cls='json-null';}return'<span class="'+cls+'">'+m+'</span>';});}
+function syntaxHL(s){
+  return s.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,m=>{
+    let cls='json-num';
+    if(/^"/.test(m)){cls=/:$/.test(m)?'json-key':'json-str';}
+    else if(/true|false/.test(m)){cls='json-bool';}
+    else if(/null/.test(m)){cls='json-null';}
+    return'<span class="'+cls+'">'+m+'</span>';
+  });
+}
 function copyJSON(){navigator.clipboard.writeText(document.getElementById('jsonOutput').innerText).then(()=>flash('jsont'));}
 
 /* COUNTER */
 function countText(){
   const t=document.getElementById('counterInput').value;
+  const words=t.trim()===''?0:t.trim().split(/\s+/).length;
   const stats=[
     {l:'Caracteres',v:t.length.toLocaleString()},
     {l:'Sem espaços',v:t.replace(/\s/g,'').length.toLocaleString()},
-    {l:'Palavras',v:(t.trim()===''?0:t.trim().split(/\s+/).length).toLocaleString()},
+    {l:'Palavras',v:words.toLocaleString()},
     {l:'Linhas',v:(t===''?0:t.split('\n').length).toLocaleString()},
     {l:'Frases',v:t.split(/[.!?]+/).filter(s=>s.trim()).length.toLocaleString()},
     {l:'Parágrafos',v:t.split(/\n\s*\n/).filter(p=>p.trim()).length.toLocaleString()},
-    {l:'Tempo leitura',v:Math.ceil((t.trim()===''?0:t.trim().split(/\s+/).length)/200)+'min'},
-    {l:'Bytes (UTF-8)',v:new Blob([t]).size.toLocaleString()},
+    {l:'Tempo leitura',v:Math.ceil(words/200)+'min'},
+    {l:'Bytes (UTF-8)',v:new Blob([t]).size.toLocaleString()}
   ];
   document.getElementById('counterStats').innerHTML=stats.map(s=>'<div class="cidr-stat"><div class="cidr-stat-label">'+s.l+'</div><div class="cidr-stat-val">'+s.v+'</div></div>').join('');
 }
-
-
-/* ── EMAIL HEADER ANALYSIS ── */
-async function pasteAndAnalyzeEmail(){
-  try{
-    const text=await navigator.clipboard.readText();
-    if(!text.trim()){alert('A clipboard está vazia.');return;}
-    document.getElementById('emailInput').value=text.trim();
-    analyzeEmail();
-  }catch(e){
-    alert('Sem permissão para ler a clipboard. Cola manualmente e clica em Analisar.');
-  }
-}
-
-function analyzeEmail(){
-  const raw=document.getElementById('emailInput').value.trim();
-  if(!raw){alert('Cola os headers primeiro.');return;}
-
-  // Parse headers — fold continuation lines
-  const lines=raw.split(/\r?\n/);
-  const headers=[];
-  let current=null;
-  for(const line of lines){
-    if(/^\s/.test(line)&&current){current.value+=' '+line.trim();}
-    else{
-      const m=line.match(/^([\w\-]+):\s*(.*)/);
-      if(m){current={name:m[1].toLowerCase(),raw:m[1],value:m[2]};headers.push(current);}
-      else{current=null;}
-    }
-  }
-
-  const get=(name)=>headers.filter(h=>h.name===name.toLowerCase()).map(h=>h.value);
-  const getFirst=(name)=>get(name)[0]||'';
-
-  // Extract fields
-  const from=getFirst('from');
-  const replyTo=getFirst('reply-to');
-  const returnPath=getFirst('return-path');
-  const to=getFirst('to');
-  const subject=getFirst('subject');
-  const date=getFirst('date');
-  const messageId=getFirst('message-id');
-  const xMailer=getFirst('x-mailer')||getFirst('user-agent');
-  const xOriginatingIp=getFirst('x-originating-ip')||getFirst('x-sender-ip');
-  const contentType=getFirst('content-type');
-  const mimeVersion=getFirst('mime-version');
-  const authResults=get('authentication-results').join(' | ');
-  const receivedSpf=getFirst('received-spf');
-  const dkimSig=getFirst('dkim-signature');
-  const arcAuthResults=getFirst('arc-authentication-results');
-
-  // Parse Received headers in order (last = oldest)
-  const received=get('received').reverse();
-
-  // Extract IPs from Received headers
-  const ipRegex=/\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b/g;
-  const allIps=new Set();
-  received.forEach(r=>{const m=r.match(ipRegex);if(m)m.forEach(ip=>allIps.add(ip));});
-  if(xOriginatingIp){const m=xOriginatingIp.match(ipRegex);if(m)m.forEach(ip=>allIps.add(ip));}
-
-  // Private IP ranges
-  const isPrivate=(ip)=>{
-    const p=ip.split('.').map(Number);
-    return(p[0]===10)||(p[0]===172&&p[1]>=16&&p[1]<=31)||(p[0]===192&&p[1]===168)||(p[0]===127);
-  };
-  const publicIps=[...allIps].filter(ip=>!isPrivate(ip)&&ip!=='0.0.0.0');
-
-  // SPF check
-  let spfStatus='unknown',spfDetail='Não encontrado';
-  const spfSrc=receivedSpf||authResults;
-  if(/\bpass\b/i.test(spfSrc)){spfStatus='pass';spfDetail='SPF passou';}
-  else if(/\bfail\b/i.test(spfSrc)){spfStatus='fail';spfDetail='SPF falhou — possível spoofing';}
-  else if(/\bsoftfail\b/i.test(spfSrc)){spfStatus='warn';spfDetail='SPF softfail';}
-  else if(/\bneutral\b/i.test(spfSrc)){spfStatus='warn';spfDetail='SPF neutral';}
-  else if(/\bnone\b/i.test(spfSrc)){spfStatus='warn';spfDetail='SPF não configurado';}
-
-  // DKIM check
-  let dkimStatus='unknown',dkimDetail='Não encontrado';
-  if(dkimSig){
-    if(/\bpass\b/i.test(authResults)){dkimStatus='pass';dkimDetail='DKIM válido';}
-    else if(/\bfail\b/i.test(authResults)){dkimStatus='fail';dkimDetail='DKIM inválido — email pode ter sido alterado';}
-    else{dkimStatus='warn';dkimDetail='DKIM presente mas resultado desconhecido';}
-  } else if(/dkim=pass/i.test(authResults)){dkimStatus='pass';dkimDetail='DKIM válido';}
-  else if(/dkim=fail/i.test(authResults)){dkimStatus='fail';dkimDetail='DKIM inválido';}
-
-  // DMARC check
-  let dmarcStatus='unknown',dmarcDetail='Não encontrado';
-  if(/dmarc=pass/i.test(authResults)){dmarcStatus='pass';dmarcDetail='DMARC passou';}
-  else if(/dmarc=fail/i.test(authResults)){dmarcStatus='fail';dmarcDetail='DMARC falhou';}
-  else if(/dmarc=none/i.test(authResults)){dmarcStatus='warn';dmarcDetail='DMARC não configurado';}
-
-  // Spoofing checks
-  const spoofFlags=[];
-  const fromMatch=from.match(/[\w.+-]+@([\w.-]+)/);
-  const replyMatch=replyTo.match(/[\w.+-]+@([\w.-]+)/);
-  const returnMatch=returnPath.match(/[\w.+-]+@([\w.-]+)/);
-  if(fromMatch&&replyMatch&&fromMatch[1].toLowerCase()!==replyMatch[1].toLowerCase()){
-    spoofFlags.push('Reply-To difere do domínio de From ('+fromMatch[1]+' vs '+replyMatch[1]+')');
-  }
-  if(fromMatch&&returnMatch&&fromMatch[1].toLowerCase()!==returnMatch[1].toLowerCase()){
-    spoofFlags.push('Return-Path difere do domínio de From ('+fromMatch[1]+' vs '+returnMatch[1]+')');
-  }
-  if(spfStatus==='fail')spoofFlags.push('SPF falhou');
-  if(dkimStatus==='fail')spoofFlags.push('DKIM inválido');
-  if(dmarcStatus==='fail')spoofFlags.push('DMARC falhou');
-
-  // Score
-  let score=0;
-  if(spfStatus==='pass')score+=25;
-  else if(spfStatus==='fail')score-=30;
-  else if(spfStatus==='warn')score-=10;
-  if(dkimStatus==='pass')score+=25;
-  else if(dkimStatus==='fail')score-=25;
-  if(dmarcStatus==='pass')score+=20;
-  else if(dmarcStatus==='fail')score-=20;
-  if(spoofFlags.length===0)score+=15;
-  else score-=spoofFlags.length*10;
-  if(publicIps.length>0)score+=5;
-  score=Math.max(0,Math.min(100,score+50));
-
-  // Render score
-  const scoreEl=document.getElementById('emailScore');
-  const scoreIcon=document.getElementById('emailScoreIcon');
-  const scoreTitle=document.getElementById('emailScoreTitle');
-  const scoreDesc=document.getElementById('emailScoreDesc');
-  scoreEl.style.display='block';
-  if(score>=70){
-    scoreEl.style.background='var(--accent-dim)';scoreEl.style.borderColor='var(--accent)';
-    scoreIcon.textContent='✓';scoreTitle.style.color='var(--accent)';
-    scoreTitle.textContent='Email aparentemente legítimo (score: '+score+'/100)';
-    scoreDesc.textContent='Nenhum indicador crítico de spoofing ou manipulação encontrado.';
-  } else if(score>=40){
-    scoreEl.style.background='var(--warning-dim)';scoreEl.style.borderColor='var(--warning)';
-    scoreIcon.textContent='⚠';scoreTitle.style.color='var(--warning)';
-    scoreTitle.textContent='Email suspeito — verificar manualmente (score: '+score+'/100)';
-    scoreDesc.textContent='Alguns indicadores de risco. Não confiar sem verificação adicional.';
-  } else {
-    scoreEl.style.background='var(--danger-dim)';scoreEl.style.borderColor='var(--danger)';
-    scoreIcon.textContent='✗';scoreTitle.style.color='var(--danger)';
-    scoreTitle.textContent='Email potencialmente malicioso (score: '+score+'/100)';
-    scoreDesc.textContent='Múltiplos indicadores de spoofing ou autenticação falhada.';
-  }
-
-  // Render results
-  const statusIcon=(s)=>s==='pass'?'<span style="color:var(--accent)">✓</span>':s==='fail'?'<span style="color:var(--danger)">✗</span>':s==='warn'?'<span style="color:var(--warning)">⚠</span>':'<span style="color:var(--muted)">?</span>';
-  const statusColor=(s)=>s==='pass'?'var(--accent)':s==='fail'?'var(--danger)':s==='warn'?'var(--warning)':'var(--muted)';
-
-  let html='';
-
-  // Identification card
-  html+='<div class="card"><div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Identificação</div>';
-  const idRows=[
-    ['De',from||'—'],['Para',to||'—'],['Assunto',subject||'—'],['Data',date||'—'],
-    ['Reply-To',replyTo||'—'],['Return-Path',returnPath||'—'],
-    ['Message-ID',messageId||'—'],['Mailer / UA',xMailer||'—'],
-    ['Content-Type',contentType||'—'],
-  ];
-  html+=idRows.map(([l,v])=>'<div style="display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--border);font-size:13px"><span style="font-family:var(--mono);font-size:11px;color:var(--muted);min-width:110px;flex-shrink:0">'+l+'</span><span style="word-break:break-all;color:var(--text)">'+esc(v)+'</span></div>').join('');
-  html+='</div>';
-
-  // Authentication card
-  html+='<div class="card"><div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Autenticação</div>';
-  const authRows=[
-    ['SPF',spfStatus,spfDetail],
-    ['DKIM',dkimStatus,dkimDetail],
-    ['DMARC',dmarcStatus,dmarcDetail],
-  ];
-  html+=authRows.map(([l,s,d])=>'<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:12px;font-weight:700;min-width:60px">'+l+'</span>'+statusIcon(s)+'<span style="font-size:13px;color:'+statusColor(s)+'">'+d+'</span></div>').join('');
-  if(authResults){html+='<div style="margin-top:1rem"><div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:6px">Authentication-Results raw</div><div style="font-family:var(--mono);font-size:11px;color:var(--muted);word-break:break-all;background:var(--bg);padding:10px;border-radius:8px;line-height:1.6">'+esc(authResults)+'</div></div>';}
-  html+='</div>';
-
-  // Spoofing flags
-  if(spoofFlags.length>0){
-    html+='<div class="card" style="border-color:var(--danger);background:var(--danger-dim)"><div style="font-family:var(--mono);font-size:10px;color:var(--danger);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">⚠ Indicadores de spoofing</div>';
-    html+=spoofFlags.map(f=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:13px"><span style="color:var(--danger)">✗</span>'+esc(f)+'</div>').join('');
-    html+='</div>';
-  }
-
-  // IPs card
-  if(publicIps.length>0){
-    html+='<div class="card"><div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">IPs públicos encontrados</div>';
-    html+=publicIps.map(ip=>'<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:13px;color:var(--accent)">'+ip+'</span><div style="display:flex;gap:6px"><a href="https://www.virustotal.com/gui/search/'+ip+'" target="_blank" class="btn btn-ghost" style="padding:4px 10px;font-size:11px">VT</a><a href="https://www.abuseipdb.com/check/'+ip+'" target="_blank" class="btn btn-ghost" style="padding:4px 10px;font-size:11px">AbuseIPDB</a><a href="https://viz.greynoise.io/ip/'+ip+'" target="_blank" class="btn btn-ghost" style="padding:4px 10px;font-size:11px">GreyNoise</a></div></div>').join('');
-    html+='</div>';
-  }
-
-  // Received path card
-  if(received.length>0){
-    html+='<div class="card"><div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Caminho do email ('+received.length+' saltos)</div>';
-    html+=received.map((r,i)=>{
-      const ips=r.match(ipRegex)||[];
-      const byMatch=r.match(/by\s+([\S]+)/i);
-      const fromMatch2=r.match(/from\s+([\S]+)/i);
-      const withMatch=r.match(/with\s+([A-Z]+)/i);
-      const dateMatch=r.match(/;\s*(.+)$/);
-      return '<div style="padding:12px 0;border-bottom:1px solid var(--border)">'
-        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">'
-        +'<span style="font-family:var(--mono);font-size:10px;background:var(--surface2);color:var(--muted);padding:2px 8px;border-radius:10px;border:1px solid var(--border2)">'+(i+1)+' / '+received.length+'</span>'
-        +(fromMatch2?'<span style="font-size:12px;color:var(--muted)">de <strong style="color:var(--text)">'+esc(fromMatch2[1])+'</strong></span>':'')
-        +(byMatch?'<span style="font-size:12px;color:var(--muted)">→ <strong style="color:var(--text)">'+esc(byMatch[1])+'</strong></span>':'')
-        +(withMatch?'<span style="font-family:var(--mono);font-size:11px;color:var(--info)">'+esc(withMatch[1])+'</span>':'')
-        +'</div>'
-        +(ips.length?'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px">'+ips.map(ip=>'<span style="font-family:var(--mono);font-size:11px;background:var(--accent-dim);color:var(--accent);padding:2px 8px;border-radius:8px">'+ip+'</span>').join('')+'</div>':'')
-        +(dateMatch?'<div style="font-family:var(--mono);font-size:11px;color:var(--muted)">'+esc(dateMatch[1].trim())+'</div>':'')
-        +'<details style="margin-top:6px"><summary style="font-family:var(--mono);font-size:10px;color:var(--muted);cursor:pointer">Ver raw</summary><div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px;word-break:break-all;line-height:1.6">'+esc(r)+'</div></details>'
-        +'</div>';
-    }).join('');
-    html+='</div>';
-  }
-
-  document.getElementById('emailResults').innerHTML=html;
-}
-
 
 /* EMAIL HEADER ANALYSIS */
 function analyzeEmail(){
   const raw=document.getElementById('emailInput').value.trim();
   if(!raw){alert('Cola os headers do email primeiro.');return;}
 
-  const get=(header)=>{
-    const re=new RegExp('^'+header+':\\s*(.+?)(?=\n[\\S]|$)','ims');
+  function get(header){
+    const re=new RegExp('^'+header+':\\s*(.+?)(?=\\n[\\S]|$)','ims');
     const m=raw.match(re);
     return m?m[1].replace(/\s+/g,' ').trim():'';
-  };
-  const getAll=(header)=>{
-    const re=new RegExp('^'+header+':\\s*(.+?)(?=\n[\\S]|$)','gims');
+  }
+  function getAll(header){
+    const re=new RegExp('^'+header+':\\s*(.+?)(?=\\n[\\S]|$)','gims');
     return [...raw.matchAll(re)].map(m=>m[1].replace(/\s+/g,' ').trim());
-  };
+  }
 
   const from=get('From');
   const replyTo=get('Reply-To');
@@ -1400,7 +1260,6 @@ function analyzeEmail(){
   const spamScore=get('X-Spam-Score')||get('X-Spam-Status')||'';
   const originIp=get('X-Originating-IP')||get('X-Forwarded-For')||'';
 
-  // Auth results
   const authResults=getAll('Authentication-Results').join(' ');
   const receivedSpf=get('Received-SPF');
 
@@ -1408,15 +1267,13 @@ function analyzeEmail(){
   const dkimRes=authResults.match(/dkim=([\w]+)/i)?.[1]||'none';
   const dmarcRes=authResults.match(/dmarc=([\w]+)/i)?.[1]||'none';
 
-  // Extract From display name and email
   const fromEmail=from.match(/<([^>]+)>/)?.[1]||from;
-  const fromDisplay=from.match(/^([^<]+)</)?.[1]?.trim()||'';
+  const fromDisplay=from.match(/^([^<]+)</)? from.match(/^([^<]+)</)[1].trim():'';
   const fromDomain=fromEmail.split('@')[1]||'';
-
-  // Reply-To mismatch detection
   const replyEmail=replyTo.match(/<([^>]+)>/)?.[1]||replyTo;
   const replyDomain=replyEmail.split('@')[1]||'';
-  const returnDomain=(returnPath.match(/<([^>]+)>/)?.[1]||returnPath).split('@')[1]||'';
+  const returnEmail=(returnPath.match(/<([^>]+)>/)?.[1]||returnPath);
+  const returnDomain=returnEmail.split('@')[1]||'';
 
   const spoofingFlags=[];
   if(replyTo&&replyDomain&&replyDomain.toLowerCase()!==fromDomain.toLowerCase())
@@ -1424,104 +1281,86 @@ function analyzeEmail(){
   if(returnPath&&returnDomain&&returnDomain.toLowerCase()!==fromDomain.toLowerCase())
     spoofingFlags.push('Return-Path domain ('+returnDomain+') difere do From ('+fromDomain+')');
   if(spfRes.toLowerCase()==='fail'||spfRes.toLowerCase()==='softfail')
-    spoofingFlags.push('SPF '+spfRes+' — servidor não autorizado a enviar por este domínio');
+    spoofingFlags.push('SPF '+spfRes+' — servidor não autorizado');
   if(dkimRes.toLowerCase()==='fail')
     spoofingFlags.push('DKIM fail — assinatura inválida ou modificada');
   if(dmarcRes.toLowerCase()==='fail')
     spoofingFlags.push('DMARC fail — política de autenticação violada');
 
-  // Parse Received headers (hops)
   const receivedHeaders=getAll('Received');
   const hops=receivedHeaders.map((r,i)=>{
     const fromMatch=r.match(/from\s+([^\s]+(?:\s+\([^)]+\))?)/i);
     const byMatch=r.match(/by\s+([^\s]+(?:\s+\([^)]+\))?)/i);
     const ipMatch=r.match(/\[([\d.]+)\]/);
     const dateMatch=r.match(/;\s*(.+)$/);
-    return{
-      num:receivedHeaders.length-i,
-      from:fromMatch?.[1]||'',
-      by:byMatch?.[1]||'',
-      ip:ipMatch?.[1]||'',
-      date:dateMatch?.[1]?.trim()||'',
-      raw:r
-    };
+    return{num:receivedHeaders.length-i,from:fromMatch?.[1]||'',by:byMatch?.[1]||'',ip:ipMatch?.[1]||'',date:dateMatch?.[1]?.trim()||''};
   }).reverse();
 
-  // Calculate hop delays
-  const hopDates=hops.map(h=>{try{return new Date(h.date);}catch(e){return null;}});
+  const hopDates=hops.map(h=>{try{const d=new Date(h.date);return isNaN(d)?null:d;}catch(e){return null;}});
 
-  // Build score
-  let score=0;
+  let score=40;
   const authPass=v=>['pass','ok','good'].includes(v.toLowerCase());
   const authFail=v=>['fail','softfail','reject'].includes(v.toLowerCase());
   if(authPass(spfRes))score+=20;else if(authFail(spfRes))score-=25;
   if(authPass(dkimRes))score+=20;else if(authFail(dkimRes))score-=25;
   if(authPass(dmarcRes))score+=20;else if(authFail(dmarcRes))score-=20;
-  if(spoofingFlags.length===0)score+=20;else score-=spoofingFlags.length*15;
-  score=Math.max(0,Math.min(100,score+40));
+  score-=spoofingFlags.length*15;
+  score=Math.max(0,Math.min(100,score));
 
-  // Auth badge helper
-  const badge=(label,val)=>{
+  function badge(label,val){
     const v=val.toLowerCase();
-    let cls='auth-none',icon='?';
+    let cls='auth-none',icon='—';
     if(['pass','ok'].includes(v)){cls='auth-pass';icon='✓';}
     else if(['fail','softfail','reject'].includes(v)){cls='auth-fail';icon='✗';}
-    else if(['neutral','none',''].includes(v)){cls='auth-none';icon='—';}
-    else{cls='auth-warn';icon='⚠';}
+    else if(!['neutral','none',''].includes(v)){cls='auth-warn';icon='⚠';}
     return '<span class="auth-badge '+cls+'">'+icon+' '+label+': '+val+'</span>';
-  };
+  }
+  function ipBtn(ip){
+    return ip?'<a class="ip-rep-btn" href="https://www.virustotal.com/gui/ip-address/'+ip+'" target="_blank">VT</a><a class="ip-rep-btn" href="https://www.abuseipdb.com/check/'+ip+'" target="_blank">Abuse</a>':'';
+  }
 
-  const ipBtn=(ip)=>ip?'<a class="ip-rep-btn" href="https://www.virustotal.com/gui/ip-address/'+ip+'" target="_blank">VT</a><a class="ip-rep-btn" href="https://www.abuseipdb.com/check/'+ip+'" target="_blank">Abuse</a>':'';
+  let verdictColor,verdictBg,verdictBorder,verdictLabel;
+  if(score>=75){verdictColor='var(--accent)';verdictBg='var(--accent-dim)';verdictBorder='rgba(0,255,148,0.3)';verdictLabel='Email aparentemente legítimo';}
+  else if(score>=45){verdictColor='var(--warning)';verdictBg='var(--warning-dim)';verdictBorder='rgba(255,184,0,0.3)';verdictLabel='Email suspeito — verificar manualmente';}
+  else{verdictColor='var(--danger)';verdictBg='var(--danger-dim)';verdictBorder='rgba(255,77,109,0.3)';verdictLabel='Email potencialmente malicioso';}
+
+  document.getElementById('emailVerdict').style.display='block';
+  document.getElementById('emailVerdict').innerHTML='<div class="verdict-box" style="background:'+verdictBg+';border-color:'+verdictBorder+'"><div class="verdict-score" style="color:'+verdictColor+'">'+score+'<span style="font-size:16px;color:var(--muted)">/100</span></div><div class="verdict-label" style="color:'+verdictColor+'">'+verdictLabel+'</div>'+(spoofingFlags.length?'<div class="verdict-detail">'+spoofingFlags.map(f=>'⚠ '+f).join('<br>')+'</div>':'<div class="verdict-detail">✓ Nenhum indicador de spoofing detetado</div>')+'</div>';
 
   let html='';
 
-  // VERDICT
-  let verdictColor,verdictBg,verdictBorder,verdictLabel;
-  if(score>=75){verdictColor='var(--accent)';verdictBg='var(--accent-dim)';verdictBorder='rgba(0,255,148,0.3)';verdictLabel='Email aparentemente legítimo';}
-  else if(score>=50){verdictColor='var(--warning)';verdictBg='var(--warning-dim)';verdictBorder='rgba(255,184,0,0.3)';verdictLabel='Email suspeito — verificar manualmente';}
-  else{verdictColor='var(--danger)';verdictBg='var(--danger-dim)';verdictBorder='rgba(255,77,109,0.3)';verdictLabel='Email potencialmente malicioso';}
-
-  const verdictHtml='<div class="verdict-box" style="background:'+verdictBg+';border-color:'+verdictBorder+';margin-bottom:1rem"><div class="verdict-score" style="color:'+verdictColor+'">'+score+'<span style="font-size:16px;color:var(--muted)">/100</span></div><div class="verdict-label" style="color:'+verdictColor+'">'+verdictLabel+'</div>'+(spoofingFlags.length?'<div class="verdict-detail">'+spoofingFlags.map(f=>'⚠ '+f).join('<br>')+'</div>':'<div class="verdict-detail">✓ Nenhum indicador de spoofing detetado</div>')+'</div>';
-
-  document.getElementById('emailVerdict').style.display='block';
-  document.getElementById('emailVerdict').innerHTML=verdictHtml;
-
-  // IDENTIDADE
   html+='<div class="email-section"><div class="email-section-title">Identidade e remetente</div>';
-  html+='<div class="email-row"><span class="email-key">From</span><span class="email-val">'+(fromDisplay?'<span style="color:var(--muted)">'+esc(fromDisplay)+'</span> ':'')+'<span class="email-val accent">&lt;'+esc(fromEmail)+'&gt;</span></span></div>';
-  if(replyTo&&replyTo!==from)html+='<div class="email-row"><span class="email-key">Reply-To</span><span class="email-val '+(replyDomain!==fromDomain?'danger':'')+'">'+esc(replyTo)+(replyDomain!==fromDomain?' ⚠':'')+'</span></div>';
+  html+='<div class="email-row"><span class="email-key">From</span><span class="email-val">'+(fromDisplay?'<span style="color:var(--muted)">'+esc(fromDisplay)+'</span> ':'')+'<span style="color:var(--accent)">&lt;'+esc(fromEmail)+'&gt;</span></span></div>';
+  if(replyTo&&replyTo!==from)html+='<div class="email-row"><span class="email-key">Reply-To</span><span class="email-val '+(replyDomain&&replyDomain!==fromDomain?'danger':'')+'">'+esc(replyTo)+(replyDomain&&replyDomain!==fromDomain?' ⚠ domínio diferente':'')+'</span></div>';
   if(returnPath)html+='<div class="email-row"><span class="email-key">Return-Path</span><span class="email-val '+(returnDomain&&returnDomain!==fromDomain?'warning':'')+'">'+esc(returnPath)+(returnDomain&&returnDomain!==fromDomain?' ⚠':'')+'</span></div>';
   html+='<div class="email-row"><span class="email-key">To</span><span class="email-val">'+esc(to)+'</span></div>';
   html+='<div class="email-row"><span class="email-key">Subject</span><span class="email-val accent">'+esc(subject)+'</span></div>';
   html+='<div class="email-row"><span class="email-key">Date</span><span class="email-val">'+esc(date)+'</span></div>';
   if(msgId)html+='<div class="email-row"><span class="email-key">Message-ID</span><span class="email-val" style="font-size:11px">'+esc(msgId)+'</span></div>';
   if(mailer)html+='<div class="email-row"><span class="email-key">Mailer / Client</span><span class="email-val info">'+esc(mailer)+'</span></div>';
-  if(originIp)html+='<div class="email-row"><span class="email-key">IP de origem</span><span class="email-val">'+esc(originIp)+ipBtn(originIp)+'</span></div>';
+  if(originIp)html+='<div class="email-row"><span class="email-key">IP de origem</span><span class="email-val">'+esc(originIp)+''+ipBtn(originIp)+'</span></div>';
   if(spamScore)html+='<div class="email-row"><span class="email-key">Spam Score</span><span class="email-val warning">'+esc(spamScore)+'</span></div>';
   html+='</div>';
 
-  // AUTENTICAÇÃO
   html+='<div class="email-section"><div class="email-section-title">Autenticação</div>';
-  html+='<div style="padding:4px 0">'+badge('SPF',spfRes||'none')+badge('DKIM',dkimRes||'none')+badge('DMARC',dmarcRes||'none')+'</div>';
-  if(authResults)html+='<div class="email-row" style="margin-top:8px"><span class="email-key">Authentication-Results</span><span class="email-val" style="font-size:11px;color:var(--muted)">'+esc(authResults.substring(0,300))+(authResults.length>300?'…':'')+'</span></div>';
-  if(receivedSpf)html+='<div class="email-row"><span class="email-key">Received-SPF</span><span class="email-val" style="font-size:11px;color:var(--muted)">'+esc(receivedSpf.substring(0,200))+'</span></div>';
+  html+='<div style="padding:6px 0">'+badge('SPF',spfRes||'none')+badge('DKIM',dkimRes||'none')+badge('DMARC',dmarcRes||'none')+'</div>';
+  if(authResults)html+='<div class="email-row" style="margin-top:8px"><span class="email-key">Auth-Results</span><span class="email-val" style="font-size:11px;color:var(--muted)">'+esc(authResults.substring(0,400))+(authResults.length>400?'…':'')+'</span></div>';
   html+='</div>';
 
-  // HOPS
   if(hops.length){
-    html+='<div class="email-section"><div class="email-section-title">Caminho do email <span style="font-weight:400;opacity:0.6">('+hops.length+' hop'+(hops.length!==1?'s':'')+')</span></div>';
+    html+='<div class="email-section"><div class="email-section-title">Caminho do email ('+hops.length+' hop'+(hops.length!==1?'s':'')+')</div>';
     hops.forEach((h,i)=>{
       let delayHtml='';
-      if(i>0&&hopDates[i]&&hopDates[i-1]&&!isNaN(hopDates[i])&&!isNaN(hopDates[i-1])){
+      if(i>0&&hopDates[i]&&hopDates[i-1]){
         const diff=Math.round((hopDates[i]-hopDates[i-1])/1000);
-        if(!isNaN(diff)){
+        if(!isNaN(diff)&&isFinite(diff)){
           const cls=diff<30?'delay-ok':diff<300?'delay-warn':'delay-bad';
           const label=diff<60?diff+'s':Math.round(diff/60)+'min';
           delayHtml='<span class="hop-delay '+cls+'">+'+label+'</span>';
         }
       }
-      const ipHtml=h.ip?'<span class="hop-ip" onclick="window.open('https://www.virustotal.com/gui/ip-address/'+h.ip+'','_blank')" title="Verificar no VirusTotal">['+h.ip+']</span>'+ipBtn(h.ip):'';
-      html+='<div class="hop-item'+(i===0?' hop-first':'')+'"><div class="hop-num">Hop '+h.num+(i===hops.length-1?' — destino final':i===0?' — origem':'')+'</div>';
+      const ipHtml=h.ip?'<span class="hop-ip" onclick="window.open(\'https://www.virustotal.com/gui/ip-address/'+h.ip+'\',\'_blank\')">['+h.ip+']</span> '+ipBtn(h.ip):'';
+      html+='<div class="hop-item'+(i===0?' hop-first':'')+'"><div class="hop-num">Hop '+h.num+(i===hops.length-1?' (destino)':i===0?' (origem)':'')+'</div>';
       if(h.from)html+='<div class="hop-from"><span style="color:var(--muted)">from </span>'+esc(h.from)+' '+ipHtml+'</div>';
       if(h.by)html+='<div class="hop-by"><span style="color:var(--muted)">by </span>'+esc(h.by)+'</div>';
       if(h.date)html+='<div class="hop-time">'+esc(h.date)+delayHtml+'</div>';
@@ -1530,8 +1369,7 @@ function analyzeEmail(){
     html+='</div>';
   }
 
-  // ALL HEADERS
-  html+='<div class="email-section"><div class="email-section-title" style="cursor:pointer" onclick="toggleRawHeaders()">Todos os headers <span id="rawHeadersToggle" style="margin-left:auto;font-family:var(--mono);color:var(--muted)">+ expandir</span></div><div id="rawHeadersBody" style="display:none"><div style="font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.9;white-space:pre-wrap;word-break:break-all">'+esc(raw)+'</div></div></div>';
+  html+='<div class="email-section"><div class="email-section-title" style="cursor:pointer" onclick="toggleRawHeaders()">Todos os headers raw <span id="rawHeadersToggle" style="margin-left:auto;font-family:var(--mono);color:var(--muted);font-size:12px">+ expandir</span></div><div id="rawHeadersBody" style="display:none;margin-top:8px"><div style="font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.9;white-space:pre-wrap;word-break:break-all">'+esc(raw)+'</div></div></div>';
 
   document.getElementById('emailResults').innerHTML=html;
 }
@@ -1545,7 +1383,7 @@ function toggleRawHeaders(){
 }
 
 /* UTILS */
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function copyEl(id,tid){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>flash(tid));}
 function flash(id){const el=document.getElementById(id);el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200);}
 
