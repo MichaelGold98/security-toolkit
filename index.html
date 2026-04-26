@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Security Toolkit</title>
+<title>Security Toolkit — Miguel Rodrigues</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -20,11 +20,13 @@
 }
 body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh}
 
+/* NAV */
 nav{border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(13,13,15,0.95);backdrop-filter:blur(12px);z-index:100}
 .logo{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--accent);letter-spacing:0.05em;cursor:pointer}
 .logo span{color:var(--muted)}
 .nav-tag{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border2);border-radius:20px;padding:4px 12px}
 
+/* LAYOUT */
 .layout{display:flex;min-height:calc(100vh - 60px)}
 .sidebar{width:220px;flex-shrink:0;border-right:1px solid var(--border);background:var(--surface);padding:1.5rem 0;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
 .sidebar-section{margin-bottom:1.5rem}
@@ -33,25 +35,25 @@ nav{border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:fle
 .nav-item:hover{color:var(--text);background:var(--surface2)}
 .nav-item.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-dim2)}
 .nav-item svg{width:14px;height:14px;flex-shrink:0}
-
 .main{flex:1;overflow-x:hidden}
-.page{display:none;width:100%}
-.page.active{display:block}
-#page-home{padding:2rem 2rem 5rem}
-.page:not(#page-home){padding:2.5rem 3rem 5rem;display:none}
-.page:not(#page-home).active{display:flex;justify-content:center}
+.page{display:none;width:100%;padding:2.5rem 3rem 5rem}
+.page.active{display:flex;justify-content:center}
+#page-home{display:none;padding:2rem 2rem 5rem}
+#page-home.active{display:block}
 .page-inner{width:100%;max-width:860px}
 
+/* TYPOGRAPHY & CARDS */
 .page-title{font-size:26px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px}
 .page-title em{font-style:normal;color:var(--accent)}
 .page-desc{font-size:14px;color:var(--muted);margin-bottom:2rem}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.25rem}
 label{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
 textarea,input[type="text"],input[type="password"]{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);padding:10px 14px;font-family:var(--mono);font-size:13px;color:var(--text);resize:vertical;line-height:1.7;transition:border-color 0.2s;outline:none}
-textarea:focus,input[type="text"]:focus,input[type="password"]:focus{border-color:var(--accent)}
+textarea:focus,input:focus{border-color:var(--accent)}
 textarea::placeholder,input::placeholder{color:var(--muted)}
 .result-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;font-family:var(--mono);font-size:13px;min-height:48px;word-break:break-all;white-space:pre-wrap;line-height:1.7;user-select:all;color:var(--accent)}
 
+/* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius);font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;border:1px solid var(--border2);background:var(--surface2);color:var(--text)}
 .btn:hover{background:#26262E}.btn:active{transform:scale(0.97)}
 .btn-accent{background:var(--accent);color:#0D0D0F;border-color:var(--accent)}.btn-accent:hover{background:#00e085}
@@ -61,6 +63,7 @@ textarea::placeholder,input::placeholder{color:var(--muted)}
 .section{margin-bottom:1.25rem}.section:last-child{margin-bottom:0}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 
+/* CHIPS & TOASTS */
 .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-family:var(--mono);font-size:11px;font-weight:500}
 .chip.green{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(0,255,148,0.2)}
 .chip.blue{background:var(--info-dim);color:var(--info);border:1px solid rgba(61,155,255,0.2)}
@@ -70,7 +73,7 @@ textarea::placeholder,input::placeholder{color:var(--muted)}
 .toast{font-family:var(--mono);font-size:11px;color:var(--accent);opacity:0;transition:opacity 0.3s;margin-left:4px}
 .toast.show{opacity:1}
 
-/* HOME */
+/* ── HOME ── */
 .home-profile-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:1.25rem;display:flex;gap:1.75rem;align-items:flex-start}
 .profile-card-text{flex:1;min-width:0}
 .avatar-ring{width:84px;height:84px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--accent-dim);position:relative}
@@ -88,12 +91,9 @@ textarea::placeholder,input::placeholder{color:var(--muted)}
 .social-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--surface2);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s;text-decoration:none}
 .social-btn:hover{border-color:var(--accent);color:var(--accent)}
 .social-btn svg{width:14px;height:14px}
-
-/* HOME GRID — 3 colunas */
 .home-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
 .home-grid-left{grid-column:1/3}
 .home-grid-right{grid-column:3/4;display:flex;flex-direction:column;gap:1.25rem}
-
 .timeline-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.25rem}
 .timeline-card:last-child{margin-bottom:0}
 .timeline-title{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem}
@@ -106,14 +106,12 @@ textarea::placeholder,input::placeholder{color:var(--muted)}
 .tl-year{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:3px}
 .tl-title{font-size:13px;font-weight:700;margin-bottom:2px}
 .tl-desc{font-size:12px;color:var(--muted);line-height:1.5}
-
 .stats-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem}
 .stats-card-title{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
 .stat-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
 .stat-item:last-child{border-bottom:none;padding-bottom:0}
 .stat-label{font-size:12px;color:var(--muted)}
 .stat-val{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent)}
-
 .tools-section-title{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
 .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .tool-card-home{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;cursor:pointer;transition:all 0.2s}
@@ -125,7 +123,7 @@ textarea::placeholder,input::placeholder{color:var(--muted)}
 .tc-desc{font-size:11px;color:var(--muted);line-height:1.5}
 .tc-cat{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;opacity:0.5}
 
-/* PASSWORD */
+/* ── PASSWORD ── */
 .pw-display{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px;font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:0.04em;word-break:break-all;min-height:58px;line-height:1.6;color:var(--accent)}
 .slider-row{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
 .slider-row label{margin:0;white-space:nowrap}
@@ -138,28 +136,32 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 .strength-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin:10px 0 6px}
 .strength-fill{height:100%;border-radius:2px;transition:width 0.4s,background 0.4s}
 
-/* DIFF */
+/* ── DIFF ── */
 .diff-output{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:var(--mono);font-size:12px;line-height:1.9;min-height:80px;white-space:pre-wrap;word-break:break-all}
 .diff-add{background:rgba(0,255,148,0.15);color:#00FF94;border-radius:2px;padding:0 2px}
 .diff-del{background:rgba(255,77,109,0.15);color:#FF4D6D;border-radius:2px;padding:0 2px;text-decoration:line-through}
 .diff-eq{color:var(--muted)}
 
+/* ── IOC TABLE ── */
 .ioc-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
 .ioc-table th{text-align:left;padding:8px 12px;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
 .ioc-table td{padding:8px 12px;border-bottom:1px solid var(--border);word-break:break-all;vertical-align:top}
 .ioc-table tr:last-child td{border-bottom:none}
 .ioc-table tr:hover td{background:var(--surface2)}
 
+/* ── REPUTATION ── */
 .rep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
 .rep-link{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border2);border-radius:var(--radius);background:var(--surface2);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s;text-decoration:none;font-family:var(--mono)}
 .rep-link:hover{border-color:var(--info);color:var(--info);background:var(--info-dim)}
 .rep-link svg{width:14px;height:14px;flex-shrink:0}
 
+/* ── CIDR ── */
 .cidr-result{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
 .cidr-stat{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px}
 .cidr-stat-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
 .cidr-stat-val{font-family:var(--mono);font-size:13px;color:var(--accent);word-break:break-all}
 
+/* ── REGEX ── */
 .regex-match{background:rgba(0,255,148,0.15);color:#00FF94;border-radius:2px;padding:0 2px}
 .regex-input-row{display:flex;gap:8px;margin-bottom:1rem}
 .regex-input-row input{flex:1}
@@ -167,120 +169,167 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
 .flag-btn{border:1px solid var(--border2);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-size:11px;cursor:pointer;background:transparent;color:var(--muted);transition:all 0.15s}
 .flag-btn.on{background:var(--accent-dim);color:var(--accent);border-color:rgba(0,255,148,0.3)}
 
+/* ── HASH ── */
 .hash-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .hash-label{font-family:var(--mono);font-size:11px;color:var(--muted);min-width:50px}
 .hash-val{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:var(--mono);font-size:12px;color:var(--accent);word-break:break-all;cursor:text;user-select:all}
 
+/* ── JSON ── */
 .json-output{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:var(--mono);font-size:12px;line-height:1.8;min-height:100px;white-space:pre-wrap;word-break:break-all;overflow-x:auto}
 .json-str{color:#98C379}.json-num{color:#D19A66}.json-bool{color:#56B6C2}.json-null{color:#E06C75}.json-key{color:#61AFEF}
+
+/* ── EMAIL HEADER ANALYSIS ── */
+.email-verdict{border-radius:var(--radius-lg);border:1px solid;margin-bottom:1.25rem;overflow:hidden}
+.email-verdict-top{display:flex;align-items:center;gap:1.5rem;padding:1.5rem}
+.score-ring-wrap{position:relative;width:80px;height:80px;flex-shrink:0}
+.score-ring-wrap svg{transform:rotate(-90deg)}
+.score-ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-number{font-family:var(--mono);font-weight:800;font-size:22px;line-height:1}
+.score-denom{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:1px}
+.email-verdict-info{flex:1}
+.email-verdict-title{font-size:16px;font-weight:700;margin-bottom:6px}
+.email-verdict-flags{font-size:12px;font-family:var(--mono);line-height:1.9;color:var(--muted)}
+.email-verdict-bottom{display:flex;gap:1.5rem;padding:0.875rem 1.5rem;border-top:1px solid rgba(255,255,255,0.06);flex-wrap:wrap}
+.email-verdict-stat{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.email-verdict-stat b{color:var(--text);font-weight:600}
+
+.email-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.email-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.email-section.full{grid-column:1/-1}
+.email-section-hdr{display:flex;align-items:center;gap:10px;padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,0.02)}
+.email-hdr-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.email-hdr-icon svg{width:14px;height:14px}
+.email-hdr-icon.green{background:var(--accent-dim);color:var(--accent)}
+.email-hdr-icon.blue{background:var(--info-dim);color:var(--info)}
+.email-hdr-icon.yellow{background:var(--warning-dim);color:var(--warning)}
+.email-hdr-icon.red{background:var(--danger-dim);color:var(--danger)}
+.email-section-title{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+.email-section-body{padding:1rem 1.25rem}
+.email-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.email-row:last-child{border-bottom:none;padding-bottom:0}
+.email-key{font-family:var(--mono);font-size:10px;color:var(--muted);min-width:110px;flex-shrink:0;padding-top:2px;letter-spacing:0.03em;text-transform:uppercase}
+.email-val{font-family:var(--mono);font-size:12px;color:var(--text);word-break:break-all;flex:1;line-height:1.6}
+.ev-accent{color:var(--accent)}.ev-danger{color:var(--danger)}.ev-warning{color:var(--warning)}.ev-info{color:var(--info)}.ev-muted{color:var(--muted)}
+
+.auth-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.auth-card{border-radius:var(--radius);padding:14px 10px;border:1px solid var(--border);text-align:center}
+.auth-card-icon{font-size:22px;margin-bottom:6px;line-height:1}
+.auth-card-name{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px}
+.auth-card-val{font-family:var(--mono);font-size:13px;font-weight:700;margin-bottom:4px}
+.auth-card-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.auth-card.pass{background:var(--accent-dim);border-color:rgba(0,255,148,0.25)}.auth-card.pass .auth-card-val{color:var(--accent)}
+.auth-card.fail{background:var(--danger-dim);border-color:rgba(255,77,109,0.25)}.auth-card.fail .auth-card-val{color:var(--danger)}
+.auth-card.warn{background:var(--warning-dim);border-color:rgba(255,184,0,0.25)}.auth-card.warn .auth-card-val{color:var(--warning)}
+.auth-card.neutral{background:var(--surface2);border-color:var(--border2)}.auth-card.neutral .auth-card-val{color:var(--muted)}
+
+.hop-timeline{position:relative;padding-left:2rem}
+.hop-timeline::before{content:'';position:absolute;left:7px;top:14px;bottom:14px;width:1px;background:var(--border2)}
+.hop-item{position:relative;margin-bottom:10px}
+.hop-item:last-child{margin-bottom:0}
+.hop-dot{position:absolute;left:-2rem;top:5px;width:14px;height:14px;border-radius:50%;border:2px solid var(--border2);background:var(--surface2)}
+.hop-dot.origin{border-color:var(--accent);background:var(--accent-dim)}
+.hop-dot.dest{border-color:var(--info);background:var(--info-dim)}
+.hop-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;font-family:var(--mono);font-size:12px}
+.hop-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.hop-badge{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600}
+.hop-badge.origin{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(0,255,148,0.2)}
+.hop-badge.dest{background:var(--info-dim);color:var(--info);border:1px solid rgba(61,155,255,0.2)}
+.hop-badge.relay{background:var(--surface);color:var(--muted);border:1px solid var(--border2)}
+.hop-num-label{font-family:var(--mono);font-size:10px;color:var(--muted);margin-left:auto}
+.hop-from{color:var(--text);margin-bottom:3px;line-height:1.5;word-break:break-all}
+.hop-by{color:var(--muted);margin-bottom:3px;line-height:1.5;word-break:break-all}
+.hop-ip{color:var(--info);cursor:pointer}.hop-ip:hover{text-decoration:underline}
+.hop-time{color:var(--muted);font-size:11px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.hop-delay{font-size:10px;padding:1px 7px;border-radius:8px;font-weight:600}
+.delay-ok{background:var(--accent-dim);color:var(--accent)}
+.delay-warn{background:var(--warning-dim);color:var(--warning)}
+.delay-bad{background:var(--danger-dim);color:var(--danger)}
+.ip-rep-btn{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:5px;font-family:var(--mono);font-size:10px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);cursor:pointer;margin-left:4px;transition:all 0.15s;text-decoration:none;vertical-align:middle}
+.ip-rep-btn:hover{border-color:var(--info);color:var(--info)}
+.score-method-note{font-family:var(--mono);font-size:10px;color:var(--muted);padding:8px 12px;background:var(--surface2);border-radius:var(--radius);border:1px solid var(--border);margin-top:8px;line-height:1.6}
 
 footer{border-top:1px solid var(--border);padding:1.5rem 2.5rem;font-family:var(--mono);font-size:11px;color:var(--muted)}
 footer span{color:var(--accent)}
 
-@media(max-width:1100px){.home-grid{grid-template-columns:1fr 1fr}.home-grid-left{grid-column:1/2}.home-grid-right{grid-column:2/3}}
+@media(max-width:1100px){.home-grid{grid-template-columns:1fr 1fr}.home-grid-left{grid-column:1/2}.home-grid-right{grid-column:2/3}.email-grid{grid-template-columns:1fr}}
 @media(max-width:700px){
-  .sidebar{display:none}
-  .page{padding:1.5rem 1rem 4rem}
-  .grid2,.home-grid{grid-template-columns:1fr}
+  .sidebar{display:none}.page{padding:1.5rem 1rem 4rem}
+  .grid2,.home-grid,.auth-cards{grid-template-columns:1fr}
   .home-grid-left,.home-grid-right{grid-column:1}
   .home-profile-card{flex-direction:column}
   .cidr-result{grid-template-columns:1fr}
   .tools-grid{grid-template-columns:1fr 1fr}
+  .email-verdict-top{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
 <body>
-
 <nav>
   <div class="logo" onclick="showPage('home')">sec<span>/</span>toolkit</div>
   <div class="nav-tag">client-side only</div>
 </nav>
-
 <div class="layout">
 <aside class="sidebar">
   <div class="sidebar-section">
     <div class="sidebar-label">Início</div>
     <div class="nav-item active" onclick="showPage('home')" data-page="home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Início
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Início
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">Análise</div>
     <div class="nav-item" onclick="showPage('defang')" data-page="defang">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Defang URL / IP
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Defang URL / IP
     </div>
     <div class="nav-item" onclick="showPage('ioc')" data-page="ioc">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      Extrator de IOCs
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Extrator de IOCs
     </div>
     <div class="nav-item" onclick="showPage('emailheader')" data-page="emailheader">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Análise de Email
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Análise de Email
     </div>
     <div class="nav-item" onclick="showPage('reputation')" data-page="reputation">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
-      Reputação IP / URL
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>Reputação IP / URL
     </div>
     <div class="nav-item" onclick="showPage('cidr')" data-page="cidr">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      Calculadora CIDR
-    </div>
-    <div class="nav-item" onclick="showPage('emailheader')" data-page="emailheader">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Análise de Email
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Calculadora CIDR
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">Encoding</div>
     <div class="nav-item" onclick="showPage('encoding')" data-page="encoding">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Base64 / URL / Hex
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Base64 / URL / Hex
     </div>
     <div class="nav-item" onclick="showPage('hash')" data-page="hash">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
-      Hash Generator
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>Hash Generator
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">Geração</div>
     <div class="nav-item" onclick="showPage('password')" data-page="password">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-      Gerador de password
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Gerador de password
     </div>
     <div class="nav-item" onclick="showPage('uuid')" data-page="uuid">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-      UUID / MAC / Dados
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>UUID / MAC / Dados
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">Texto</div>
     <div class="nav-item" onclick="showPage('diff')" data-page="diff">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Diff de texto
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Diff de texto
     </div>
     <div class="nav-item" onclick="showPage('regex')" data-page="regex">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-      Regex Tester
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Regex Tester
     </div>
     <div class="nav-item" onclick="showPage('json')" data-page="json">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      JSON Formatter
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>JSON Formatter
     </div>
     <div class="nav-item" onclick="showPage('counter')" data-page="counter">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-      Contador de texto
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Contador de texto
     </div>
   </div>
 </aside>
-
 <main class="main">
-
-<!-- HOME -->
-<div class="page active" id="page-home">
-
-  <!-- PERFIL — largura total -->
+<div class="page" id="page-home">
   <div class="home-profile-card">
     <div class="avatar-ring">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -291,83 +340,37 @@ footer span{color:var(--accent)}
       <div class="home-role">// CSIRT Information Security Consultant · Blue Team · SOC Engineer</div>
       <p class="home-bio">Sou um consultor de cibersegurança. Procuro uma oportunidade para evoluir profissionalmente, onde tenha a possibilidade de aprender com profissionais experientes, dar a minha contribuição e continuar a desenvolver as minhas habilidades técnicas. De 2017 a 2024 trabalhei na área comercial. Em 2023 iniciei o curso na Anciber com a ambição de mudar o rumo da minha carreira. Estou motivado e preparado para enfrentar novos desafios e crescer na área.</p>
       <div class="home-tags">
-        <span class="home-tag">Blue Team</span><span class="home-tag">CSIRT</span><span class="home-tag">SIEM · Wazuh</span>
-        <span class="home-tag">Kali Linux</span><span class="home-tag">Splunk</span><span class="home-tag">Wireshark</span>
-        <span class="home-tag">Nmap · Nessus</span><span class="home-tag">Metasploit</span><span class="home-tag">OSINT</span><span class="home-tag">Python</span>
+        <span class="home-tag">Blue Team</span><span class="home-tag">CSIRT</span><span class="home-tag">SIEM · Wazuh</span><span class="home-tag">Kali Linux</span><span class="home-tag">Splunk</span><span class="home-tag">Wireshark</span><span class="home-tag">Nmap · Nessus</span><span class="home-tag">Metasploit</span><span class="home-tag">OSINT</span><span class="home-tag">Python</span>
       </div>
       <div class="social-links">
-        <a class="social-btn" href="https://github.com/MichaelGold98" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a class="social-btn" href="https://www.linkedin.com/in/miguel-ouro-rodrigues/" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
+        <a class="social-btn" href="https://github.com/MichaelGold98" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+        <a class="social-btn" href="https://www.linkedin.com/in/miguel-ouro-rodrigues/" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+        <a class="social-btn" href="tel:+351919990874"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+351 919 990 874</a>
+        <a class="social-btn" href="mailto:miguel.ouro@icloud.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email</a>
       </div>
     </div>
   </div>
-
-  <!-- GRID 3 COLUNAS -->
   <div class="home-grid">
     <div class="home-grid-left">
       <div class="timeline-card">
         <div class="timeline-title">Percurso</div>
         <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot active"></div>
-            <div class="tl-year">2024 — presente</div>
-            <div class="tl-title">CSIRT Information Security Consultant</div>
-            <div class="tl-desc">Layer8, Lisboa — Consultoria em segurança de informação.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot active"></div>
-            <div class="tl-year">2023 — 2024</div>
-            <div class="tl-title">Formação em Cibersegurança — ANCIBER</div>
-            <div class="tl-desc">Deteção e análise de ameaças, auditoria, firewalls, segurança de rede, gestão de vulnerabilidades, CTFs. Kali Linux, Wireshark, Wazuh, Nessus, Nmap, Metasploit, Maltego, Shodan, Censys.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">2017 — 2024</div>
-            <div class="tl-title">Área Comercial</div>
-            <div class="tl-desc">7 anos — comunicação, gestão de relações e resolução de problemas.</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">2014 — 2018</div>
-            <div class="tl-title">Técnico de Gestão e Programação de Sistemas</div>
-            <div class="tl-desc">Escola Profissional de Tecnologias Digital — Java, C, HTML, CSS, jQuery, PHP, SQL.</div>
-          </div>
+          <div class="tl-item"><div class="tl-dot active"></div><div class="tl-year">2024 — presente</div><div class="tl-title">CSIRT Information Security Consultant</div><div class="tl-desc">Layer8, Lisboa — Consultoria em segurança de informação.</div></div>
+          <div class="tl-item"><div class="tl-dot active"></div><div class="tl-year">2023 — 2024</div><div class="tl-title">Formação em Cibersegurança — ANCIBER</div><div class="tl-desc">Deteção e análise de ameaças, auditoria, firewalls, segurança de rede, gestão de vulnerabilidades, CTFs. Kali Linux, Wireshark, Wazuh, Nessus, Nmap, Metasploit, Maltego, Shodan, Censys.</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2017 — 2024</div><div class="tl-title">Área Comercial</div><div class="tl-desc">7 anos — comunicação, gestão de relações e resolução de problemas.</div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2014 — 2018</div><div class="tl-title">Técnico de Gestão e Programação de Sistemas</div><div class="tl-desc">Escola Profissional de Tecnologias Digital — Java, C, HTML, CSS, jQuery, PHP, SQL.</div></div>
         </div>
       </div>
       <div class="timeline-card">
         <div class="timeline-title">Certificações</div>
         <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot active"></div>
-            <div class="tl-year">Dezembro 2025</div>
-            <div class="tl-title">SPLUNK Core Certified Power User</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot active"></div>
-            <div class="tl-year">Janeiro 2026</div>
-            <div class="tl-title">Microsoft SC-900</div>
-            <div class="tl-desc">Security, Compliance, and Identity Fundamentals</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot active"></div>
-            <div class="tl-year">23 Janeiro 2026</div>
-            <div class="tl-title">TRANSITS Extended</div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot active"></div>
-            <div class="tl-year">26 Março 2026</div>
-            <div class="tl-title">TRANSITS 1</div>
-          </div>
+          <div class="tl-item"><div class="tl-dot active"></div><div class="tl-year">Dezembro 2025</div><div class="tl-title">SPLUNK Core Certified Power User</div></div>
+          <div class="tl-item"><div class="tl-dot active"></div><div class="tl-year">Janeiro 2026</div><div class="tl-title">Microsoft SC-900</div><div class="tl-desc">Security, Compliance, and Identity Fundamentals</div></div>
+          <div class="tl-item"><div class="tl-dot active"></div><div class="tl-year">23 Janeiro 2026</div><div class="tl-title">TRANSITS Extended</div></div>
+          <div class="tl-item"><div class="tl-dot active"></div><div class="tl-year">26 Março 2026</div><div class="tl-title">TRANSITS 1</div></div>
         </div>
       </div>
     </div>
-
     <div class="home-grid-right">
       <div class="stats-card">
         <div class="stats-card-title">Toolkit · Stats</div>
@@ -383,9 +386,7 @@ footer span{color:var(--accent)}
         <div class="stat-item"><span class="stat-label">AbuseIPDB</span><span id="apiStatus-abuse" class="stat-val" style="color:var(--muted)">—</span></div>
         <div class="stat-item"><span class="stat-label">OTX AlienVault</span><span id="apiStatus-otx" class="stat-val" style="color:var(--muted)">—</span></div>
         <div class="stat-item"><span class="stat-label">IPInfo</span><span id="apiStatus-ipinfo" class="stat-val" style="color:var(--muted)">—</span></div>
-        <div style="margin-top:10px">
-          <button class="btn btn-ghost" style="width:100%;justify-content:center;font-size:11px" onclick="showPage('reputation')">Configurar API keys →</button>
-        </div>
+        <div style="margin-top:10px"><button class="btn btn-ghost" style="width:100%;justify-content:center;font-size:11px" onclick="showPage('reputation')">Configurar API keys →</button></div>
       </div>
       <div class="stats-card">
         <div class="stats-card-title">Línguas</div>
@@ -396,20 +397,18 @@ footer span{color:var(--accent)}
       <div class="stats-card">
         <div class="stats-card-title">Localização</div>
         <div class="stat-item"><span class="stat-label">Cidade</span><span class="stat-val">Azambuja</span></div>
-        <div class="stat-item"><span class="stat-label">País</span><span class="stat-val">Portugal</span></div>
+        <div class="stat-item"><span class="stat-label">País</span><span class="stat-val">Portugal 🇵🇹</span></div>
         <div class="stat-item"><span class="stat-label">Carta</span><span class="stat-val">B1, B</span></div>
       </div>
     </div>
   </div>
-
   <div class="tools-section-title">Ferramentas disponíveis</div>
   <div class="tools-grid">
     <div class="tool-card-home" onclick="showPage('defang')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="tc-name">Defang URL / IP</div><div class="tc-desc">Formato seguro para partilha</div></div>
     <div class="tool-card-home" onclick="showPage('ioc')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="tc-name">Extrator de IOCs</div><div class="tc-desc">IPs, URLs, hashes e emails</div></div>
-    <div class="tool-card-home" onclick="showPage('emailheader')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="tc-name">Análise de Email</div><div class="tc-desc">Headers, SPF, DKIM, DMARC, origem</div></div>
+    <div class="tool-card-home" onclick="showPage('emailheader')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="tc-name">Análise de Email</div><div class="tc-desc">Headers, SPF, DKIM, DMARC, spoofing</div></div>
     <div class="tool-card-home" onclick="showPage('reputation')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div><div class="tc-name">Reputação IP / URL</div><div class="tc-desc">VirusTotal, AbuseIPDB e mais</div></div>
     <div class="tool-card-home" onclick="showPage('cidr')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="tc-name">Calculadora CIDR</div><div class="tc-desc">Sub-redes e ranges de IPs</div></div>
-    <div class="tool-card-home" onclick="showPage('emailheader')"><div class="tc-cat">Análise</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="tc-name">Análise de Email</div><div class="tc-desc">Headers, SPF, DKIM, DMARC, spoofing</div></div>
     <div class="tool-card-home" onclick="showPage('encoding')"><div class="tc-cat">Encoding</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="tc-name">Encoding / Decoding</div><div class="tc-desc">Base64, URL, Hex, ROT13</div></div>
     <div class="tool-card-home" onclick="showPage('hash')"><div class="tc-cat">Encoding</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg></div><div class="tc-name">Hash Generator</div><div class="tc-desc">SHA1, SHA256, SHA512</div></div>
     <div class="tool-card-home" onclick="showPage('password')"><div class="tc-cat">Geração</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="tc-name">Gerador de password</div><div class="tc-desc">Criptograficamente seguras</div></div>
@@ -420,315 +419,250 @@ footer span{color:var(--accent)}
     <div class="tool-card-home" onclick="showPage('counter')"><div class="tc-cat">Texto</div><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg></div><div class="tc-name">Contador de texto</div><div class="tc-desc">Palavras, caracteres, linhas</div></div>
   </div>
 </div>
-
-
-<!-- DEFANG -->
 <div class="page" id="page-defang"><div class="page-inner">
   <div class="page-title">Defang <em>URL / IP</em></div>
-  <div class="page-desc">Converte URLs e IPs em formato seguro. Cola manualmente, importa da clipboard ou arrasta texto.</div>
-  <div class="card">
-    <div class="section">
-      <label>Input (um por linha)</label>
-      <div class="row" style="margin-bottom:8px">
-        <button class="btn btn-accent" onclick="pasteAndDefang()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Clipboard → Defang automático
-        </button>
-        <span class="toast" id="pasteToast" style="margin-left:4px">✓ Feito e copiado!</span>
-      </div>
-      <textarea id="defangInput" rows="5" placeholder="https://malicious.example.com&#10;192.168.1.100&#10;&#10;Ou usa o botão acima para importar e fazer defang da clipboard de uma vez."></textarea>
+  <div class="page-desc">Converte URLs e IPs em formato seguro. O botão automático lê a clipboard, faz defang e copia o resultado — tudo de uma vez.</div>
+  
+<div class="card">
+  <div class="section">
+    <div class="row" style="margin-bottom:8px">
+      <button class="btn btn-accent" onclick="pasteAndDefang()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Clipboard → Defang automático
+      </button>
+      <span class="toast" id="pasteToast">✓ Feito!</span>
     </div>
-    <div class="row section">
-      <button class="btn btn-accent" onclick="doDefang()">Fazer defang</button>
-      <button class="btn" onclick="doRefang()">Reverter (refang)</button>
-      <button class="btn btn-ghost" onclick="document.getElementById('defangInput').value='';document.getElementById('defangOut').textContent='—';document.getElementById('defangMeta').innerHTML=''">Limpar</button>
-    </div>
-    <div class="section">
-      <label>Resultado <span id="defangAutoCopy" style="font-family:var(--mono);font-size:10px;color:var(--accent);opacity:0;transition:opacity 0.3s;margin-left:6px">✓ Copiado automaticamente!</span></label>
-      <div class="result-box" id="defangOut">—</div>
-      <div class="meta-row" id="defangMeta"></div>
-    </div>
-    <div class="row"><button class="btn" onclick="copyEl('defangOut','dft')">Copiar novamente</button><span class="toast" id="dft">✓ Copiado!</span></div>
+    <label>Ou cola manualmente (um por linha)</label>
+    <textarea id="defangInput" rows="6" placeholder="https://malicious.example.com&#10;192.168.1.100&#10;http://phishing.ru/login"></textarea>
   </div>
-
+  <div class="row section">
+    <button class="btn btn-accent" onclick="doDefang()">Fazer defang</button>
+    <button class="btn" onclick="doRefang()">Reverter (refang)</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('defangInput').value='';document.getElementById('defangOut').textContent='—';document.getElementById('defangMeta').innerHTML=''">Limpar</button>
+  </div>
+  <div class="section">
+    <label>Resultado <span id="defangAutoCopy" style="font-family:var(--mono);font-size:10px;color:var(--accent);opacity:0;transition:opacity 0.3s;margin-left:6px">✓ Copiado automaticamente!</span></label>
+    <div class="result-box" id="defangOut">—</div>
+    <div class="meta-row" id="defangMeta"></div>
+  </div>
+  <div class="row"><button class="btn" onclick="copyEl('defangOut','dft')">Copiar novamente</button><span class="toast" id="dft">✓ Copiado!</span></div>
+</div>
 </div></div>
-
-<!-- IOC -->
 <div class="page" id="page-ioc"><div class="page-inner">
   <div class="page-title">Extrator de <em>IOCs</em></div>
   <div class="page-desc">Cola qualquer texto (log, email, relatório) e extrai automaticamente IPs, URLs, hashes e emails.</div>
-  <div class="card">
-    <div class="section">
-      <label>Texto para analisar</label>
-      <textarea id="iocInput" rows="7" placeholder="Cola aqui qualquer texto com indicadores de comprometimento..."></textarea>
-    </div>
-    <div class="row section">
-      <button class="btn btn-accent" onclick="extractIOCs()">Extrair IOCs</button>
-      <button class="btn btn-ghost" onclick="document.getElementById('iocInput').value='';document.getElementById('iocResults').innerHTML=''">Limpar</button>
-    </div>
-    <div id="iocResults"></div>
+  
+<div class="card">
+  <div class="section"><label>Texto para analisar</label><textarea id="iocInput" rows="7" placeholder="Cola aqui qualquer texto com indicadores de comprometimento..."></textarea></div>
+  <div class="row section">
+    <button class="btn btn-accent" onclick="extractIOCs()">Extrair IOCs</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('iocInput').value='';document.getElementById('iocResults').innerHTML=''">Limpar</button>
   </div>
-
+  <div id="iocResults"></div>
+</div>
 </div></div>
-
-<!-- REPUTATION -->
+<div class="page" id="page-emailheader"><div class="page-inner">
+  <div class="page-title">Análise de <em>Email Headers</em></div>
+  <div class="page-desc">Cola os headers completos do email para detetar spoofing, verificar autenticação e rastrear o caminho de entrega.</div>
+  
+<div class="card">
+  <div class="section">
+    <label>Headers do email (Gmail: ⋮ → Mostrar original · Outlook: Ficheiro → Propriedades)</label>
+    <textarea id="emailInput" rows="10" placeholder="Received: from mail.example.com&#10;From: sender@example.com&#10;Authentication-Results: spf=pass dkim=pass&#10;&#10;Cola aqui os headers completos..."></textarea>
+  </div>
+  <div class="row">
+    <button class="btn btn-accent" onclick="analyzeEmail()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Analisar headers
+    </button>
+    <button class="btn btn-ghost" onclick="document.getElementById('emailInput').value='';document.getElementById('emailResults').innerHTML='';document.getElementById('emailVerdict').style.display='none'">Limpar</button>
+  </div>
+</div>
+<div id="emailVerdict" style="display:none"></div>
+<div id="emailResults"></div>
+</div></div>
 <div class="page" id="page-reputation"><div class="page-inner">
   <div class="page-title">Reputação <em>IP / URL</em></div>
   <div class="page-desc">Consulta automática via API + links diretos para as principais plataformas de threat intelligence.</div>
-  <div class="card" id="apiKeysCard">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;cursor:pointer" onclick="toggleApiKeys()">
-      <div>
-        <div style="font-size:14px;font-weight:700;margin-bottom:2px">Configurar API Keys</div>
-        <div style="font-size:12px;color:var(--muted)">Guardadas localmente no teu browser. Necessárias para consulta automática.</div>
-      </div>
-      <span id="apiKeysToggleIcon" style="font-family:var(--mono);font-size:18px;color:var(--muted)">+</span>
+  
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;cursor:pointer" onclick="toggleApiKeys()">
+    <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">Configurar API Keys</div><div style="font-size:12px;color:var(--muted)">Guardadas localmente no teu browser.</div></div>
+    <span id="apiKeysToggleIcon" style="font-family:var(--mono);font-size:18px;color:var(--muted)">+</span>
+  </div>
+  <div id="apiKeysBody" style="display:none">
+    <div class="grid2 section">
+      <div><label>VirusTotal API Key <span style="color:var(--accent);font-size:10px">GRATUITA</span></label><input type="password" id="key-vt" placeholder="VT API key..."><div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://www.virustotal.com/gui/join-us" target="_blank" style="color:var(--info)">virustotal.com</a></div></div>
+      <div><label>AbuseIPDB API Key <span style="color:var(--accent);font-size:10px">GRATUITA</span></label><input type="password" id="key-abuse" placeholder="AbuseIPDB key..."><div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://www.abuseipdb.com/register" target="_blank" style="color:var(--info)">abuseipdb.com</a></div></div>
+      <div><label>OTX AlienVault Key <span style="color:var(--accent);font-size:10px">GRATUITA</span></label><input type="password" id="key-otx" placeholder="OTX key..."><div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://otx.alienvault.com" target="_blank" style="color:var(--info)">otx.alienvault.com</a></div></div>
+      <div><label>IPInfo Token <span style="color:var(--accent);font-size:10px">GRATUITO</span></label><input type="password" id="key-ipinfo" placeholder="IPInfo token..."><div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://ipinfo.io/signup" target="_blank" style="color:var(--info)">ipinfo.io</a></div></div>
     </div>
-    <div id="apiKeysBody" style="display:none">
-      <div class="grid2 section">
-        <div>
-          <label>VirusTotal API Key <span style="color:var(--accent);font-size:10px">GRATUITA</span></label>
-          <input type="password" id="key-vt" placeholder="Cole a tua VT API key...">
-          <div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://www.virustotal.com/gui/join-us" target="_blank" style="color:var(--info)">virustotal.com/gui/join-us</a></div>
-        </div>
-        <div>
-          <label>AbuseIPDB API Key <span style="color:var(--accent);font-size:10px">GRATUITA</span> <span style="color:var(--warning);font-size:10px">⚠ CORS</span></label>
-          <input type="password" id="key-abuse" placeholder="Cole a tua AbuseIPDB key...">
-          <div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://www.abuseipdb.com/register" target="_blank" style="color:var(--info)">abuseipdb.com/register</a><br><span style="color:var(--warning)">Nota: o AbuseIPDB bloqueia pedidos diretos do browser (CORS). Usa o botão manual para consulta direta.</span></div>
-        </div>
-        <div>
-          <label>OTX AlienVault Key <span style="color:var(--accent);font-size:10px">GRATUITA</span></label>
-          <input type="password" id="key-otx" placeholder="Cole a tua OTX key...">
-          <div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://otx.alienvault.com" target="_blank" style="color:var(--info)">otx.alienvault.com</a> → perfil</div>
-        </div>
-        <div>
-          <label>IPInfo Token <span style="color:var(--accent);font-size:10px">GRATUITO</span></label>
-          <input type="password" id="key-ipinfo" placeholder="Cole o teu IPInfo token...">
-          <div style="font-size:11px;color:var(--muted);margin-top:4px">→ <a href="https://ipinfo.io/signup" target="_blank" style="color:var(--info)">ipinfo.io/signup</a></div>
-        </div>
-      </div>
-      <div class="row">
-        <button class="btn btn-accent" onclick="saveApiKeys()">Guardar keys</button>
-        <button class="btn btn-ghost" onclick="clearApiKeys()">Apagar keys</button>
-        <span class="toast" id="keyToast">✓ Guardado!</span>
-      </div>
+    <div class="row section"><button class="btn btn-accent" onclick="saveApiKeys()">Guardar</button><button class="btn btn-ghost" onclick="clearApiKeys()">Apagar</button><span class="toast" id="keyToast">✓ Guardado!</span></div>
+  </div>
+</div>
+<div class="card">
+  <div class="section"><label>IP ou URL</label>
+    <div class="row"><input type="text" id="repInput" placeholder="Ex: 8.8.8.8 ou https://example.com" style="flex:1"><button class="btn btn-accent" onclick="runRepLookup()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Consultar</button></div>
+  </div>
+  <div class="section"><label>Pesquisar manualmente em</label>
+    <div class="rep-grid">
+      <a class="rep-link" href="#" onclick="return openRep('vt')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20"/></svg>VirusTotal</a>
+      <a class="rep-link" href="#" onclick="return openRep('abuse')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>AbuseIPDB</a>
+      <a class="rep-link" href="#" onclick="return openRep('shodan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Shodan</a>
+      <a class="rep-link" href="#" onclick="return openRep('otx')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>OTX AlienVault</a>
+      <a class="rep-link" href="#" onclick="return openRep('talos')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Talos Intelligence</a>
+      <a class="rep-link" href="#" onclick="return openRep('urlscan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>URLScan.io</a>
+      <a class="rep-link" href="#" onclick="return openRep('greynoise')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6s2-2 5-2 5 2 5 2 2-2 5-2 5 2 5 2M1 12s2-2 5-2 5 2 5 2 2-2 5-2 5 2 5 2M1 18s2-2 5-2 5 2 5 2 2-2 5-2 5 2 5 2"/></svg>GreyNoise</a>
+      <a class="rep-link" href="#" onclick="return openRep('whois')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Whois</a>
     </div>
   </div>
-  <div class="card">
-    <div class="section">
-      <label>IP ou URL para verificar</label>
-      <div class="row">
-        <input type="text" id="repInput" placeholder="Ex: 8.8.8.8 ou https://example.com" style="flex:1">
-        <button class="btn btn-accent" onclick="runRepLookup()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Consultar
-        </button>
-      </div>
-    </div>
-    <div class="section">
-      <label>Pesquisar manualmente em</label>
-      <div class="rep-grid">
-        <a class="rep-link" href="#" onclick="return openRep('vt')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20"/></svg>VirusTotal</a>
-        <a class="rep-link" href="#" onclick="return openRep('abuse')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>AbuseIPDB</a>
-        <a class="rep-link" href="#" onclick="return openRep('shodan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Shodan</a>
-        <a class="rep-link" href="#" onclick="return openRep('otx')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>OTX AlienVault</a>
-        <a class="rep-link" href="#" onclick="return openRep('talos')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Talos Intelligence</a>
-        <a class="rep-link" href="#" onclick="return openRep('urlscan')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>URLScan.io</a>
-        <a class="rep-link" href="#" onclick="return openRep('greynoise')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6s2-2 5-2 5 2 5 2 2-2 5-2 5 2 5 2M1 12s2-2 5-2 5 2 5 2 2-2 5-2 5 2 5 2M1 18s2-2 5-2 5 2 5 2 2-2 5-2 5 2 5 2"/></svg>GreyNoise</a>
-        <a class="rep-link" href="#" onclick="return openRep('whois')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Whois</a>
-      </div>
-    </div>
-    <div id="repResults" style="display:none">
-      <div style="height:1px;background:var(--border);margin-bottom:1.25rem"></div>
-      <label>Resultados automáticos</label>
-      <div id="repResultsBody"></div>
-      <div id="repVerdict" style="margin-top:1rem;padding:1rem 1.25rem;border-radius:var(--radius-lg);border:1px solid;display:none"></div>
-    </div>
+  <div id="repResults" style="display:none">
+    <div style="height:1px;background:var(--border);margin-bottom:1.25rem"></div>
+    <label>Resultados automáticos</label>
+    <div id="repResultsBody"></div>
+    <div id="repVerdict" style="margin-top:1rem;padding:1rem 1.25rem;border-radius:var(--radius-lg);border:1px solid;display:none"></div>
   </div>
-
+</div>
 </div></div>
-
-<!-- EMAILHEADER -->
-<div class="page" id="page-emailheader"><div class="page-inner">
-  <div class="page-title">Análise de <em>Email Headers</em></div>
-  <div class="page-desc">Cola os headers completos de um email para identificar a origem real, detetar spoofing e verificar SPF/DKIM/DMARC.</div>
-  <div class="card">
-    <div class="section">
-      <label>Headers do email</label>
-      <div class="row" style="margin-bottom:8px">
-        <button class="btn btn-accent" onclick="pasteAndAnalyzeEmail()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><rect x="9" y="2" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Clipboard → Analisar
-        </button>
-        <button class="btn" onclick="analyzeEmail()">Analisar</button>
-        <button class="btn btn-ghost" onclick="document.getElementById('emailInput').value='';document.getElementById('emailResults').innerHTML='';document.getElementById('emailVerdict').style.display='none'">Limpar</button>
-        <span class="toast" id="emailPasteToast">✓ Analisado!</span>
-      </div>
-      <textarea id="emailInput" rows="10" placeholder="Cola aqui os headers completos do email...&#10;&#10;Como obter os headers:&#10;• Gmail: Abrir email → ⋮ → Mostrar original&#10;• Outlook: Ficheiro → Propriedades → Cabeçalhos&#10;• Thunderbird: Ver → Código fonte da mensagem"></textarea>
-    </div>
-  </div>
-  <div id="emailVerdict" style="display:none"></div>
-  <div id="emailResults"></div>
-</div></div>
-
-
-<!-- CIDR -->
 <div class="page" id="page-cidr"><div class="page-inner">
   <div class="page-title">Calculadora <em>CIDR</em></div>
   <div class="page-desc">Calcula informação detalhada sobre sub-redes a partir de notação CIDR.</div>
-  <div class="card">
-    <div class="section"><label>Notação CIDR</label><input type="text" id="cidrInput" placeholder="Ex: 192.168.1.0/24" oninput="calcCIDR()"></div>
-    <div id="cidrResult"></div>
-  </div>
-
+  
+<div class="card">
+  <div class="section"><label>Notação CIDR</label><input type="text" id="cidrInput" placeholder="Ex: 192.168.1.0/24" oninput="calcCIDR()"></div>
+  <div id="cidrResult"></div>
+</div>
 </div></div>
-
-<!-- ENCODING -->
 <div class="page" id="page-encoding"><div class="page-inner">
   <div class="page-title">Encoding / <em>Decoding</em></div>
   <div class="page-desc">Codifica e descodifica texto em vários formatos.</div>
-  <div class="card">
-    <div class="section"><label>Input</label><textarea id="encInput" rows="4" placeholder="Texto para codificar / descodificar..."></textarea></div>
-    <div class="grid2 section">
-      <div><label>Base64</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="b64enc()">Encode</button><button class="btn" onclick="b64dec()">Decode</button></div><div class="result-box" id="b64out">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('b64out','b64t')">Copiar</button><span class="toast" id="b64t">✓</span></div></div>
-      <div><label>URL Encode</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="urlenc()">Encode</button><button class="btn" onclick="urldec()">Decode</button></div><div class="result-box" id="urlout">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('urlout','urlt')">Copiar</button><span class="toast" id="urlt">✓</span></div></div>
-      <div><label>Hex</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="hexenc()">Encode</button><button class="btn" onclick="hexdec()">Decode</button></div><div class="result-box" id="hexout">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('hexout','hext')">Copiar</button><span class="toast" id="hext">✓</span></div></div>
-      <div><label>ROT13</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="rot13()">Aplicar ROT13</button></div><div class="result-box" id="rot13out">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('rot13out','rot13t')">Copiar</button><span class="toast" id="rot13t">✓</span></div></div>
-    </div>
+  
+<div class="card">
+  <div class="section"><label>Input</label><textarea id="encInput" rows="4" placeholder="Texto para codificar / descodificar..."></textarea></div>
+  <div class="grid2 section">
+    <div><label>Base64</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="b64enc()">Encode</button><button class="btn" onclick="b64dec()">Decode</button></div><div class="result-box" id="b64out">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('b64out','b64t')">Copiar</button><span class="toast" id="b64t">✓</span></div></div>
+    <div><label>URL Encode</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="urlenc()">Encode</button><button class="btn" onclick="urldec()">Decode</button></div><div class="result-box" id="urlout">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('urlout','urlt')">Copiar</button><span class="toast" id="urlt">✓</span></div></div>
+    <div><label>Hex</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="hexenc()">Encode</button><button class="btn" onclick="hexdec()">Decode</button></div><div class="result-box" id="hexout">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('hexout','hext')">Copiar</button><span class="toast" id="hext">✓</span></div></div>
+    <div><label>ROT13</label><div class="row" style="margin-bottom:6px"><button class="btn btn-accent" onclick="rot13()">Aplicar ROT13</button></div><div class="result-box" id="rot13out">—</div><div class="row" style="margin-top:6px"><button class="btn btn-ghost" onclick="copyEl('rot13out','rot13t')">Copiar</button><span class="toast" id="rot13t">✓</span></div></div>
   </div>
-
+</div>
 </div></div>
-
-<!-- HASH -->
 <div class="page" id="page-hash"><div class="page-inner">
   <div class="page-title">Hash <em>Generator</em></div>
   <div class="page-desc">Gera hashes criptográficos de texto. Processado localmente no browser.</div>
-  <div class="card">
-    <div class="section"><label>Texto</label><textarea id="hashInput" rows="4" placeholder="Texto para gerar hash..." oninput="genHashes()"></textarea></div>
-    <div id="hashResults"></div>
-  </div>
-
+  
+<div class="card">
+  <div class="section"><label>Texto</label><textarea id="hashInput" rows="4" placeholder="Texto para gerar hash..." oninput="genHashes()"></textarea></div>
+  <div id="hashResults"></div>
+</div>
 </div></div>
-
-<!-- PASSWORD -->
 <div class="page" id="page-password"><div class="page-inner">
   <div class="page-title">Gerador de <em>password</em></div>
   <div class="page-desc">Passwords criptograficamente seguras geradas localmente no teu browser.</div>
-  <div class="card">
-    <div class="section">
-      <div class="slider-row"><label>Comprimento</label><input type="range" min="8" max="128" value="24" step="1" id="pwLen" oninput="document.getElementById('pwLenVal').textContent=this.value;genPw()"><span class="slider-val" id="pwLenVal">24</span></div>
-      <div class="opts">
-        <button class="opt-chip on" data-key="upper" onclick="toggleOpt(this)">A–Z maiúsculas</button>
-        <button class="opt-chip on" data-key="lower" onclick="toggleOpt(this)">a–z minúsculas</button>
-        <button class="opt-chip on" data-key="digits" onclick="toggleOpt(this)">0–9 números</button>
-        <button class="opt-chip on" data-key="symbols" onclick="toggleOpt(this)">!@#$ símbolos</button>
-        <button class="opt-chip" data-key="ambig" onclick="toggleOpt(this)">Excluir ambíguos (0O1lI)</button>
-      </div>
+  
+<div class="card">
+  <div class="section">
+    <div class="slider-row"><label>Comprimento</label><input type="range" min="8" max="128" value="24" step="1" id="pwLen" oninput="document.getElementById('pwLenVal').textContent=this.value;genPw()"><span class="slider-val" id="pwLenVal">24</span></div>
+    <div class="opts">
+      <button class="opt-chip on" data-key="upper" onclick="toggleOpt(this)">A–Z maiúsculas</button>
+      <button class="opt-chip on" data-key="lower" onclick="toggleOpt(this)">a–z minúsculas</button>
+      <button class="opt-chip on" data-key="digits" onclick="toggleOpt(this)">0–9 números</button>
+      <button class="opt-chip on" data-key="symbols" onclick="toggleOpt(this)">!@#$ símbolos</button>
+      <button class="opt-chip" data-key="ambig" onclick="toggleOpt(this)">Excluir ambíguos (0O1lI)</button>
     </div>
-    <div class="section">
-      <label>Password gerada</label>
-      <div class="pw-display" id="pwOutput">—</div>
-      <div class="strength-bar"><div class="strength-fill" id="strengthFill" style="width:0%"></div></div>
-      <div class="row"><span id="strengthLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted)">—</span><span id="entropyLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto"></span></div>
-    </div>
-    <div class="row"><button class="btn btn-accent" onclick="genPw()">Gerar nova</button><button class="btn" onclick="copyPw()">Copiar</button><span class="toast" id="pwToast">✓ Copiado!</span></div>
   </div>
-
+  <div class="section">
+    <label>Password gerada</label>
+    <div class="pw-display" id="pwOutput">—</div>
+    <div class="strength-bar"><div class="strength-fill" id="strengthFill" style="width:0%"></div></div>
+    <div class="row"><span id="strengthLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted)">—</span><span id="entropyLabel" style="font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto"></span></div>
+  </div>
+  <div class="row"><button class="btn btn-accent" onclick="genPw()">Gerar nova</button><button class="btn" onclick="copyPw()">Copiar</button><span class="toast" id="pwToast">✓ Copiado!</span></div>
+</div>
 </div></div>
-
-<!-- UUID -->
 <div class="page" id="page-uuid"><div class="page-inner">
   <div class="page-title">UUID / MAC / <em>Dados de teste</em></div>
   <div class="page-desc">Gera identificadores e dados aleatórios para testes e desenvolvimento.</div>
-  <div class="card">
-    <div class="section"><label>UUID v4</label><div class="result-box" id="uuidOut">—</div><div class="row" style="margin-top:8px"><button class="btn btn-accent" onclick="genUUID()">Gerar UUID</button><button class="btn" onclick="copyEl('uuidOut','uuidt')">Copiar</button><span class="toast" id="uuidt">✓</span></div></div>
-    <div class="section"><label>Endereço MAC aleatório</label><div class="result-box" id="macOut">—</div><div class="row" style="margin-top:8px"><button class="btn btn-accent" onclick="genMAC()">Gerar MAC</button><button class="btn" onclick="copyEl('macOut','mact')">Copiar</button><span class="toast" id="mact">✓</span></div></div>
-    <div class="section"><label>IP aleatório (público)</label><div class="result-box" id="ipOut">—</div><div class="row" style="margin-top:8px"><button class="btn btn-accent" onclick="genIP()">Gerar IP</button><button class="btn" onclick="copyEl('ipOut','ipt')">Copiar</button><span class="toast" id="ipt">✓</span></div></div>
-    <div class="section">
-      <label>Quantidade</label>
-      <div class="slider-row"><input type="range" min="1" max="20" value="5" step="1" id="bulkCount" oninput="document.getElementById('bulkCountVal').textContent=this.value"><span class="slider-val" id="bulkCountVal">5</span></div>
-      <div class="row" style="margin-bottom:8px"><button class="btn btn-accent" onclick="genBulk()">Gerar múltiplos UUIDs</button><button class="btn" onclick="copyEl('bulkOut','bulkt')">Copiar</button><span class="toast" id="bulkt">✓</span></div>
-      <div class="result-box" id="bulkOut">—</div>
-    </div>
+  
+<div class="card">
+  <div class="section"><label>UUID v4</label><div class="result-box" id="uuidOut">—</div><div class="row" style="margin-top:8px"><button class="btn btn-accent" onclick="genUUID()">Gerar UUID</button><button class="btn" onclick="copyEl('uuidOut','uuidt')">Copiar</button><span class="toast" id="uuidt">✓</span></div></div>
+  <div class="section"><label>Endereço MAC aleatório</label><div class="result-box" id="macOut">—</div><div class="row" style="margin-top:8px"><button class="btn btn-accent" onclick="genMAC()">Gerar MAC</button><button class="btn" onclick="copyEl('macOut','mact')">Copiar</button><span class="toast" id="mact">✓</span></div></div>
+  <div class="section"><label>IP aleatório (público)</label><div class="result-box" id="ipOut">—</div><div class="row" style="margin-top:8px"><button class="btn btn-accent" onclick="genIP()">Gerar IP</button><button class="btn" onclick="copyEl('ipOut','ipt')">Copiar</button><span class="toast" id="ipt">✓</span></div></div>
+  <div class="section">
+    <label>UUIDs em bulk</label>
+    <div class="slider-row"><input type="range" min="1" max="20" value="5" step="1" id="bulkCount" oninput="document.getElementById('bulkCountVal').textContent=this.value"><span class="slider-val" id="bulkCountVal">5</span></div>
+    <div class="row" style="margin-bottom:8px"><button class="btn btn-accent" onclick="genBulk()">Gerar múltiplos UUIDs</button><button class="btn" onclick="copyEl('bulkOut','bulkt')">Copiar</button><span class="toast" id="bulkt">✓</span></div>
+    <div class="result-box" id="bulkOut">—</div>
   </div>
-
+</div>
 </div></div>
-
-<!-- DIFF -->
 <div class="page" id="page-diff"><div class="page-inner">
   <div class="page-title">Diff de <em>texto</em></div>
   <div class="page-desc">Compara dois blocos de texto e destaca as diferenças palavra a palavra.</div>
-  <div class="card">
-    <div class="grid2 section">
-      <div><label>Texto original</label><textarea id="diffA" rows="10" placeholder="Texto original..." oninput="doDiff()"></textarea></div>
-      <div><label>Texto novo</label><textarea id="diffB" rows="10" placeholder="Texto novo..." oninput="doDiff()"></textarea></div>
-    </div>
-    <div class="row section">
-      <div id="diffStats"></div>
-      <button class="btn btn-ghost" style="margin-left:auto" onclick="document.getElementById('diffA').value='';document.getElementById('diffB').value='';doDiff()">Limpar</button>
-      <button class="btn" onclick="copyDiff()">Copiar diff</button>
-      <span class="toast" id="diffToast">✓ Copiado!</span>
-    </div>
-    <div><label>Resultado</label><div class="diff-output" id="diffOutput"><span class="diff-eq">Cola texto acima...</span></div></div>
+  
+<div class="card">
+  <div class="grid2 section">
+    <div><label>Texto original</label><textarea id="diffA" rows="10" placeholder="Texto original..." oninput="doDiff()"></textarea></div>
+    <div><label>Texto novo</label><textarea id="diffB" rows="10" placeholder="Texto novo..." oninput="doDiff()"></textarea></div>
   </div>
-
+  <div class="row section">
+    <div id="diffStats"></div>
+    <button class="btn btn-ghost" style="margin-left:auto" onclick="document.getElementById('diffA').value='';document.getElementById('diffB').value='';doDiff()">Limpar</button>
+    <button class="btn" onclick="copyDiff()">Copiar diff</button>
+    <span class="toast" id="diffToast">✓ Copiado!</span>
+  </div>
+  <div><label>Resultado</label><div class="diff-output" id="diffOutput"><span class="diff-eq">Cola texto acima...</span></div></div>
+</div>
 </div></div>
-
-<!-- REGEX -->
 <div class="page" id="page-regex"><div class="page-inner">
   <div class="page-title">Regex <em>Tester</em></div>
   <div class="page-desc">Testa expressões regulares em tempo real com highlight de matches.</div>
-  <div class="card">
-    <div class="section">
-      <label>Expressão regular</label>
-      <div class="regex-input-row">
-        <input type="text" id="regexPattern" placeholder="Ex: \b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b" oninput="testRegex()">
-        <div class="regex-flags">
-          <button class="flag-btn on" id="flag-g" onclick="toggleFlag(this,'g')">g</button>
-          <button class="flag-btn on" id="flag-i" onclick="toggleFlag(this,'i')">i</button>
-          <button class="flag-btn" id="flag-m" onclick="toggleFlag(this,'m')">m</button>
-        </div>
+  
+<div class="card">
+  <div class="section">
+    <label>Expressão regular</label>
+    <div class="regex-input-row">
+      <input type="text" id="regexPattern" placeholder="Ex: \b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b" oninput="testRegex()">
+      <div class="regex-flags">
+        <button class="flag-btn on" id="flag-g" onclick="toggleFlag(this,'g')">g</button>
+        <button class="flag-btn on" id="flag-i" onclick="toggleFlag(this,'i')">i</button>
+        <button class="flag-btn" id="flag-m" onclick="toggleFlag(this,'m')">m</button>
       </div>
     </div>
-    <div class="section"><label>Texto de teste</label><textarea id="regexText" rows="6" placeholder="Cola aqui o texto onde queres testar a regex..." oninput="testRegex()"></textarea></div>
-    <div id="regexMeta" class="meta-row section"></div>
-    <div><label>Resultado (matches destacados)</label><div class="diff-output" id="regexOutput"><span class="diff-eq">Escreve uma regex e texto acima...</span></div></div>
   </div>
-
+  <div class="section"><label>Texto de teste</label><textarea id="regexText" rows="6" placeholder="Cola aqui o texto onde queres testar a regex..." oninput="testRegex()"></textarea></div>
+  <div id="regexMeta" class="meta-row section"></div>
+  <div><label>Resultado</label><div class="diff-output" id="regexOutput"><span class="diff-eq">Escreve uma regex e texto acima...</span></div></div>
+</div>
 </div></div>
-
-<!-- JSON -->
 <div class="page" id="page-json"><div class="page-inner">
   <div class="page-title">JSON <em>Formatter</em></div>
   <div class="page-desc">Formata, valida e faz syntax highlight de JSON.</div>
-  <div class="card">
-    <div class="section"><label>JSON input</label><textarea id="jsonInput" rows="7" placeholder='{"exemplo": "cola aqui o teu JSON...\"}'></textarea></div>
-    <div class="row section">
-      <button class="btn btn-accent" onclick="formatJSON()">Formatar</button>
-      <button class="btn" onclick="minifyJSON()">Minificar</button>
-      <button class="btn btn-ghost" onclick="document.getElementById('jsonInput').value='';document.getElementById('jsonOutput').innerHTML='';document.getElementById('jsonMeta').innerHTML=''">Limpar</button>
-    </div>
-    <div class="meta-row section" id="jsonMeta"></div>
-    <div><label>Resultado</label><div class="json-output" id="jsonOutput"></div></div>
-    <div class="row" style="margin-top:8px"><button class="btn" onclick="copyJSON()">Copiar</button><span class="toast" id="jsont">✓ Copiado!</span></div>
+  
+<div class="card">
+  <div class="section"><label>JSON input</label><textarea id="jsonInput" rows="7" placeholder='{"exemplo": "cola aqui o teu JSON..."}'></textarea></div>
+  <div class="row section">
+    <button class="btn btn-accent" onclick="formatJSON()">Formatar</button>
+    <button class="btn" onclick="minifyJSON()">Minificar</button>
+    <button class="btn btn-ghost" onclick="document.getElementById('jsonInput').value='';document.getElementById('jsonOutput').innerHTML='';document.getElementById('jsonMeta').innerHTML=''">Limpar</button>
   </div>
-
+  <div class="meta-row section" id="jsonMeta"></div>
+  <div><label>Resultado</label><div class="json-output" id="jsonOutput"></div></div>
+  <div class="row" style="margin-top:8px"><button class="btn" onclick="copyJSON()">Copiar</button><span class="toast" id="jsont">✓ Copiado!</span></div>
+</div>
 </div></div>
-
-<!-- COUNTER -->
 <div class="page" id="page-counter"><div class="page-inner">
   <div class="page-title">Contador de <em>texto</em></div>
   <div class="page-desc">Análise detalhada de qualquer bloco de texto.</div>
-  <div class="card">
-    <div class="section"><label>Texto</label><textarea id="counterInput" rows="8" placeholder="Cola aqui o texto para analisar..." oninput="countText()"></textarea></div>
-    <div id="counterStats" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:1rem"></div>
-  </div>
-
+  
+<div class="card">
+  <div class="section"><label>Texto</label><textarea id="counterInput" rows="8" placeholder="Cola aqui o texto para analisar..." oninput="countText()"></textarea></div>
+  <div id="counterStats" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:1rem"></div>
+</div>
 </div></div>
-
-<footer>Tudo processado <span>localmente</span> — nenhum dado é enviado para servidores.</footer>
+<footer>Tudo processado <span>localmente no teu browser</span> — nenhum dado é enviado para servidores.</footer>
 </main>
 </div>
-
 <script>
 /* NAV */
 function showPage(name){
@@ -756,12 +690,11 @@ async function pasteAndDefang(){
     document.getElementById('defangInput').value=text.trim();
     doDefang();
   }catch(e){
-    alert('Sem permissão para ler a clipboard. Usa Ctrl+V para colar e depois clica em Fazer defang.');
+    alert('Sem permissão para ler a clipboard. Cola manualmente e clica em Fazer defang.');
   }
 }
 function doDefang(){
-  const raw=document.getElementById('defangInput').value.trim();
-  if(!raw)return;
+  const raw=document.getElementById('defangInput').value.trim();if(!raw)return;
   const lines=raw.split('\n').map(l=>{
     let s=l.trim();
     s=s.replace(/https?:\/\//gi,m=>m.replace('://','[://]'));
@@ -777,18 +710,14 @@ function doDefang(){
   document.getElementById('defangMeta').innerHTML=chips.join('');
   navigator.clipboard.writeText(result).then(()=>{
     const tag=document.getElementById('defangAutoCopy');
-    tag.style.opacity='1';
-    setTimeout(()=>tag.style.opacity='0',2500);
+    tag.style.opacity='1';setTimeout(()=>tag.style.opacity='0',2500);
   }).catch(()=>{});
 }
 function doRefang(){
-  const raw=document.getElementById('defangInput').value.trim();
-  if(!raw)return;
+  const raw=document.getElementById('defangInput').value.trim();if(!raw)return;
   const lines=raw.split('\n').map(l=>{
     let s=l.trim();
-    s=s.replace(/\[\.\]/g,'.');
-    s=s.replace(/\[:\/\/\]/g,'://');
-    s=s.replace(/\[:\]/g,':');
+    s=s.replace(/\[\.\]/g,'.');s=s.replace(/\[:V\/V\/\]/g,'://');s=s.replace(/\[:\]/g,':');
     return s;
   });
   document.getElementById('defangOut').textContent=lines.join('\n');
@@ -811,209 +740,244 @@ function extractIOCs(){
   const sha1=[...new Set((text.replace(sha256Re,'')).match(sha1Re)||[])];
   const md5=[...new Set((text.replace(sha256Re,'').replace(sha1Re,'')).match(md5Re)||[])];
   const groups=[
-    {label:'IPs',items:ips,cls:'blue'},
-    {label:'URLs',items:urls,cls:'green'},
-    {label:'Emails',items:emails,cls:'yellow'},
-    {label:'SHA256',items:sha256,cls:'red'},
-    {label:'SHA1',items:sha1,cls:'red'},
-    {label:'MD5',items:md5,cls:'red'}
+    {label:'IPs',items:ips,cls:'blue'},{label:'URLs',items:urls,cls:'green'},
+    {label:'Emails',items:emails,cls:'yellow'},{label:'SHA256',items:sha256,cls:'red'},
+    {label:'SHA1',items:sha1,cls:'red'},{label:'MD5',items:md5,cls:'red'}
   ];
   const total=groups.reduce((s,g)=>s+g.items.length,0);
-  if(total===0){
-    document.getElementById('iocResults').innerHTML='<div style="color:var(--muted);font-family:var(--mono);font-size:13px;padding:1rem 0">Nenhum IOC encontrado no texto.</div>';
-    return;
-  }
+  if(total===0){document.getElementById('iocResults').innerHTML='<div style="color:var(--muted);font-family:var(--mono);font-size:13px;padding:1rem 0">Nenhum IOC encontrado.</div>';return;}
   let html='<div class="meta-row" style="margin-bottom:1rem">'+groups.filter(g=>g.items.length).map(g=>'<span class="chip '+g.cls+'">'+g.items.length+' '+g.label+'</span>').join('')+'</div>';
   groups.filter(g=>g.items.length).forEach(g=>{
     html+='<div style="margin-bottom:1rem"><label>'+g.label+' ('+g.items.length+')</label><table class="ioc-table"><thead><tr><th>#</th><th>Valor</th><th></th></tr></thead><tbody>';
-    g.items.forEach((v,i)=>{
-      html+='<tr><td style="color:var(--muted)">'+(i+1)+'</td><td>'+v+'</td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="navigator.clipboard.writeText(this.dataset.v)" data-v="'+v.replace(/"/g,'&quot;')+'">Copiar</button></td></tr>';
-    });
+    g.items.forEach((v,i)=>{html+='<tr><td style="color:var(--muted)">'+(i+1)+'</td><td>'+esc(v)+'</td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="cpv(this)" data-v="'+v.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'">Copiar</button></td></tr>';});
     html+='</tbody></table></div>';
   });
   document.getElementById('iocResults').innerHTML=html;
 }
 
+/* EMAIL HEADER ANALYSIS
+ * Score methodology (RFC-aligned):
+ * Base: 40 pts (neutral starting point)
+ * SPF pass (RFC 7208): +20 | fail/softfail: -25 | neutral/none: 0
+ * DKIM pass (RFC 6376): +20 | fail: -25 | none: 0
+ * DMARC pass (RFC 7489): +20 | fail: -20 | none: 0
+ * Reply-To domain mismatch: -15 (common phishing vector)
+ * Return-Path domain mismatch: -10
+ * Range clamped to [0, 100]
+ */
+function analyzeEmail(){
+  const raw=document.getElementById('emailInput').value.trim();
+  if(!raw){alert('Cola os headers do email primeiro.');return;}
+
+  function get(h){const re=new RegExp('^'+h+':\\s*(.+?)(?=\\n[\\S]|$)','ims');const m=raw.match(re);return m?m[1].replace(/\s+/g,' ').trim():'';}
+  function getAll(h){const re=new RegExp('^'+h+':\\s*(.+?)(?=\\n[\\S]|$)','gims');return[...raw.matchAll(re)].map(m=>m[1].replace(/\s+/g,' ').trim());}
+
+  const from=get('From'),replyTo=get('Reply-To'),returnPath=get('Return-Path');
+  const to=get('To'),subject=get('Subject'),date=get('Date'),msgId=get('Message-ID');
+  const mailer=get('X-Mailer')||get('User-Agent')||get('X-Originating-Client')||'';
+  const spamScore=get('X-Spam-Score')||get('X-Spam-Status')||'';
+  const originIp=get('X-Originating-IP')||get('X-Forwarded-For')||'';
+  const authResults=getAll('Authentication-Results').join(' ');
+  const receivedSpf=get('Received-SPF');
+
+  const spfRes=authResults.match(/spf=([\w]+)/i)?.[1]||receivedSpf.match(/^(pass|fail|softfail|neutral|none|temperror|permerror)/i)?.[1]||'none';
+  const dkimRes=authResults.match(/dkim=([\w]+)/i)?.[1]||'none';
+  const dmarcRes=authResults.match(/dmarc=([\w]+)/i)?.[1]||'none';
+
+  const fromEmail=from.match(/<([^>]+)>/)?.[1]||from;
+  const fromDisplay=from.includes('<')?from.slice(0,from.indexOf('<')).trim():'';
+  const fromDomain=(fromEmail.split('@')[1]||'').toLowerCase();
+  const replyEmail=replyTo.match(/<([^>]+)>/)?.[1]||replyTo;
+  const replyDomain=(replyEmail.split('@')[1]||'').toLowerCase();
+  const returnEmail=returnPath.match(/<([^>]+)>/)?.[1]||returnPath;
+  const returnDomain=(returnEmail.split('@')[1]||'').toLowerCase();
+
+  const pass=v=>['pass','ok','good'].includes((v||'').toLowerCase());
+  const fail=v=>['fail','softfail','reject'].includes((v||'').toLowerCase());
+
+  // Score calculation (documented above)
+  let score=40;
+  if(pass(spfRes))score+=20;else if(fail(spfRes))score-=25;
+  if(pass(dkimRes))score+=20;else if(fail(dkimRes))score-=25;
+  if(pass(dmarcRes))score+=20;else if(fail(dmarcRes))score-=20;
+  const flags=[];
+  if(replyTo&&replyDomain&&replyDomain!==fromDomain){flags.push('Reply-To domain ('+replyDomain+') difere do From ('+fromDomain+')');score-=15;}
+  if(returnPath&&returnDomain&&returnDomain!==fromDomain){flags.push('Return-Path domain ('+returnDomain+') difere do From ('+fromDomain+')');score-=10;}
+  if(fail(spfRes))flags.push('SPF '+spfRes+' — servidor não autorizado a enviar por este domínio');
+  if(fail(dkimRes))flags.push('DKIM fail — assinatura inválida ou modificada em trânsito');
+  if(fail(dmarcRes))flags.push('DMARC fail — política do domínio violada');
+  score=Math.max(0,Math.min(100,score));
+
+  // Colors
+  let sc,sb,si,slabel;
+  if(score>=75){sc='var(--accent)';sb='rgba(0,255,148,0.08)';si='rgba(0,255,148,0.25)';slabel='Email aparentemente legítimo';}
+  else if(score>=45){sc='var(--warning)';sb='rgba(255,184,0,0.08)';si='rgba(255,184,0,0.25)';slabel='Email suspeito — verificar manualmente';}
+  else{sc='var(--danger)';sb='rgba(255,77,109,0.08)';si='rgba(255,77,109,0.25)';slabel='Email potencialmente malicioso';}
+
+  // Score ring SVG
+  const r=32,circ=2*Math.PI*r,dash=circ*(score/100);
+  const ring='<svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="'+r+'" fill="none" stroke="var(--border2)" stroke-width="6"/><circle cx="40" cy="40" r="'+r+'" fill="none" stroke="'+sc+'" stroke-width="6" stroke-dasharray="'+dash+' '+circ+'" stroke-linecap="round" style="transition:stroke-dasharray 0.6s"/></svg>';
+
+  // Verdict block
+  const verdictHtml='<div class="email-verdict" style="background:'+sb+';border-color:'+si+'"><div class="email-verdict-top"><div class="score-ring-wrap">'+ring+'<div class="score-ring-inner"><div class="score-number" style="color:'+sc+'">'+score+'</div><div class="score-denom">/100</div></div></div><div class="email-verdict-info"><div class="email-verdict-title" style="color:'+sc+'">'+slabel+'</div><div class="email-verdict-flags">'+(flags.length?flags.map(f=>'⚠ '+f).join('<br>'):'✓ Nenhum indicador de spoofing detetado')+'</div></div></div><div class="email-verdict-bottom"><span class="email-verdict-stat">SPF <b style="color:'+authColor(spfRes)+'">'+spfRes+'</b></span><span class="email-verdict-stat">DKIM <b style="color:'+authColor(dkimRes)+'">'+dkimRes+'</b></span><span class="email-verdict-stat">DMARC <b style="color:'+authColor(dmarcRes)+'">'+dmarcRes+'</b></span><span class="email-verdict-stat" style="margin-left:auto;font-size:10px;opacity:0.6">Score baseado em RFC 7208 · RFC 6376 · RFC 7489</span></div></div>';
+  document.getElementById('emailVerdict').style.display='block';
+  document.getElementById('emailVerdict').innerHTML=verdictHtml;
+
+  function authColor(v){const vl=(v||'').toLowerCase();if(['pass','ok'].includes(vl))return'var(--accent)';if(['fail','softfail','reject'].includes(vl))return'var(--danger)';if(['neutral','none'].includes(vl))return'var(--muted)';return'var(--warning)';}
+  function authCardClass(v){const vl=(v||'').toLowerCase();if(['pass','ok'].includes(vl))return'pass';if(['fail','softfail','reject'].includes(vl))return'fail';if(['neutral','none'].includes(vl))return'neutral';return'warn';}
+  function authIcon(v){const vl=(v||'').toLowerCase();if(['pass','ok'].includes(vl))return'✓';if(['fail','softfail','reject'].includes(vl))return'✗';return'—';}
+  function authDesc(type,v){
+    const vl=(v||'').toLowerCase();
+    const descs={
+      spf:{pass:'Servidor autorizado pelo domínio',fail:'Servidor NÃO autorizado',softfail:'Servidor suspeito (softfail)',neutral:'Sem política definida',none:'Header em falta'},
+      dkim:{pass:'Assinatura válida e íntegra',fail:'Assinatura inválida ou corrompida',none:'Sem assinatura digital'},
+      dmarc:{pass:'Alinhamento SPF/DKIM OK',fail:'Política do domínio violada',none:'Sem política DMARC'}
+    };
+    return descs[type]?.[vl]||v;
+  }
+  function ipBtn(ip){return ip?'<a class="ip-rep-btn" href="https://www.virustotal.com/gui/ip-address/'+ip+'" target="_blank">VT</a><a class="ip-rep-btn" href="https://www.abuseipdb.com/check/'+ip+'" target="_blank">Abuse</a>':'';}
+
+  let html='<div class="email-grid">';
+
+  // Identidade
+  html+='<div class="email-section"><div class="email-section-hdr"><div class="email-hdr-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="email-section-title">Identidade</span></div><div class="email-section-body">';
+  html+='<div class="email-row"><span class="email-key">From</span><span class="email-val">'+(fromDisplay?'<span class="ev-muted">'+esc(fromDisplay)+'</span> ':'')+'<span class="ev-accent">&lt;'+esc(fromEmail)+'&gt;</span></span></div>';
+  if(replyTo&&replyTo!==from)html+='<div class="email-row"><span class="email-key">Reply-To</span><span class="email-val '+(replyDomain!==fromDomain?'ev-danger':'')+'">'+esc(replyTo)+(replyDomain!==fromDomain?' ⚠':'')+'</span></div>';
+  if(returnPath)html+='<div class="email-row"><span class="email-key">Return-Path</span><span class="email-val '+(returnDomain&&returnDomain!==fromDomain?'ev-warning':'')+'">'+esc(returnPath)+(returnDomain&&returnDomain!==fromDomain?' ⚠':'')+'</span></div>';
+  html+='<div class="email-row"><span class="email-key">To</span><span class="email-val">'+esc(to)+'</span></div>';
+  html+='<div class="email-row"><span class="email-key">Subject</span><span class="email-val ev-accent">'+esc(subject)+'</span></div>';
+  html+='<div class="email-row"><span class="email-key">Date</span><span class="email-val">'+esc(date)+'</span></div>';
+  if(msgId)html+='<div class="email-row"><span class="email-key">Message-ID</span><span class="email-val ev-muted" style="font-size:11px">'+esc(msgId)+'</span></div>';
+  if(mailer)html+='<div class="email-row"><span class="email-key">Mailer</span><span class="email-val ev-info">'+esc(mailer)+'</span></div>';
+  if(originIp)html+='<div class="email-row"><span class="email-key">IP origem</span><span class="email-val">'+esc(originIp)+''+ipBtn(originIp)+'</span></div>';
+  if(spamScore)html+='<div class="email-row"><span class="email-key">Spam Score</span><span class="email-val ev-warning">'+esc(spamScore)+'</span></div>';
+  html+='</div></div>';
+
+  // Autenticação
+  html+='<div class="email-section"><div class="email-section-hdr"><div class="email-hdr-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="email-section-title">Autenticação</span></div><div class="email-section-body">';
+  html+='<div class="auth-cards">';
+  html+='<div class="auth-card '+authCardClass(spfRes)+'"><div class="auth-card-icon">'+authIcon(spfRes)+'</div><div class="auth-card-name">SPF</div><div class="auth-card-val">'+spfRes+'</div><div class="auth-card-desc">'+authDesc('spf',spfRes)+'</div></div>';
+  html+='<div class="auth-card '+authCardClass(dkimRes)+'"><div class="auth-card-icon">'+authIcon(dkimRes)+'</div><div class="auth-card-name">DKIM</div><div class="auth-card-val">'+dkimRes+'</div><div class="auth-card-desc">'+authDesc('dkim',dkimRes)+'</div></div>';
+  html+='<div class="auth-card '+authCardClass(dmarcRes)+'"><div class="auth-card-icon">'+authIcon(dmarcRes)+'</div><div class="auth-card-name">DMARC</div><div class="auth-card-val">'+dmarcRes+'</div><div class="auth-card-desc">'+authDesc('dmarc',dmarcRes)+'</div></div>';
+  html+='</div>';
+  if(authResults)html+='<div class="email-row" style="margin-top:10px"><span class="email-key">Auth-Results</span><span class="email-val ev-muted" style="font-size:11px">'+esc(authResults.substring(0,300))+(authResults.length>300?'…':'')+'</span></div>';
+  html+='</div></div>';
+
+  // Hops
+  const receivedHeaders=getAll('Received');
+  const hops=receivedHeaders.map((r,i)=>{
+    const fM=r.match(/from\s+([^\s]+(?:\s+\([^)]+\))?)/i);
+    const bM=r.match(/by\s+([^\s]+(?:\s+\([^)]+\))?)/i);
+    const ipM=r.match(/\[([\d.]+)\]/);
+    const dM=r.match(/;\s*(.+)$/);
+    return{num:receivedHeaders.length-i,from:fM?.[1]||'',by:bM?.[1]||'',ip:ipM?.[1]||'',date:dM?.[1]?.trim()||''};
+  }).reverse();
+  const hopDates=hops.map(h=>{try{const d=new Date(h.date);return isNaN(d)?null:d;}catch(e){return null;}});
+
+  if(hops.length){
+    html+='<div class="email-section full"><div class="email-section-hdr"><div class="email-hdr-icon yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="email-section-title">Caminho de entrega — '+hops.length+' hop'+(hops.length!==1?'s':'')+'</span></div><div class="email-section-body"><div class="hop-timeline">';
+    hops.forEach((h,i)=>{
+      let delayHtml='';
+      if(i>0&&hopDates[i]&&hopDates[i-1]){
+        const diff=Math.round((hopDates[i]-hopDates[i-1])/1000);
+        if(!isNaN(diff)&&isFinite(diff)){
+          const cls=Math.abs(diff)<30?'delay-ok':Math.abs(diff)<300?'delay-warn':'delay-bad';
+          const label=Math.abs(diff)<60?diff+'s':Math.round(diff/60)+'min';
+          delayHtml='<span class="hop-delay '+cls+'">+'+label+'</span>';
+        }
+      }
+      const isOrigin=i===0,isDest=i===hops.length-1;
+      var ipHtml=''; if(h.ip){var _u='https://www.virustotal.com/gui/ip-address/'+h.ip; ipHtml='<span class="hop-ip" onclick="window.open(\''+_u+'\',\'_blank\')">'+esc(h.ip)+'</span>'+ipBtn(h.ip);}
+      html+='<div class="hop-item"><div class="hop-dot'+(isOrigin?' origin':isDest?' dest':'')+'"></div><div class="hop-card"><div class="hop-header"><span class="hop-badge '+(isOrigin?'origin':isDest?'dest':'relay')+'">'+(isOrigin?'Origem':isDest?'Destino':'Relay')+'</span><span class="hop-num-label">Hop '+h.num+'</span></div>';
+      if(h.from)html+='<div class="hop-from"><span style="color:var(--muted)">from </span>'+esc(h.from)+' '+ipHtml+'</div>';
+      if(h.by)html+='<div class="hop-by"><span style="color:var(--muted)">by </span>'+esc(h.by)+'</div>';
+      if(h.date)html+='<div class="hop-time"><span>'+esc(h.date)+'</span>'+delayHtml+'</div>';
+      html+='</div></div>';
+    });
+    html+='</div></div></div>';
+  }
+
+  // Raw headers
+  html+='<div class="email-section full"><div class="email-section-hdr" style="cursor:pointer" onclick="toggleRawHeaders()"><div class="email-hdr-icon red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span class="email-section-title">Headers raw completos</span><span id="rawToggleLabel" style="margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)">+ expandir</span></div><div id="rawHeadersBody" style="display:none;padding:1rem 1.25rem"><div style="font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.9;white-space:pre-wrap;word-break:break-all">'+esc(raw)+'</div></div></div>';
+
+  html+='</div>';
+  document.getElementById('emailResults').innerHTML=html;
+}
+
+function toggleRawHeaders(){
+  const b=document.getElementById('rawHeadersBody');
+  const l=document.getElementById('rawToggleLabel');
+  const open=b.style.display==='none';
+  b.style.display=open?'block':'none';
+  l.textContent=open?'− colapsar':'+ expandir';
+}
+
 /* REPUTATION */
 function toggleApiKeys(){
-  const body=document.getElementById('apiKeysBody');
-  const icon=document.getElementById('apiKeysToggleIcon');
+  const body=document.getElementById('apiKeysBody'),icon=document.getElementById('apiKeysToggleIcon');
   const open=body.style.display==='none';
   body.style.display=open?'block':'none';
   icon.textContent=open?'−':'+';
   if(open)loadApiKeys();
 }
-function loadApiKeys(){
-  ['vt','abuse','otx','ipinfo'].forEach(k=>{
-    const el=document.getElementById('key-'+k);
-    if(el)el.value=localStorage.getItem('repkey_'+k)||'';
-  });
-}
-function saveApiKeys(){
-  ['vt','abuse','otx','ipinfo'].forEach(k=>{
-    const el=document.getElementById('key-'+k);
-    if(el)localStorage.setItem('repkey_'+k,el.value.trim());
-  });
-  flash('keyToast');
-  updateApiStatusHome();
-}
-function clearApiKeys(){
-  ['vt','abuse','otx','ipinfo'].forEach(k=>{
-    localStorage.removeItem('repkey_'+k);
-    const el=document.getElementById('key-'+k);
-    if(el)el.value='';
-  });
-  flash('keyToast');
-  updateApiStatusHome();
-}
+function loadApiKeys(){['vt','abuse','otx','ipinfo'].forEach(k=>{const el=document.getElementById('key-'+k);if(el)el.value=localStorage.getItem('repkey_'+k)||'';});}
+function saveApiKeys(){['vt','abuse','otx','ipinfo'].forEach(k=>{const el=document.getElementById('key-'+k);if(el)localStorage.setItem('repkey_'+k,el.value.trim());});flash('keyToast');updateApiStatusHome();}
+function clearApiKeys(){['vt','abuse','otx','ipinfo'].forEach(k=>{localStorage.removeItem('repkey_'+k);const el=document.getElementById('key-'+k);if(el)el.value='';});flash('keyToast');updateApiStatusHome();}
 function getKey(k){return localStorage.getItem('repkey_'+k)||'';}
-
 function openRep(service){
   const val=document.getElementById('repInput').value.trim();
   if(!val){alert('Introduz um IP ou URL primeiro.');return false;}
-  const enc=encodeURIComponent(val);
-  const isURL=/^https?:\/\//i.test(val);
-  const urls={
-    vt:'https://www.virustotal.com/gui/search/'+enc,
-    abuse:'https://www.abuseipdb.com/check/'+enc,
-    shodan:'https://www.shodan.io/search?query='+enc,
-    otx:isURL?'https://otx.alienvault.com/indicator/url/'+enc:'https://otx.alienvault.com/indicator/ip/'+enc,
-    talos:'https://talosintelligence.com/reputation_center/lookup?search='+enc,
-    urlscan:'https://urlscan.io/search/#'+enc,
-    greynoise:'https://viz.greynoise.io/ip/'+enc,
-    whois:'https://who.is/whois/'+enc
-  };
-  window.open(urls[service],'_blank');
-  return false;
+  const enc=encodeURIComponent(val),isURL=/^https?:\/\//i.test(val);
+  const urls={vt:'https://www.virustotal.com/gui/search/'+enc,abuse:'https://www.abuseipdb.com/check/'+enc,shodan:'https://www.shodan.io/search?query='+enc,otx:isURL?'https://otx.alienvault.com/indicator/url/'+enc:'https://otx.alienvault.com/indicator/ip/'+enc,talos:'https://talosintelligence.com/reputation_center/lookup?search='+enc,urlscan:'https://urlscan.io/search/#'+enc,greynoise:'https://viz.greynoise.io/ip/'+enc,whois:'https://who.is/whois/'+enc};
+  window.open(urls[service],'_blank');return false;
 }
-
 async function runRepLookup(){
   const val=document.getElementById('repInput').value.trim();
   if(!val){alert('Introduz um IP ou URL primeiro.');return;}
   const isIP=/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(val);
   const isURL=/^https?:\/\//i.test(val);
-  let target=val;
-  try{if(isURL)target=new URL(val).hostname;}catch(e){}
-
+  let target=val;try{if(isURL)target=new URL(val).hostname;}catch(e){}
   document.getElementById('repResults').style.display='block';
   document.getElementById('repVerdict').style.display='none';
-  document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:13px;color:var(--muted);padding:1rem 0;display:flex;align-items:center;gap:10px"><span style="display:inline-block;width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></span>A consultar fontes...</div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
-
-  const results=[];
-  const promises=[];
-
+  document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:13px;color:var(--muted);padding:1rem 0;display:flex;align-items:center;gap:10px"><span style="display:inline-block;width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></span>A consultar...</div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
+  const results=[],promises=[];
   const vtKey=getKey('vt');
   if(vtKey){
     let vtEndpoint,vtId;
     if(isIP){vtEndpoint='ip_addresses';vtId=target;}
-    else{
-      vtEndpoint='urls';
-      try{
-        const encoded=encodeURIComponent(val);
-        const b64=btoa(encoded.replace(/%([0-9A-F]{2})/g,(_,p)=>String.fromCharCode(parseInt(p,16))));
-        vtId=b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-      }catch(e){vtId=btoa(val).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
-    }
-    promises.push(
-      fetch('https://www.virustotal.com/api/v3/'+vtEndpoint+'/'+vtId,{headers:{'x-apikey':vtKey}})
-        .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-        .then(data=>{
-          const stats=data?.data?.attributes?.last_analysis_stats;
-          if(stats){
-            const mal=stats.malicious||0;
-            const tot=Object.values(stats).reduce((a,b)=>a+b,0);
-            results.push({source:'VirusTotal',flagged:mal>0,detail:mal+'/'+tot+' engines detetaram',score:mal>0?'danger':'clean'});
-          }else{
-            results.push({source:'VirusTotal',flagged:false,detail:'Sem dados de análise',score:'clean'});
-          }
-        }).catch(e=>results.push({source:'VirusTotal',flagged:null,detail:'Erro: '+e.message,score:'error'}))
-    );
+    else{vtEndpoint='urls';try{vtId=btoa(encodeURIComponent(val).replace(/%([0-9A-F]{2})/g,(_,p)=>String.fromCharCode(parseInt(p,16)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}catch(e){vtId=btoa(val).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}}
+    promises.push(fetch('https://www.virustotal.com/api/v3/'+vtEndpoint+'/'+vtId,{headers:{'x-apikey':vtKey}}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(data=>{const stats=data?.data?.attributes?.last_analysis_stats;if(stats){const mal=stats.malicious||0,tot=Object.values(stats).reduce((a,b)=>a+b,0);results.push({source:'VirusTotal',flagged:mal>0,detail:mal+'/'+tot+' engines detetaram',score:mal>0?'danger':'clean'});}else results.push({source:'VirusTotal',flagged:false,detail:'Sem dados',score:'clean'});}).catch(e=>results.push({source:'VirusTotal',flagged:null,detail:'Erro: '+e.message,score:'error'})));
   }
-
   const abuseKey=getKey('abuse');
   if(abuseKey&&isIP){
-    promises.push(
-      fetch('https://api.abuseipdb.com/api/v2/check?ipAddress='+encodeURIComponent(target)+'&maxAgeInDays=90',{
-        headers:{'Key':abuseKey,'Accept':'application/json'}
-      })
-        .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-        .then(data=>{
-          const score=data?.data?.abuseConfidenceScore;
-          if(score!==undefined){
-            const reports=data?.data?.totalReports??0;
-            const country=data?.data?.countryCode||'';
-            const isp=data?.data?.isp||'';
-            results.push({source:'AbuseIPDB',flagged:score>0,detail:'Score: '+score+'/100 · '+reports+' reports · '+country+(isp?' · '+isp:''),score:score>25?'danger':score>0?'warning':'clean'});
-          }
-        }).catch(e=>results.push({source:'AbuseIPDB',flagged:null,detail:'Erro CORS — usa o botão manual acima',score:'error'}))
-    );
+    promises.push(fetch('https://api.abuseipdb.com/api/v2/check?ipAddress='+encodeURIComponent(target)+'&maxAgeInDays=90',{headers:{'Key':abuseKey,'Accept':'application/json'}}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(data=>{const s=data?.data?.abuseConfidenceScore;if(s!==undefined){const rep=data?.data?.totalReports??0,country=data?.data?.countryCode||'',isp=data?.data?.isp||'';results.push({source:'AbuseIPDB',flagged:s>0,detail:'Score: '+s+'/100 · '+rep+' reports · '+country+(isp?' · '+isp:''),score:s>25?'danger':s>0?'warning':'clean'});}}).catch(e=>results.push({source:'AbuseIPDB',flagged:null,detail:'Erro CORS — usa o botão manual',score:'error'})));
   }
-
   const otxKey=getKey('otx');
   if(otxKey){
     const otxType=isIP?'IPv4':'domain';
-    promises.push(
-      fetch('https://otx.alienvault.com/api/v1/indicators/'+otxType+'/'+target+'/general',{headers:{'X-OTX-API-KEY':otxKey}})
-        .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-        .then(data=>{
-          const pulses=data?.pulse_info?.count||0;
-          results.push({source:'OTX AlienVault',flagged:pulses>0,detail:pulses+' pulse'+(pulses!==1?'s':'')+' encontrado'+(pulses!==1?'s':''),score:pulses>0?'danger':'clean'});
-        }).catch(e=>results.push({source:'OTX AlienVault',flagged:null,detail:'Erro: '+e.message,score:'error'}))
-    );
+    promises.push(fetch('https://otx.alienvault.com/api/v1/indicators/'+otxType+'/'+target+'/general',{headers:{'X-OTX-API-KEY':otxKey}}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(data=>{const p=data?.pulse_info?.count||0;results.push({source:'OTX AlienVault',flagged:p>0,detail:p+' pulse'+(p!==1?'s':'')+' encontrado'+(p!==1?'s':''),score:p>0?'danger':'clean'});}).catch(e=>results.push({source:'OTX AlienVault',flagged:null,detail:'Erro: '+e.message,score:'error'})));
   }
-
   const ipinfoKey=getKey('ipinfo');
   if(ipinfoKey&&isIP){
-    promises.push(
-      fetch('https://ipinfo.io/'+target+'?token='+ipinfoKey)
-        .then(r=>r.json())
-        .then(data=>{
-          const org=data?.org||'';
-          const city=data?.city||'';
-          const country=data?.country||'';
-          const hostname=data?.hostname||'';
-          results.push({source:'IPInfo',flagged:false,detail:org+(city?' · '+city:'')+(country?', '+country:'')+(hostname?' · '+hostname:''),score:'info'});
-        }).catch(()=>{})
-    );
+    promises.push(fetch('https://ipinfo.io/'+target+'?token='+ipinfoKey).then(r=>r.json()).then(data=>{const org=data?.org||'',city=data?.city||'',country=data?.country||'',hostname=data?.hostname||'';results.push({source:'IPInfo',flagged:false,detail:org+(city?' · '+city:'')+(country?', '+country:'')+(hostname?' · '+hostname:''),score:'info'});}).catch(()=>{}));
   }
-
-  if(promises.length===0){
-    document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:12px;color:var(--muted);padding:0.5rem 0">Nenhuma API key configurada. Usa os botões manuais acima ou configura as keys.</div>';
-    return;
-  }
-
+  if(promises.length===0){document.getElementById('repResultsBody').innerHTML='<div style="font-family:var(--mono);font-size:12px;color:var(--muted);padding:0.5rem 0">Nenhuma API key configurada. Usa os botões manuais acima.</div>';return;}
   await Promise.allSettled(promises);
-
-  const scoreColors={danger:'var(--danger)',warning:'var(--warning)',clean:'var(--accent)',info:'var(--info)',error:'var(--muted)'};
-  const scoreIcons={danger:'✗',warning:'⚠',clean:'✓',info:'ℹ',error:'?'};
-
-  let html=results.map(r=>'<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:14px;color:'+scoreColors[r.score]+';margin-top:1px;flex-shrink:0">'+scoreIcons[r.score]+'</span><div><div style="font-size:13px;font-weight:600;margin-bottom:2px">'+r.source+'</div><div style="font-family:var(--mono);font-size:12px;color:var(--muted)">'+r.detail+'</div></div></div>').join('');
-  if(!results.length)html='<div style="font-family:var(--mono);font-size:12px;color:var(--muted);padding:0.5rem 0">Sem resultados.</div>';
+  const sColors={danger:'var(--danger)',warning:'var(--warning)',clean:'var(--accent)',info:'var(--info)',error:'var(--muted)'};
+  const sIcons={danger:'✗',warning:'⚠',clean:'✓',info:'ℹ',error:'?'};
+  let html=results.map(r=>'<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:14px;color:'+sColors[r.score]+';margin-top:1px;flex-shrink:0">'+sIcons[r.score]+'</span><div><div style="font-size:13px;font-weight:600;margin-bottom:2px">'+r.source+'</div><div style="font-family:var(--mono);font-size:12px;color:var(--muted)">'+r.detail+'</div></div></div>').join('');
+  if(!results.length)html='<div style="font-family:var(--mono);font-size:12px;color:var(--muted)">Sem resultados.</div>';
   document.getElementById('repResultsBody').innerHTML=html;
-
-  const flagged=results.filter(r=>r.flagged===true);
-  const checked=results.filter(r=>r.flagged!==null&&r.score!=='info'&&r.score!=='error');
-  const verdict=document.getElementById('repVerdict');
-  verdict.style.display='block';
-  if(flagged.length>0){
-    verdict.style.background='var(--danger-dim)';
-    verdict.style.borderColor='var(--danger)';
-    verdict.innerHTML='<div style="font-size:14px;font-weight:700;color:var(--danger);margin-bottom:4px">✗ '+val+' encontra-se referenciado como malicioso</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono)">Referenciado em '+flagged.length+' de '+checked.length+' fonte'+(checked.length!==1?'s':'')+' consultada'+(checked.length!==1?'s':'')+'. Recomenda-se investigação adicional.</div>';
-  }else if(checked.length>0){
-    verdict.style.background='var(--accent-dim)';
-    verdict.style.borderColor='var(--accent)';
-    verdict.innerHTML='<div style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px">✓ '+val+' não se encontra referenciado</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono)">Sem ocorrências em '+checked.length+' fonte'+(checked.length!==1?'s':'')+' consultada'+(checked.length!==1?'s':'')+' com key configurada.</div>';
-  }else{
-    verdict.style.background='var(--surface2)';
-    verdict.style.borderColor='var(--border2)';
-    verdict.innerHTML='<div style="font-size:13px;color:var(--muted);font-family:var(--mono)">Nenhuma fonte retornou resultado válido. Verifica as keys ou usa os botões manuais.</div>';
-  }
+  const flagged=results.filter(r=>r.flagged===true),checked=results.filter(r=>r.flagged!==null&&r.score!=='info'&&r.score!=='error');
+  const verdict=document.getElementById('repVerdict');verdict.style.display='block';
+  if(flagged.length>0){verdict.style.background='var(--danger-dim)';verdict.style.borderColor='var(--danger)';verdict.innerHTML='<div style="font-size:14px;font-weight:700;color:var(--danger);margin-bottom:4px">✗ '+esc(val)+' encontra-se referenciado como malicioso</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono)">Referenciado em '+flagged.length+' de '+checked.length+' fontes. Recomenda-se investigação adicional.</div>';}
+  else if(checked.length>0){verdict.style.background='var(--accent-dim)';verdict.style.borderColor='var(--accent)';verdict.innerHTML='<div style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px">✓ '+esc(val)+' não se encontra referenciado</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono)">Sem ocorrências em '+checked.length+' fontes consultadas.</div>';}
+  else{verdict.style.background='var(--surface2)';verdict.style.borderColor='var(--border2)';verdict.innerHTML='<div style="font-size:13px;color:var(--muted);font-family:var(--mono)">Nenhuma fonte retornou resultado válido. Verifica as keys ou usa os botões manuais.</div>';}
 }
 
 /* CIDR */
 function calcCIDR(){
-  const val=document.getElementById('cidrInput').value.trim();
-  const res=document.getElementById('cidrResult');
+  const val=document.getElementById('cidrInput').value.trim(),res=document.getElementById('cidrResult');
   if(!val){res.innerHTML='';return;}
   const match=val.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\/(\d{1,2})$/);
   if(!match){res.innerHTML='<div style="color:var(--danger);font-family:var(--mono);font-size:12px;margin-top:8px">Formato inválido. Ex: 192.168.1.0/24</div>';return;}
@@ -1021,15 +985,10 @@ function calcCIDR(){
   if([a,b,c,d].some(x=>x>255)||bits>32){res.innerHTML='<div style="color:var(--danger);font-family:var(--mono);font-size:12px;margin-top:8px">IP ou prefixo inválido.</div>';return;}
   const mask=bits===0?0:(~0<<(32-bits))>>>0;
   const ip32=((a<<24)|(b<<16)|(c<<8)|d)>>>0;
-  const net=(ip32&mask)>>>0;
-  const bcast=(net|(~mask>>>0))>>>0;
+  const net=(ip32&mask)>>>0,bcast=(net|(~mask>>>0))>>>0;
   const hosts=bits>=31?Math.pow(2,32-bits):Math.pow(2,32-bits)-2;
   const toIP=n=>[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');
-  const stats=[
-    {l:'Rede',v:toIP(net)},{l:'Máscara',v:toIP(mask)},{l:'Wildcard',v:toIP(~mask>>>0)},
-    {l:'Primeiro host',v:bits>=31?toIP(net):toIP(net+1)},{l:'Último host',v:bits>=31?toIP(bcast):toIP(bcast-1)},
-    {l:'Broadcast',v:toIP(bcast)},{l:'Hosts utilizáveis',v:Math.max(0,hosts).toLocaleString()},{l:'Prefixo',v:'/'+bits}
-  ];
+  const stats=[{l:'Rede',v:toIP(net)},{l:'Máscara',v:toIP(mask)},{l:'Wildcard',v:toIP(~mask>>>0)},{l:'Primeiro host',v:bits>=31?toIP(net):toIP(net+1)},{l:'Último host',v:bits>=31?toIP(bcast):toIP(bcast-1)},{l:'Broadcast',v:toIP(bcast)},{l:'Hosts utilizáveis',v:Math.max(0,hosts).toLocaleString()},{l:'Prefixo',v:'/'+bits}];
   res.innerHTML='<div class="cidr-result">'+stats.map(s=>'<div class="cidr-stat"><div class="cidr-stat-label">'+s.l+'</div><div class="cidr-stat-val">'+s.v+'</div></div>').join('')+'</div>';
 }
 
@@ -1037,23 +996,21 @@ function calcCIDR(){
 function b64enc(){try{document.getElementById('b64out').textContent=btoa(unescape(encodeURIComponent(document.getElementById('encInput').value)));}catch(e){document.getElementById('b64out').textContent='Erro: '+e.message;}}
 function b64dec(){try{document.getElementById('b64out').textContent=decodeURIComponent(escape(atob(document.getElementById('encInput').value)));}catch(e){document.getElementById('b64out').textContent='Erro: input inválido';}}
 function urlenc(){document.getElementById('urlout').textContent=encodeURIComponent(document.getElementById('encInput').value);}
-function urldec(){try{document.getElementById('urlout').textContent=decodeURIComponent(document.getElementById('encInput').value);}catch(e){document.getElementById('urlout').textContent='Erro: input inválido';}}
+function urldec(){try{document.getElementById('urlout').textContent=decodeURIComponent(document.getElementById('encInput').value);}catch(e){document.getElementById('urlout').textContent='Erro';}}
 function hexenc(){document.getElementById('hexout').textContent=Array.from(document.getElementById('encInput').value).map(c=>c.charCodeAt(0).toString(16).padStart(2,'0')).join(' ');}
 function hexdec(){try{document.getElementById('hexout').textContent=document.getElementById('encInput').value.trim().split(/\s+/).map(h=>String.fromCharCode(parseInt(h,16))).join('');}catch(e){document.getElementById('hexout').textContent='Erro';}}
 function rot13(){document.getElementById('rot13out').textContent=document.getElementById('encInput').value.replace(/[a-zA-Z]/g,c=>{const b=c<='Z'?65:97;return String.fromCharCode(((c.charCodeAt(0)-b+13)%26)+b);});}
 
 /* HASH */
 async function genHashes(){
-  const text=document.getElementById('hashInput').value;
-  const res=document.getElementById('hashResults');
+  const text=document.getElementById('hashInput').value,res=document.getElementById('hashResults');
   if(!text){res.innerHTML='';return;}
   const enc=new TextEncoder().encode(text);
   res.innerHTML='<div style="color:var(--muted);font-family:var(--mono);font-size:12px;margin-top:8px">A gerar...</div>';
-  const algos=['SHA-1','SHA-256','SHA-512'];
-  const labels=['SHA1','SHA256','SHA512'];
+  const algos=['SHA-1','SHA-256','SHA-512'],labels=['SHA1','SHA256','SHA512'];
   const hashes=await Promise.all(algos.map(a=>crypto.subtle.digest(a,enc)));
   const hexHashes=hashes.map(buf=>Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join(''));
-  res.innerHTML=labels.map((l,i)=>'<div class="hash-row"><span class="hash-label">'+l+'</span><div class="hash-val">'+hexHashes[i]+'</div><button class="btn btn-ghost" style="padding:5px 12px;font-size:11px;flex-shrink:0" onclick="navigator.clipboard.writeText(\''+hexHashes[i]+'\')">Copiar</button></div>').join('');
+  res.innerHTML=labels.map((l,i)=>'<div class="hash-row"><span class="hash-label">'+l+'</span><div class="hash-val">'+hexHashes[i]+'</div><button class="btn btn-ghost" style="padding:5px 12px;font-size:11px;flex-shrink:0" onclick="cpv(this)" data-v="'+hexHashes[i]+'">Copiar</button></div>').join('');
 }
 
 /* PASSWORD */
@@ -1062,115 +1019,50 @@ let pwState={upper:true,lower:true,digits:true,symbols:true,ambig:false};
 function toggleOpt(btn){const k=btn.dataset.key;pwState[k]=!pwState[k];btn.classList.toggle('on',pwState[k]);genPw();}
 function genPw(){
   let cs='';
-  if(pwState.upper)cs+=pwCharsets.upper;
-  if(pwState.lower)cs+=pwCharsets.lower;
-  if(pwState.digits)cs+=pwCharsets.digits;
-  if(pwState.symbols)cs+=pwCharsets.symbols;
+  if(pwState.upper)cs+=pwCharsets.upper;if(pwState.lower)cs+=pwCharsets.lower;
+  if(pwState.digits)cs+=pwCharsets.digits;if(pwState.symbols)cs+=pwCharsets.symbols;
   if(pwState.ambig)cs=cs.replace(/[0O1lI]/g,'');
   if(!cs){document.getElementById('pwOutput').textContent='Seleciona pelo menos uma opção.';return;}
-  const len=parseInt(document.getElementById('pwLen').value);
-  const arr=new Uint32Array(len);
+  const len=parseInt(document.getElementById('pwLen').value),arr=new Uint32Array(len);
   crypto.getRandomValues(arr);
   const pw=Array.from(arr).map(v=>cs[v%cs.length]).join('');
   document.getElementById('pwOutput').textContent=pw;
   const entropy=Math.floor(len*Math.log2(cs.length));
   document.getElementById('entropyLabel').textContent='~'+entropy+' bits de entropia';
   let pct,color,txt;
-  if(entropy<40){pct=20;color='#FF4D6D';txt='Fraca';}
-  else if(entropy<60){pct=42;color='#FFB800';txt='Razoável';}
-  else if(entropy<80){pct=65;color='#80C44A';txt='Boa';}
-  else if(entropy<100){pct=82;color='#00CC77';txt='Forte';}
-  else{pct=100;color='#00FF94';txt='Muito forte';}
-  document.getElementById('strengthFill').style.width=pct+'%';
-  document.getElementById('strengthFill').style.background=color;
-  const sl=document.getElementById('strengthLabel');
-  sl.textContent=txt;
-  sl.style.color=color;
+  if(entropy<40){pct=20;color='#FF4D6D';txt='Fraca';}else if(entropy<60){pct=42;color='#FFB800';txt='Razoável';}else if(entropy<80){pct=65;color='#80C44A';txt='Boa';}else if(entropy<100){pct=82;color='#00CC77';txt='Forte';}else{pct=100;color='#00FF94';txt='Muito forte';}
+  document.getElementById('strengthFill').style.width=pct+'%';document.getElementById('strengthFill').style.background=color;
+  const sl=document.getElementById('strengthLabel');sl.textContent=txt;sl.style.color=color;
 }
 function copyPw(){navigator.clipboard.writeText(document.getElementById('pwOutput').textContent).then(()=>flash('pwToast'));}
 
-/* UUID / MAC */
-function genUUID(){
-  const b=new Uint8Array(16);crypto.getRandomValues(b);
-  b[6]=(b[6]&0x0f)|0x40;b[8]=(b[8]&0x3f)|0x80;
-  const h=Array.from(b).map(x=>x.toString(16).padStart(2,'0'));
-  document.getElementById('uuidOut').textContent=[h.slice(0,4),h.slice(4,6),h.slice(6,8),h.slice(8,10),h.slice(10)].map(g=>g.join('')).join('-');
-}
-function genMAC(){
-  const b=new Uint8Array(6);crypto.getRandomValues(b);b[0]=(b[0]&0xfe)|0x02;
-  document.getElementById('macOut').textContent=Array.from(b).map(x=>x.toString(16).padStart(2,'0')).join(':').toUpperCase();
-}
-function genIP(){
-  const a=new Uint8Array(4);let ip;
-  const priv=[[10],[172,16],[192,168]];
-  do{crypto.getRandomValues(a);ip=[...a];}while(priv.some(p=>p.every((v,i)=>ip[i]===v))||ip[0]===127||ip[0]===0||ip[0]>=224);
-  document.getElementById('ipOut').textContent=ip.join('.');
-}
-function genBulk(){
-  const n=parseInt(document.getElementById('bulkCount').value);
-  const uuids=[];
-  for(let i=0;i<n;i++){
-    const b=new Uint8Array(16);crypto.getRandomValues(b);
-    b[6]=(b[6]&0x0f)|0x40;b[8]=(b[8]&0x3f)|0x80;
-    const h=Array.from(b).map(x=>x.toString(16).padStart(2,'0'));
-    uuids.push([h.slice(0,4),h.slice(4,6),h.slice(6,8),h.slice(8,10),h.slice(10)].map(g=>g.join('')).join('-'));
-  }
-  document.getElementById('bulkOut').textContent=uuids.join('\n');
-}
+/* UUID */
+function genUUID(){const b=new Uint8Array(16);crypto.getRandomValues(b);b[6]=(b[6]&0x0f)|0x40;b[8]=(b[8]&0x3f)|0x80;const h=Array.from(b).map(x=>x.toString(16).padStart(2,'0'));document.getElementById('uuidOut').textContent=[h.slice(0,4),h.slice(4,6),h.slice(6,8),h.slice(8,10),h.slice(10)].map(g=>g.join('')).join('-');}
+function genMAC(){const b=new Uint8Array(6);crypto.getRandomValues(b);b[0]=(b[0]&0xfe)|0x02;document.getElementById('macOut').textContent=Array.from(b).map(x=>x.toString(16).padStart(2,'0')).join(':').toUpperCase();}
+function genIP(){const a=new Uint8Array(4);let ip;const priv=[[10],[172,16],[192,168]];do{crypto.getRandomValues(a);ip=[...a];}while(priv.some(p=>p.every((v,i)=>ip[i]===v))||ip[0]===127||ip[0]===0||ip[0]>=224);document.getElementById('ipOut').textContent=ip.join('.');}
+function genBulk(){const n=parseInt(document.getElementById('bulkCount').value),uuids=[];for(let i=0;i<n;i++){const b=new Uint8Array(16);crypto.getRandomValues(b);b[6]=(b[6]&0x0f)|0x40;b[8]=(b[8]&0x3f)|0x80;const h=Array.from(b).map(x=>x.toString(16).padStart(2,'0'));uuids.push([h.slice(0,4),h.slice(4,6),h.slice(6,8),h.slice(8,10),h.slice(10)].map(g=>g.join('')).join('-'));}document.getElementById('bulkOut').textContent=uuids.join('\n');}
 
 /* DIFF */
 function doDiff(){
-  const a=document.getElementById('diffA').value;
-  const b=document.getElementById('diffB').value;
-  if(!a&&!b){
-    document.getElementById('diffOutput').innerHTML='<span class="diff-eq">Cola texto acima...</span>';
-    document.getElementById('diffStats').innerHTML='';
-    return;
-  }
+  const a=document.getElementById('diffA').value,b=document.getElementById('diffB').value;
+  if(!a&&!b){document.getElementById('diffOutput').innerHTML='<span class="diff-eq">Cola texto acima...</span>';document.getElementById('diffStats').innerHTML='';return;}
   const wa=tok(a),wb=tok(b),lcs=computeLCS(wa,wb),ops=buildOps(wa,wb,lcs);
   let html='',adds=0,dels=0;
-  ops.forEach(op=>{
-    if(op.t==='eq')html+='<span class="diff-eq">'+esc(op.v)+'</span>';
-    else if(op.t==='add'){html+='<span class="diff-add">'+esc(op.v)+'</span>';adds++;}
-    else{html+='<span class="diff-del">'+esc(op.v)+'</span>';dels++;}
-  });
+  ops.forEach(op=>{if(op.t==='eq')html+='<span class="diff-eq">'+esc(op.v)+'</span>';else if(op.t==='add'){html+='<span class="diff-add">'+esc(op.v)+'</span>';adds++;}else{html+='<span class="diff-del">'+esc(op.v)+'</span>';dels++;}});
   document.getElementById('diffOutput').innerHTML=html||'<span class="diff-eq">(sem diferenças)</span>';
   document.getElementById('diffStats').innerHTML=adds===0&&dels===0?'<span class="chip green">Idênticos</span>':'<span class="chip green">+'+adds+'</span> <span class="chip red">−'+dels+'</span>';
 }
 function tok(s){return s.match(/(\s+|\S+)/g)||[];}
-function computeLCS(a,b){
-  const m=a.length,n=b.length;
-  const dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));
-  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
-  let i=m,j=n;const r=[];
-  while(i>0&&j>0){
-    if(a[i-1]===b[j-1]){r.unshift({i:i-1,j:j-1});i--;j--;}
-    else if(dp[i-1][j]>=dp[i][j-1])i--;else j--;
-  }
-  return r;
-}
-function buildOps(a,b,lcs){
-  const ops=[];let ai=0,bi=0,li=0;
-  while(li<lcs.length){
-    const{i,j}=lcs[li];
-    while(ai<i){ops.push({t:'del',v:a[ai]});ai++;}
-    while(bi<j){ops.push({t:'add',v:b[bi]});bi++;}
-    ops.push({t:'eq',v:a[ai]});ai++;bi++;li++;
-  }
-  while(ai<a.length){ops.push({t:'del',v:a[ai]});ai++;}
-  while(bi<b.length){ops.push({t:'add',v:b[bi]});bi++;}
-  return ops;
-}
+function computeLCS(a,b){const m=a.length,n=b.length,dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);let i=m,j=n;const r=[];while(i>0&&j>0){if(a[i-1]===b[j-1]){r.unshift({i:i-1,j:j-1});i--;j--;}else if(dp[i-1][j]>=dp[i][j-1])i--;else j--;}return r;}
+function buildOps(a,b,lcs){const ops=[];let ai=0,bi=0,li=0;while(li<lcs.length){const{i,j}=lcs[li];while(ai<i){ops.push({t:'del',v:a[ai]});ai++;}while(bi<j){ops.push({t:'add',v:b[bi]});bi++;}ops.push({t:'eq',v:a[ai]});ai++;bi++;li++;}while(ai<a.length){ops.push({t:'del',v:a[ai]});ai++;}while(bi<b.length){ops.push({t:'add',v:b[bi]});bi++;}return ops;}
 function copyDiff(){navigator.clipboard.writeText(document.getElementById('diffOutput').innerText).then(()=>flash('diffToast'));}
 
 /* REGEX */
 let regexFlags={g:true,i:true,m:false};
 function toggleFlag(btn,f){regexFlags[f]=!regexFlags[f];btn.classList.toggle('on',regexFlags[f]);testRegex();}
 function testRegex(){
-  const pat=document.getElementById('regexPattern').value;
-  const text=document.getElementById('regexText').value;
-  const meta=document.getElementById('regexMeta');
-  const out=document.getElementById('regexOutput');
+  const pat=document.getElementById('regexPattern').value,text=document.getElementById('regexText').value;
+  const meta=document.getElementById('regexMeta'),out=document.getElementById('regexOutput');
   if(!pat||!text){out.innerHTML='<span class="diff-eq">Escreve uma regex e texto acima...</span>';meta.innerHTML='';return;}
   try{
     const flags=Object.entries(regexFlags).filter(([,v])=>v).map(([k])=>k).join('');
@@ -1180,209 +1072,25 @@ function testRegex(){
     for(const m of matches){result+=esc(text.slice(last,m.index));result+='<span class="regex-match">'+esc(m[0])+'</span>';last=m.index+m[0].length;}
     result+=esc(text.slice(last));
     out.innerHTML=result||'<span class="diff-eq">(vazio)</span>';
-  }catch(e){
-    meta.innerHTML='<span class="chip red">Erro: '+e.message+'</span>';
-    out.innerHTML='<span class="diff-eq">Regex inválida...</span>';
-  }
+  }catch(e){meta.innerHTML='<span class="chip red">Erro: '+e.message+'</span>';out.innerHTML='<span class="diff-eq">Regex inválida...</span>';}
 }
 
 /* JSON */
-function formatJSON(){
-  try{
-    const parsed=JSON.parse(document.getElementById('jsonInput').value);
-    document.getElementById('jsonOutput').innerHTML=syntaxHL(JSON.stringify(parsed,null,2));
-    document.getElementById('jsonMeta').innerHTML='<span class="chip green">JSON válido</span>';
-  }catch(e){
-    document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';
-    document.getElementById('jsonOutput').textContent='';
-  }
-}
-function minifyJSON(){
-  try{
-    const parsed=JSON.parse(document.getElementById('jsonInput').value);
-    document.getElementById('jsonOutput').textContent=JSON.stringify(parsed);
-    document.getElementById('jsonMeta').innerHTML='<span class="chip green">Minificado</span>';
-  }catch(e){
-    document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';
-  }
-}
-function syntaxHL(s){
-  return s.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,m=>{
-    let cls='json-num';
-    if(/^"/.test(m)){cls=/:$/.test(m)?'json-key':'json-str';}
-    else if(/true|false/.test(m)){cls='json-bool';}
-    else if(/null/.test(m)){cls='json-null';}
-    return'<span class="'+cls+'">'+m+'</span>';
-  });
-}
+function formatJSON(){try{const p=JSON.parse(document.getElementById('jsonInput').value);document.getElementById('jsonOutput').innerHTML=syntaxHL(JSON.stringify(p,null,2));document.getElementById('jsonMeta').innerHTML='<span class="chip green">JSON válido</span>';}catch(e){document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';document.getElementById('jsonOutput').textContent='';}}
+function minifyJSON(){try{const p=JSON.parse(document.getElementById('jsonInput').value);document.getElementById('jsonOutput').textContent=JSON.stringify(p);document.getElementById('jsonMeta').innerHTML='<span class="chip green">Minificado</span>';}catch(e){document.getElementById('jsonMeta').innerHTML='<span class="chip red">Erro: '+e.message+'</span>';}}
+function syntaxHL(s){return s.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,m=>{let cls='json-num';if(/^"/.test(m)){cls=/:$/.test(m)?'json-key':'json-str';}else if(/true|false/.test(m)){cls='json-bool';}else if(/null/.test(m)){cls='json-null';}return'<span class="'+cls+'">'+m+'</span>';});}
 function copyJSON(){navigator.clipboard.writeText(document.getElementById('jsonOutput').innerText).then(()=>flash('jsont'));}
 
 /* COUNTER */
 function countText(){
   const t=document.getElementById('counterInput').value;
   const words=t.trim()===''?0:t.trim().split(/\s+/).length;
-  const stats=[
-    {l:'Caracteres',v:t.length.toLocaleString()},
-    {l:'Sem espaços',v:t.replace(/\s/g,'').length.toLocaleString()},
-    {l:'Palavras',v:words.toLocaleString()},
-    {l:'Linhas',v:(t===''?0:t.split('\n').length).toLocaleString()},
-    {l:'Frases',v:t.split(/[.!?]+/).filter(s=>s.trim()).length.toLocaleString()},
-    {l:'Parágrafos',v:t.split(/\n\s*\n/).filter(p=>p.trim()).length.toLocaleString()},
-    {l:'Tempo leitura',v:Math.ceil(words/200)+'min'},
-    {l:'Bytes (UTF-8)',v:new Blob([t]).size.toLocaleString()}
-  ];
+  const stats=[{l:'Caracteres',v:t.length.toLocaleString()},{l:'Sem espaços',v:t.replace(/\s/g,'').length.toLocaleString()},{l:'Palavras',v:words.toLocaleString()},{l:'Linhas',v:(t===''?0:t.split('\n').length).toLocaleString()},{l:'Frases',v:t.split(/[.!?]+/).filter(s=>s.trim()).length.toLocaleString()},{l:'Parágrafos',v:t.split(/\n\s*\n/).filter(p=>p.trim()).length.toLocaleString()},{l:'Tempo leitura',v:Math.ceil(words/200)+'min'},{l:'Bytes (UTF-8)',v:new Blob([t]).size.toLocaleString()}];
   document.getElementById('counterStats').innerHTML=stats.map(s=>'<div class="cidr-stat"><div class="cidr-stat-label">'+s.l+'</div><div class="cidr-stat-val">'+s.v+'</div></div>').join('');
 }
 
-/* EMAIL HEADER ANALYSIS */
-function analyzeEmail(){
-  const raw=document.getElementById('emailInput').value.trim();
-  if(!raw){alert('Cola os headers do email primeiro.');return;}
-
-  function get(header){
-    const re=new RegExp('^'+header+':\\s*(.+?)(?=\\n[\\S]|$)','ims');
-    const m=raw.match(re);
-    return m?m[1].replace(/\s+/g,' ').trim():'';
-  }
-  function getAll(header){
-    const re=new RegExp('^'+header+':\\s*(.+?)(?=\\n[\\S]|$)','gims');
-    return [...raw.matchAll(re)].map(m=>m[1].replace(/\s+/g,' ').trim());
-  }
-
-  const from=get('From');
-  const replyTo=get('Reply-To');
-  const returnPath=get('Return-Path');
-  const to=get('To');
-  const subject=get('Subject');
-  const date=get('Date');
-  const msgId=get('Message-ID');
-  const mailer=get('X-Mailer')||get('User-Agent')||get('X-Originating-Client')||'';
-  const spamScore=get('X-Spam-Score')||get('X-Spam-Status')||'';
-  const originIp=get('X-Originating-IP')||get('X-Forwarded-For')||'';
-
-  const authResults=getAll('Authentication-Results').join(' ');
-  const receivedSpf=get('Received-SPF');
-
-  const spfRes=authResults.match(/spf=([\w]+)/i)?.[1]||receivedSpf.match(/^(pass|fail|softfail|neutral|none|temperror|permerror)/i)?.[1]||'none';
-  const dkimRes=authResults.match(/dkim=([\w]+)/i)?.[1]||'none';
-  const dmarcRes=authResults.match(/dmarc=([\w]+)/i)?.[1]||'none';
-
-  const fromEmail=from.match(/<([^>]+)>/)?.[1]||from;
-  const fromDisplay=from.match(/^([^<]+)</)? from.match(/^([^<]+)</)[1].trim():'';
-  const fromDomain=fromEmail.split('@')[1]||'';
-  const replyEmail=replyTo.match(/<([^>]+)>/)?.[1]||replyTo;
-  const replyDomain=replyEmail.split('@')[1]||'';
-  const returnEmail=(returnPath.match(/<([^>]+)>/)?.[1]||returnPath);
-  const returnDomain=returnEmail.split('@')[1]||'';
-
-  const spoofingFlags=[];
-  if(replyTo&&replyDomain&&replyDomain.toLowerCase()!==fromDomain.toLowerCase())
-    spoofingFlags.push('Reply-To domain ('+replyDomain+') difere do From ('+fromDomain+')');
-  if(returnPath&&returnDomain&&returnDomain.toLowerCase()!==fromDomain.toLowerCase())
-    spoofingFlags.push('Return-Path domain ('+returnDomain+') difere do From ('+fromDomain+')');
-  if(spfRes.toLowerCase()==='fail'||spfRes.toLowerCase()==='softfail')
-    spoofingFlags.push('SPF '+spfRes+' — servidor não autorizado');
-  if(dkimRes.toLowerCase()==='fail')
-    spoofingFlags.push('DKIM fail — assinatura inválida ou modificada');
-  if(dmarcRes.toLowerCase()==='fail')
-    spoofingFlags.push('DMARC fail — política de autenticação violada');
-
-  const receivedHeaders=getAll('Received');
-  const hops=receivedHeaders.map((r,i)=>{
-    const fromMatch=r.match(/from\s+([^\s]+(?:\s+\([^)]+\))?)/i);
-    const byMatch=r.match(/by\s+([^\s]+(?:\s+\([^)]+\))?)/i);
-    const ipMatch=r.match(/\[([\d.]+)\]/);
-    const dateMatch=r.match(/;\s*(.+)$/);
-    return{num:receivedHeaders.length-i,from:fromMatch?.[1]||'',by:byMatch?.[1]||'',ip:ipMatch?.[1]||'',date:dateMatch?.[1]?.trim()||''};
-  }).reverse();
-
-  const hopDates=hops.map(h=>{try{const d=new Date(h.date);return isNaN(d)?null:d;}catch(e){return null;}});
-
-  let score=40;
-  const authPass=v=>['pass','ok','good'].includes(v.toLowerCase());
-  const authFail=v=>['fail','softfail','reject'].includes(v.toLowerCase());
-  if(authPass(spfRes))score+=20;else if(authFail(spfRes))score-=25;
-  if(authPass(dkimRes))score+=20;else if(authFail(dkimRes))score-=25;
-  if(authPass(dmarcRes))score+=20;else if(authFail(dmarcRes))score-=20;
-  score-=spoofingFlags.length*15;
-  score=Math.max(0,Math.min(100,score));
-
-  function badge(label,val){
-    const v=val.toLowerCase();
-    let cls='auth-none',icon='—';
-    if(['pass','ok'].includes(v)){cls='auth-pass';icon='✓';}
-    else if(['fail','softfail','reject'].includes(v)){cls='auth-fail';icon='✗';}
-    else if(!['neutral','none',''].includes(v)){cls='auth-warn';icon='⚠';}
-    return '<span class="auth-badge '+cls+'">'+icon+' '+label+': '+val+'</span>';
-  }
-  function ipBtn(ip){
-    return ip?'<a class="ip-rep-btn" href="https://www.virustotal.com/gui/ip-address/'+ip+'" target="_blank">VT</a><a class="ip-rep-btn" href="https://www.abuseipdb.com/check/'+ip+'" target="_blank">Abuse</a>':'';
-  }
-
-  let verdictColor,verdictBg,verdictBorder,verdictLabel;
-  if(score>=75){verdictColor='var(--accent)';verdictBg='var(--accent-dim)';verdictBorder='rgba(0,255,148,0.3)';verdictLabel='Email aparentemente legítimo';}
-  else if(score>=45){verdictColor='var(--warning)';verdictBg='var(--warning-dim)';verdictBorder='rgba(255,184,0,0.3)';verdictLabel='Email suspeito — verificar manualmente';}
-  else{verdictColor='var(--danger)';verdictBg='var(--danger-dim)';verdictBorder='rgba(255,77,109,0.3)';verdictLabel='Email potencialmente malicioso';}
-
-  document.getElementById('emailVerdict').style.display='block';
-  document.getElementById('emailVerdict').innerHTML='<div class="verdict-box" style="background:'+verdictBg+';border-color:'+verdictBorder+'"><div class="verdict-score" style="color:'+verdictColor+'">'+score+'<span style="font-size:16px;color:var(--muted)">/100</span></div><div class="verdict-label" style="color:'+verdictColor+'">'+verdictLabel+'</div>'+(spoofingFlags.length?'<div class="verdict-detail">'+spoofingFlags.map(f=>'⚠ '+f).join('<br>')+'</div>':'<div class="verdict-detail">✓ Nenhum indicador de spoofing detetado</div>')+'</div>';
-
-  let html='';
-
-  html+='<div class="email-section"><div class="email-section-title">Identidade e remetente</div>';
-  html+='<div class="email-row"><span class="email-key">From</span><span class="email-val">'+(fromDisplay?'<span style="color:var(--muted)">'+esc(fromDisplay)+'</span> ':'')+'<span style="color:var(--accent)">&lt;'+esc(fromEmail)+'&gt;</span></span></div>';
-  if(replyTo&&replyTo!==from)html+='<div class="email-row"><span class="email-key">Reply-To</span><span class="email-val '+(replyDomain&&replyDomain!==fromDomain?'danger':'')+'">'+esc(replyTo)+(replyDomain&&replyDomain!==fromDomain?' ⚠ domínio diferente':'')+'</span></div>';
-  if(returnPath)html+='<div class="email-row"><span class="email-key">Return-Path</span><span class="email-val '+(returnDomain&&returnDomain!==fromDomain?'warning':'')+'">'+esc(returnPath)+(returnDomain&&returnDomain!==fromDomain?' ⚠':'')+'</span></div>';
-  html+='<div class="email-row"><span class="email-key">To</span><span class="email-val">'+esc(to)+'</span></div>';
-  html+='<div class="email-row"><span class="email-key">Subject</span><span class="email-val accent">'+esc(subject)+'</span></div>';
-  html+='<div class="email-row"><span class="email-key">Date</span><span class="email-val">'+esc(date)+'</span></div>';
-  if(msgId)html+='<div class="email-row"><span class="email-key">Message-ID</span><span class="email-val" style="font-size:11px">'+esc(msgId)+'</span></div>';
-  if(mailer)html+='<div class="email-row"><span class="email-key">Mailer / Client</span><span class="email-val info">'+esc(mailer)+'</span></div>';
-  if(originIp)html+='<div class="email-row"><span class="email-key">IP de origem</span><span class="email-val">'+esc(originIp)+''+ipBtn(originIp)+'</span></div>';
-  if(spamScore)html+='<div class="email-row"><span class="email-key">Spam Score</span><span class="email-val warning">'+esc(spamScore)+'</span></div>';
-  html+='</div>';
-
-  html+='<div class="email-section"><div class="email-section-title">Autenticação</div>';
-  html+='<div style="padding:6px 0">'+badge('SPF',spfRes||'none')+badge('DKIM',dkimRes||'none')+badge('DMARC',dmarcRes||'none')+'</div>';
-  if(authResults)html+='<div class="email-row" style="margin-top:8px"><span class="email-key">Auth-Results</span><span class="email-val" style="font-size:11px;color:var(--muted)">'+esc(authResults.substring(0,400))+(authResults.length>400?'…':'')+'</span></div>';
-  html+='</div>';
-
-  if(hops.length){
-    html+='<div class="email-section"><div class="email-section-title">Caminho do email ('+hops.length+' hop'+(hops.length!==1?'s':'')+')</div>';
-    hops.forEach((h,i)=>{
-      let delayHtml='';
-      if(i>0&&hopDates[i]&&hopDates[i-1]){
-        const diff=Math.round((hopDates[i]-hopDates[i-1])/1000);
-        if(!isNaN(diff)&&isFinite(diff)){
-          const cls=diff<30?'delay-ok':diff<300?'delay-warn':'delay-bad';
-          const label=diff<60?diff+'s':Math.round(diff/60)+'min';
-          delayHtml='<span class="hop-delay '+cls+'">+'+label+'</span>';
-        }
-      }
-      const ipHtml=h.ip?'<span class="hop-ip" onclick="window.open(\'https://www.virustotal.com/gui/ip-address/'+h.ip+'\',\'_blank\')">['+h.ip+']</span> '+ipBtn(h.ip):'';
-      html+='<div class="hop-item'+(i===0?' hop-first':'')+'"><div class="hop-num">Hop '+h.num+(i===hops.length-1?' (destino)':i===0?' (origem)':'')+'</div>';
-      if(h.from)html+='<div class="hop-from"><span style="color:var(--muted)">from </span>'+esc(h.from)+' '+ipHtml+'</div>';
-      if(h.by)html+='<div class="hop-by"><span style="color:var(--muted)">by </span>'+esc(h.by)+'</div>';
-      if(h.date)html+='<div class="hop-time">'+esc(h.date)+delayHtml+'</div>';
-      html+='</div>';
-    });
-    html+='</div>';
-  }
-
-  html+='<div class="email-section"><div class="email-section-title" style="cursor:pointer" onclick="toggleRawHeaders()">Todos os headers raw <span id="rawHeadersToggle" style="margin-left:auto;font-family:var(--mono);color:var(--muted);font-size:12px">+ expandir</span></div><div id="rawHeadersBody" style="display:none;margin-top:8px"><div style="font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.9;white-space:pre-wrap;word-break:break-all">'+esc(raw)+'</div></div></div>';
-
-  document.getElementById('emailResults').innerHTML=html;
-}
-
-function toggleRawHeaders(){
-  const body=document.getElementById('rawHeadersBody');
-  const toggle=document.getElementById('rawHeadersToggle');
-  const open=body.style.display==='none';
-  body.style.display=open?'block':'none';
-  toggle.textContent=open?'− colapsar':'+ expandir';
-}
-
 /* UTILS */
+function cpv(b){navigator.clipboard.writeText(b.dataset.v||'');}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function copyEl(id,tid){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>flash(tid));}
 function flash(id){const el=document.getElementById(id);el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200);}
