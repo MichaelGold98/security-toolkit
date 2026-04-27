@@ -329,7 +329,7 @@ footer span{color:var(--accent)}
   </div>
 </aside>
 <main class="main">
-<div class="page" id="page-home">
+<div class="page active" id="page-home">
   <div class="home-profile-card">
     <div class="avatar-ring">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -769,8 +769,39 @@ function analyzeEmail(){
   const raw=document.getElementById('emailInput').value.trim();
   if(!raw){alert('Cola os headers do email primeiro.');return;}
 
-  function get(h){const re=new RegExp('^'+h+':\\s*(.+?)(?=\\n[\\S]|$)','ims');const m=raw.match(re);return m?m[1].replace(/\s+/g,' ').trim():'';}
-  function getAll(h){const re=new RegExp('^'+h+':\\s*(.+?)(?=\\n[\\S]|$)','gims');return[...raw.matchAll(re)].map(m=>m[1].replace(/\s+/g,' ').trim());}
+  function get(h){
+    var lines=raw.split('\n');
+    var result='';var capturing=false;
+    for(var li=0;li<lines.length;li++){
+      var line=lines[li];
+      if(!capturing){
+        if(new RegExp('^'+h+'\\s*:','i').test(line)){
+          result=line.replace(new RegExp('^'+h+'\\s*:\\s*','i'),'');
+          capturing=true;
+        }
+      } else {
+        if(/^[ \t]/.test(line)){result+=' '+line.trim();}
+        else{break;}
+      }
+    }
+    return result.replace(/\s+/g,' ').trim();
+  }
+  function getAll(h){
+    var lines=raw.split('\n');
+    var results=[];var current=null;
+    for(var li=0;li<lines.length;li++){
+      var line=lines[li];
+      if(new RegExp('^'+h+'\\s*:','i').test(line)){
+        if(current!==null)results.push(current.replace(/\s+/g,' ').trim());
+        current=line.replace(new RegExp('^'+h+'\\s*:\\s*','i'),'');
+      } else if(current!==null){
+        if(/^[ \t]/.test(line)){current+=' '+line.trim();}
+        else{results.push(current.replace(/\s+/g,' ').trim());current=null;}
+      }
+    }
+    if(current!==null)results.push(current.replace(/\s+/g,' ').trim());
+    return results;
+  }
 
   const from=get('From'),replyTo=get('Reply-To'),returnPath=get('Return-Path');
   const to=get('To'),subject=get('Subject'),date=get('Date'),msgId=get('Message-ID');
@@ -780,9 +811,25 @@ function analyzeEmail(){
   const authResults=getAll('Authentication-Results').join(' ');
   const receivedSpf=get('Received-SPF');
 
-  const spfRes=authResults.match(/spf=([\w]+)/i)?.[1]||receivedSpf.match(/^(pass|fail|softfail|neutral|none|temperror|permerror)/i)?.[1]||'none';
-  const dkimRes=authResults.match(/dkim=([\w]+)/i)?.[1]||'none';
-  const dmarcRes=authResults.match(/dmarc=([\w]+)/i)?.[1]||'none';
+  // Extract SPF - check multiple sources
+  var spfVal='none';
+  var spfM=authResults.match(/[;\s]spf=(\w+)/i)||authResults.match(/^spf=(\w+)/i);
+  if(spfM)spfVal=spfM[1].toLowerCase();
+  else if(receivedSpf){var rspfM=receivedSpf.match(/^(pass|fail|softfail|neutral|none|temperror|permerror)/i);if(rspfM)spfVal=rspfM[1].toLowerCase();}
+  const spfRes=spfVal;
+
+  // Extract DKIM - check Authentication-Results thoroughly
+  var dkimVal='none';
+  var dkimM=authResults.match(/[;\s]dkim=(\w+)/i)||authResults.match(/^dkim=(\w+)/i)||authResults.match(/dkim=(\w+)/i);
+  if(dkimM)dkimVal=dkimM[1].toLowerCase();
+  else if(get('DKIM-Signature'))dkimVal='signed';
+  const dkimRes=dkimVal;
+
+  // Extract DMARC - check Authentication-Results thoroughly
+  var dmarcVal='none';
+  var dmarcM=authResults.match(/[;\s]dmarc=(\w+)/i)||authResults.match(/^dmarc=(\w+)/i)||authResults.match(/dmarc=(\w+)/i);
+  if(dmarcM)dmarcVal=dmarcM[1].toLowerCase();
+  const dmarcRes=dmarcVal;
 
   const fromEmail=from.match(/<([^>]+)>/)?.[1]||from;
   const fromDisplay=from.includes('<')?from.slice(0,from.indexOf('<')).trim():'';
@@ -830,7 +877,7 @@ function analyzeEmail(){
     const vl=(v||'').toLowerCase();
     const descs={
       spf:{pass:'Servidor autorizado pelo domínio',fail:'Servidor NÃO autorizado',softfail:'Servidor suspeito (softfail)',neutral:'Sem política definida',none:'Header em falta'},
-      dkim:{pass:'Assinatura válida e íntegra',fail:'Assinatura inválida ou corrompida',none:'Sem assinatura digital'},
+      dkim:{pass:'Assinatura válida e íntegra',fail:'Assinatura inválida ou corrompida',none:'Sem assinatura digital',signed:'Email assinado — resultado de verificação não disponível'},
       dmarc:{pass:'Alinhamento SPF/DKIM OK',fail:'Política do domínio violada',none:'Sem política DMARC'}
     };
     return descs[type]?.[vl]||v;
@@ -887,7 +934,7 @@ function analyzeEmail(){
         }
       }
       const isOrigin=i===0,isDest=i===hops.length-1;
-      var ipHtml=''; if(h.ip){var _u='https://www.virustotal.com/gui/ip-address/'+h.ip; ipHtml='<span class="hop-ip" onclick="window.open(\''+_u+'\',\'_blank\')">'+esc(h.ip)+'</span>'+ipBtn(h.ip);}
+      var ipHtml='';if(h.ip){var _vu='https://www.virustotal.com/gui/ip-address/'+h.ip;ipHtml='<span class="hop-ip" onclick="window.open(\''+_vu+'\',\'_blank\')">'+esc(h.ip)+'</span>'+ipBtn(h.ip);}
       html+='<div class="hop-item"><div class="hop-dot'+(isOrigin?' origin':isDest?' dest':'')+'"></div><div class="hop-card"><div class="hop-header"><span class="hop-badge '+(isOrigin?'origin':isDest?'dest':'relay')+'">'+(isOrigin?'Origem':isDest?'Destino':'Relay')+'</span><span class="hop-num-label">Hop '+h.num+'</span></div>';
       if(h.from)html+='<div class="hop-from"><span style="color:var(--muted)">from </span>'+esc(h.from)+' '+ipHtml+'</div>';
       if(h.by)html+='<div class="hop-by"><span style="color:var(--muted)">by </span>'+esc(h.by)+'</div>';
@@ -1095,7 +1142,9 @@ function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace
 function copyEl(id,tid){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>flash(tid));}
 function flash(id){const el=document.getElementById(id);el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200);}
 
-genPw();genUUID();genMAC();genIP();updateApiStatusHome();
+genPw();genUUID();genMAC();genIP();
+showPage("home");
+updateApiStatusHome();
 </script>
 </body>
 </html>
