@@ -237,7 +237,7 @@
     <!-- ECRÃ 1: a pergunta -->
     <div id="ecra-pergunta">
       <h1 id="titulo-pergunta">Aceitas sair comigo?</h1>
-      <p class="subtexto">Não sei bem ainda quando nem onde — só sei que gostava muito que fosses tu a fazer-me companhia. Basta um clique.</p>
+      <p class="subtexto">Gostava muito que aceitasses este convite pouco trabalhoso XD. Basta um clique.</p>
       <div class="linha-botoes" id="linha-botoes">
         <button id="btn-sim">Sim, aceito 💫</button>
         <button id="btn-nao">Não</button>
@@ -249,11 +249,17 @@
     <div id="ecra-resposta" class="oculto">
       <h1 id="titulo-resposta">Boa escolha 💫</h1>
       <p class="subtexto">Queres dizer-me alguma coisa antes de eu ficar a saltar de alegria?</p>
-      <label for="campo-local">Vou ter contigo onde?</label>
-      <textarea id="campo-local" rows="1" placeholder="Morada, zona ou ponto de encontro..."></textarea>
-      <label for="campo-mensagem">Algo que queiras dizer ou comentar?</label>
-      <textarea id="campo-mensagem" placeholder="ex: restaurante, sítios, horas..."></textarea>
-      <button id="btn-enviar">Confirmar</button>
+      <form id="formulario-resposta" method="POST">
+        <label for="campo-local">Vou ter contigo onde?</label>
+        <textarea id="campo-local" name="Vou_ter_contigo_onde" rows="1" placeholder="Morada, zona ou ponto de encontro..."></textarea>
+        <label for="campo-mensagem">Algo que queiras dizer e/ou comentar?</label>
+        <textarea id="campo-mensagem" name="Mensagem" placeholder="ex: restaurante, sítios, horas..."></textarea>
+        <input type="hidden" name="resposta" value="Sim">
+        <input type="hidden" name="_subject" id="campo-subject" value="Ela disse sim!">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" id="campo-next" value="">
+        <button type="submit" id="btn-enviar">Confirmar</button>
+      </form>
       <div id="estado-envio"></div>
     </div>
 
@@ -261,7 +267,7 @@
     <div id="ecra-obrigado" class="oculto">
       <div class="emoji">🥂</div>
       <h1>Combinado!</h1>
-      <p class="subtexto" id="texto-obrigado">Já recebi a tua resposta. Trato do resto — até logo à noite.</p>
+      <p class="subtexto" id="texto-obrigado">Já recebi a tua resposta ehehehhe <3.</p>
     </div>
 
   </div>
@@ -278,6 +284,7 @@
      seguintes chegam automaticamente à tua caixa de correio.
      ============================================================ */
   const EMAIL_DESTINO = "miguel.ouro@outlook.com";
+  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/" + EMAIL_DESTINO;
 
   // Nome dela — muda aqui e atualiza-se em toda a página
   const NOME_DELA = "Daniela";
@@ -355,51 +362,39 @@
   const ecraResposta = document.getElementById('ecra-resposta');
   const ecraObrigado = document.getElementById('ecra-obrigado');
   const estadoEnvio = document.getElementById('estado-envio');
+  const formulario = document.getElementById('formulario-resposta');
+
+  // configura o formulário para enviar diretamente para o FormSubmit
+  formulario.action = FORMSUBMIT_ENDPOINT;
+  document.getElementById('campo-subject').value =
+    NOME_DELA ? `${NOME_DELA} disse sim! 💫` : "Ela disse sim! 💫";
+  // depois de enviar, o FormSubmit traz de volta a esta mesma página
+  document.getElementById('campo-next').value =
+    window.location.origin + window.location.pathname + "?obrigado=1";
 
   btnSim.addEventListener('click', ()=>{
     ecraPergunta.classList.add('oculto');
     ecraResposta.classList.remove('oculto');
   });
 
-  document.getElementById('btn-enviar').addEventListener('click', async ()=>{
-    const local = document.getElementById('campo-local').value.trim();
-    const mensagem = document.getElementById('campo-mensagem').value.trim();
-    const btn = document.getElementById('btn-enviar');
-
+  formulario.addEventListener('submit', (ev)=>{
     if(EMAIL_DESTINO.includes('exemplo.com')){
+      ev.preventDefault();
       estadoEnvio.textContent = "(Ainda não puseste o teu email — vê o comentário no início do código.)";
       return;
     }
-
-    btn.disabled = true;
     estadoEnvio.textContent = "A enviar...";
-
-    try{
-      const dados = new FormData();
-      dados.append("resposta", "Sim");
-      dados.append("Vou_ter_contigo_onde", local || "(não disse)");
-      dados.append("Mensagem", mensagem || "(sem mensagem)");
-      dados.append("data", new Date().toLocaleString('pt-PT'));
-      dados.append("_subject", NOME_DELA ? `${NOME_DELA} disse sim! 💫` : "Ela disse sim! 💫");
-
-      const r = await fetch(FORMSUBMIT_ENDPOINT, {
-        method: "POST",
-        headers: {"Accept":"application/json"},
-        body: dados
-      });
-
-      if(r.ok){
-        ecraResposta.classList.add('oculto');
-        ecraObrigado.classList.remove('oculto');
-      }else{
-        estadoEnvio.textContent = "Não foi possível enviar. Tenta novamente.";
-        btn.disabled = false;
-      }
-    }catch(err){
-      estadoEnvio.textContent = "Sem ligação. Verifica a internet e tenta de novo.";
-      btn.disabled = false;
-    }
+    document.getElementById('btn-enviar').disabled = true;
+    // não faz preventDefault: deixa o browser enviar o formulário normalmente
   });
+
+  // se voltamos aqui depois de um envio bem sucedido, mostra logo o ecrã final
+  const parametros = new URLSearchParams(window.location.search);
+  if(parametros.get('obrigado') === '1'){
+    ecraPergunta.classList.add('oculto');
+    ecraResposta.classList.add('oculto');
+    ecraObrigado.classList.remove('oculto');
+  }
 </script>
 
 </body>
